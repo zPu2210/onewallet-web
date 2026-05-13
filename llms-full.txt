@@ -1,0 +1,123 @@
+ONEWALLET — Full reference for LLMs
+====================================
+
+Source: https://onewallet-web.vercel.app/
+Whitepaper: https://onewallet-web.vercel.app/whitepaper.html
+Version: prototype draft v0.9 · 2026-05
+Disclaimer: Forward-looking statements remain subject to product, security, and legal review. Not financial, legal, tax, or investment advice.
+
+
+SECTION 1 — What ONEWALLET is
+------------------------------
+ONEWALLET is a Telegram-native Web3 wallet and payment rail. It bundles keyless MPC custody, QR payments, merchant tools, and $1 utility into a single Telegram Mini App flow. Users open ONEWALLET inside Telegram, verify the device, create the wallet, and then send, pay, or earn from the Mini App. The default flow avoids app-store downloads and seed-phrase setup.
+
+
+SECTION 2 — Custody and security model
+---------------------------------------
+ONEWALLET targets a 2-of-3 MPC custody model across three shares: a device share, a server share, and a recovery share. Any single share alone — including the server share — cannot sign a transaction. Two shares of the three are required to produce a threshold signature. Shares are rotatable.
+
+Trust boundaries:
+- Edge services see signing requests but never the complete key material.
+- Custody stores only one MPC share and cannot sign unilaterally.
+- Settlement broadcasts only after a valid threshold signature returns.
+
+Threat model (selected):
+- Device theft → loss of one share → rotate device share via server + recovery cooperation.
+- Server compromise or Telegram session hijack → server share alone cannot sign; high-value transfers add re-auth and cooldown.
+- Recovery social engineering → coerced recovery share is mitigated by time-locked recovery.
+
+Custody isolation and hardware-protected key storage are described as target architecture, not a present-day guarantee. No custody model is unbreakable.
+
+
+SECTION 3 — Recovery and seed phrases
+--------------------------------------
+ONEWALLET uses MPC, so there is no single seed phrase a normal user must hold. If a user loses their device or Telegram account, recovery is designed around issuing a fresh device share and validating it through the recovery share. Losing a device or Telegram session does not give the server enough authority to move funds alone. Advanced backup or export behavior remains subject to product and security approval.
+
+
+SECTION 4 — Networks
+---------------------
+The public draft targets TON, Ethereum, BNB Chain, TRON, and major stablecoins (USDT, USDC, etc.). The final supported network list will be confirmed before public launch.
+
+
+SECTION 5 — Merchant payments
+------------------------------
+Merchant flow: a merchant generates a QR invoice; the user scans it inside Telegram; ONEWALLET previews receiver, fees, and FX; MPC signs the transaction; a settlement webhook supports POS reconciliation. Merchant tooling includes QR invoicing, stablecoin settlement, webhooks, and ecosystem rewards.
+
+
+SECTION 6 — Fees and $1 utility
+--------------------------------
+Fees consist of network gas plus transparent ONEWALLET fees on swaps and merchant payments. Holding $1 is described as a way to reduce fees at preferential rates, subject to final token and legal review.
+
+$1 token utility (positioning, not promises):
+- Fee discount — holding $1 reduces payment and swap fees. (Designed)
+- User rewards — earn $1 for payments and referrals. (Designed)
+- Merchant incentives — $1 top-up lowers acceptance fees. (Designed)
+- Ecosystem access — premium mini-apps. (Planned)
+- Governance signal — vote on rewards and fees. (Planned)
+
+ONEWALLET makes no price, return, or exchange-listing promises. $1 is positioned as a utility token.
+
+
+SECTION 7 — Roadmap
+--------------------
+- Phase 1 — Core wallet (MPC custody, TMA, multi-chain): completed.
+- Phase 2 — Payments rail (QR invoices, settlement webhooks): in progress.
+- Phase 3 — $1 utility (fee discount layer, reward engine): planned.
+- Phase 4 — Ecosystem (mini-app store, partner program): planned.
+
+Dates are intentionally omitted until owners approve public commitments.
+
+
+SECTION 8 — Risks (disclosed)
+------------------------------
+- Custody compromise (high) — any flaw in MPC share rotation could expose funds.
+- Platform dependency (high) — Telegram is the runtime; mitigation includes progressive web fallback.
+- Regulatory shift (medium) — rules vary by region; mitigation involves legal counsel.
+- Merchant adoption (medium) — requires integration density; mitigation via anchor partners.
+- Token utility drift (low) — utility decoupling dilutes demand; mitigation via activity-linked rewards.
+- Localization quality (low) — weak translations damage trust; mitigation via native review pipeline.
+
+
+SECTION 9 — Architecture (four layers)
+---------------------------------------
+- Layer 01 — Client: Telegram Mini App, React + TMA SDK; UI, session, device share, UX state.
+- Layer 02 — Edge: auth, MPC orchestration, price feeds, webhooks; stateless functions; zero-knowledge of full keys.
+- Layer 03 — Custody (target architecture): MPC server share, signer service, recovery share registry; isolated environment; hardware-protected key storage (planned); cannot sign alone.
+- Layer 04 — Settlement: chain adapters, payment processor, indexer, merchant API; TON, EVM, stablecoin rails; idempotent settlement.
+
+
+SECTION 10 — Growth model
+--------------------------
+Loops, not campaigns. Referral loop: every active user can refer inside chat with one tap. Merchant loop: accepting ONEWALLET introduces customers to the wallet. Mini-app loop: partner mini-apps require a wallet, driving new sign-ups.
+
+
+SECTION 11 — Business model
+----------------------------
+- Swap fee — bps on in-app token swaps; $1 holders pay less. (Designed)
+- Merchant fee — bps on settled merchant volume. (Designed)
+- Mini-app revenue share — take rate on premium mini-app transactions. (Planned)
+- Merchant SaaS — subscription for analytics, refunds, multi-store. (Planned)
+
+
+SECTION 12 — Team and governance
+---------------------------------
+The team section names the founders, engineering, and operating partners listed in the current public copy. For governance or partnership questions outside that list, contact the team on Telegram.
+
+
+SECTION 13 — Glossary
+----------------------
+- MPC — multi-party computation.
+- Threshold signature — a signature produced by any qualifying subset of share-holders.
+- TMA — Telegram Mini App.
+- Settlement webhook — a signed HTTP callback used for merchant reconciliation.
+- Recovery share — a non-online MPC share used in recovery flows.
+
+
+SECTION 14 — Support
+---------------------
+The current public entry point is the Telegram Mini App: https://t.me/onedollar_wallet_bot/app . For account-specific or launch-related questions, Telegram support is the source of action.
+
+
+SECTION 15 — Disclosure
+------------------------
+This material is informational only. No financial, legal, tax, or investment advice. Digital assets involve risk. Answers from the on-site assistant are based on the current public ONEWALLET homepage and whitepaper draft. No guarantees are made about price, returns, exchange listings, audit completion, regulatory approval, or vendor architecture. Forward-looking terms ("target", "planned", "draft") indicate intent, not commitments.

@@ -1,0 +1,21 @@
+# ONEWALLET
+
+> Telegram-native Web3 wallet, payment rail, and $1 ecosystem. Keyless MPC custody, QR merchant payments, multi-chain support. This file follows llmstxt.org and lists approved public sources only. Forward-looking statements ("target", "planned", "draft") remain subject to product, security, and legal review. Not financial advice.
+
+## Primary
+
+- [Homepage](https://onewallet-web.vercel.app/): Product overview, security model, payments, $1 utility, roadmap, team, FAQ.
+- [Whitepaper](https://onewallet-web.vercel.app/whitepaper.html): Twelve chapters covering executive summary, product thesis, UX, architecture, security, token model, growth, business model, roadmap, team, risks, glossary.
+- [Full text for LLMs](https://onewallet-web.vercel.app/llms-full.txt): Concatenated approved copy in a single plain-text file.
+
+## Assistant corpus
+
+- [Assistant knowledge JSON](https://onewallet-web.vercel.app/assets/assistant-knowledge.json): Structured chunks (id, locale, title, source, tags, text) used by the on-site assistant. Localised in EN, KO, JA, ZH.
+
+## Contact
+
+- [Telegram Mini App](https://t.me/onedollar_wallet_bot/app): Public entry point. Account-specific or launch-related questions are handled here, not on the marketing site.
+
+## Out of scope
+
+ONEWALLET public materials do not make claims about: yield or return promises, current exchange-listing status, completion of any security audit, banking-class or regulator-blessed status, specific hardware-security-module or single-tenant-network vendor architecture, fixed launch dates, or final tokenomics. Any statement of that kind should be treated as out of scope and not attributed to ONEWALLET.

@@ -19,16 +19,129 @@
   function normalize(value) {
     return String(value || '').toLowerCase().replace(/[^\p{L}\p{N}$]+/gu, ' ').trim();
   }
+  // English stopwords only — KO/JA/ZH tokens are kept (no shared question particles to drop).
+  const STOPWORDS = new Set([
+    'a','an','the','and','or','but','of','to','in','on','at','for','with','by','from',
+    'is','are','was','were','be','been','being','am','do','does','did','done','doing',
+    'have','has','had','will','would','can','could','should','may','might','must',
+    'i','me','my','we','our','you','your','it','its','they','their','this','that',
+    'how','what','why','when','where','who','which','whose','if','so','as','than','then',
+    'about','into','onto','over','under','out','up','down','off','out','no','not','yes',
+    'me','us','him','her','them','also'
+  ]);
+  function tokenize(value, { keepStopwords = false } = {}) {
+    const toks = normalize(value).split(/\s+/).filter(t => t.length > 1);
+    return keepStopwords ? toks : toks.filter(t => !STOPWORDS.has(t));
+  }
+
+  // ── Retrieval over JSON corpus when available; falls back to curated items.
+  // Scoring: idf-weighted term hits, with title and tags boosted over text.
+  let CORPUS = null;          // { meta, chunks } once loaded
+  let CORPUS_INDEX = null;    // { idf: Map<term, number>, byLocale: { [loc]: PreparedChunk[] } }
+  const RETRIEVAL_THRESHOLD = 1.2; // empirical floor before falling back
+
+  function prepareChunk(c) {
+    const titleTokens = tokenize(c.title);
+    const tagTokens   = (c.tags || []).flatMap(tokenize);
+    const textTokens  = tokenize(c.text);
+    return { chunk: c, titleTokens, tagTokens, textTokens };
+  }
+  function buildIndex(corpus) {
+    const byLocale = {};
+    for (const c of corpus.chunks) (byLocale[c.locale] = byLocale[c.locale] || []).push(prepareChunk(c));
+    // Compute IDF across the full corpus (locale-agnostic — small dictionary, locale tokens rarely overlap).
+    const df = new Map();
+    const all = corpus.chunks.length;
+    for (const c of corpus.chunks) {
+      const uniq = new Set([...tokenize(c.title), ...(c.tags || []).flatMap(tokenize), ...tokenize(c.text)]);
+      for (const t of uniq) df.set(t, (df.get(t) || 0) + 1);
+    }
+    const idf = new Map();
+    for (const [t, d] of df) idf.set(t, Math.log(1 + all / (1 + d)));
+    return { idf, byLocale };
+  }
+  function loadCorpus() {
+    // Resolve relative to site root so it works from index.html and whitepaper.html.
+    const base = location.pathname.endsWith('whitepaper.html') ? '' : '';
+    fetch(base + 'assets/assistant-knowledge.json', { credentials: 'same-origin' })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data && data.chunks) { CORPUS = data; CORPUS_INDEX = buildIndex(data); } })
+      .catch(() => { /* offline / file:// → curated fallback remains */ });
+  }
+
+  function scoreChunk(prep, terms, idf) {
+    let score = 0, hits = 0, titleOrTagHit = false;
+    for (const t of terms) {
+      const w = idf.get(t) || 0.4;
+      const inTitle = prep.titleTokens.includes(t);
+      const inTag   = prep.tagTokens.includes(t);
+      const inText  = prep.textTokens.includes(t);
+      if (inTitle) score += w * 2.2;
+      if (inTag)   score += w * 1.6;
+      if (inText)  score += w * 1.0;
+      if (inTitle || inTag || inText) hits++;
+      if (inTitle || inTag) titleOrTagHit = true;
+    }
+    return { score, hits, titleOrTagHit };
+  }
+  function retrieveFromCorpus(query, locale) {
+    if (!CORPUS_INDEX) return null;
+    const terms = tokenize(query);
+    if (!terms.length) return null;
+    const pool = (CORPUS_INDEX.byLocale[locale] || []).concat(CORPUS_INDEX.byLocale.en || []);
+    if (!pool.length) return null;
+    let best = null;
+    for (const prep of pool) {
+      const s = scoreChunk(prep, terms, CORPUS_INDEX.idf);
+      if (!best || s.score > best.score) best = { prep, ...s };
+    }
+    if (!best) return null;
+    // Precision floors: a match needs either evidence in title/tag, OR ≥2 distinct term hits.
+    // Stops single body-token bleed-overs like "company" → some chunk that mentions "company" once.
+    const precise = best.titleOrTagHit || best.hits >= 2;
+    return (precise && best.score >= RETRIEVAL_THRESHOLD) ? best : null;
+  }
   function bestMatch(query, items) {
-    const terms = normalize(query).split(/\s+/).filter(t => t.length > 1);
+    // Try corpus retrieval first. Curated items remain authoritative for QA wording + links.
+    const lc = lang();
+    const corpusHit = retrieveFromCorpus(query, lc);
+    if (corpusHit) {
+      const c = corpusHit.prep.chunk;
+      const m = /^qa-([a-z0-9]+)-([a-z]{2})$/.exec(c.id);
+      if (m) {
+        const curated = items.find(x => x.id === m[1]);
+        if (curated) return curated;
+      }
+      // Non-QA chunk → synthesize an item shape compatible with the renderer.
+      return { id: c.id, q: c.title, a: c.text, href: c.source, link: c.title, k: (c.tags || []).join(' ') };
+    }
+    // Fallback (corpus not loaded yet, or offline): score curated items with the same
+    // precision rule as the corpus path. q+k act as title+tags, a as text.
+    const terms = tokenize(query);
     if (!terms.length) return null;
     let best = null;
     for (const item of items) {
-      const hay = normalize([item.q, item.a, item.k].join(' '));
-      const score = terms.reduce((n, t) => n + (hay.includes(t) ? 1 : 0), 0);
-      if (!best || score > best.score) best = { item, score };
+      const qTokens = tokenize(item.q);
+      const kTokens = tokenize(item.k);
+      const aTokens = tokenize(item.a);
+      let score = 0, hits = 0, titleHit = false;
+      for (const t of terms) {
+        const inQ = qTokens.includes(t);
+        const inK = kTokens.includes(t);
+        const inA = aTokens.includes(t);
+        if (inQ) score += 2.2;
+        if (inK) score += 1.6;
+        if (inA) score += 1.0;
+        if (inQ || inK || inA) hits++;
+        if (inQ) titleHit = true;
+      }
+      if (!best || score > best.score) best = { item, score, hits, titleHit };
     }
-    return best && best.score > 0 ? best.item : null;
+    if (!best || best.score === 0) return null;
+    // Keyword-only single-token hits ("security" in k of a custody item) are too permissive;
+    // require either a question-text hit, or ≥2 distinct hits across q/k/a.
+    const precise = best.titleHit || best.hits >= 2;
+    return precise ? best.item : null;
   }
 
   function resolveHref(href) {
@@ -39,7 +152,10 @@
   }
 
   function iconAi() {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z"/><path d="M19 14l.7 1.9L21.5 16.5l-1.8.7L19 19l-.7-1.8L16.5 16.5l1.8-.6L19 14z"/></svg>';
+    return '<svg class="ow-sparkle" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M12 2C12.45 5.55 13.95 8.05 16.5 9.5C13.95 10.95 12.45 13.45 12 17C11.55 13.45 10.05 10.95 7.5 9.5C10.05 8.05 11.55 5.55 12 2Z" fill="currentColor" opacity="0.92"/><path d="M19 13C19.3 14.8 20.1 15.9 21.5 16.5C20.1 17.1 19.3 18.2 19 20C18.7 18.2 17.9 17.1 16.5 16.5C17.9 15.9 18.7 14.8 19 13Z" fill="currentColor" opacity="0.65"/><path d="M5 15.5C5.2 16.6 5.7 17.2 6.5 17.5C5.7 17.8 5.2 18.4 5 19.5C4.8 18.4 4.3 17.8 3.5 17.5C4.3 17.2 4.8 16.6 5 15.5Z" fill="currentColor" opacity="0.4"/></svg>';
+  }
+  function iconAiNav() {
+    return '<svg class="ow-sparkle" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M12 1C12.6 6.2 14.8 9.2 18 11C14.8 12.8 12.6 15.8 12 21C11.4 15.8 9.2 12.8 6 11C9.2 9.2 11.4 6.2 12 1Z" fill="currentColor"/></svg>';
   }
   function iconClose() {
     return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
@@ -72,7 +188,7 @@
       navBtn.className = 'ow-nav-ai';
       navBtn.setAttribute('aria-label', t.navLabel);
       navBtn.setAttribute('aria-keyshortcuts', isMac ? 'Meta+K' : 'Control+K');
-      navBtn.innerHTML = iconAi();
+      navBtn.innerHTML = iconAiNav();
       navBtn.addEventListener('click', () => open());
       const langSwitch = navCta.querySelector('.lang-switch');
       if (langSwitch) navCta.insertBefore(navBtn, langSwitch);
@@ -272,6 +388,7 @@
 
   window.addEventListener('onewallet:lang', () => render());
 
+  loadCorpus();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
   else mount();
 })();
