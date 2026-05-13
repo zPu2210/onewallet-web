@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>ONEWALLET Whitepaper v0.9 — Technical &amp; Product Reference</title>
+<meta name="description" content="Technical and product whitepaper for ONEWALLET — a Telegram-native Web3 wallet, payment rail, and $1 token economy. MPC custody, threat model, growth and business model, risks." />
+<meta name="theme-color" content="#0d1117" />
+<link rel="canonical" href="https://onewallet.app/whitepaper.html" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="ONEWALLET" />
+<meta property="og:title" content="ONEWALLET Whitepaper v0.9" />
+<meta property="og:description" content="Technical and product whitepaper: MPC custody, payments rail, token model, risks." />
+<meta property="og:image" content="https://onewallet.app/assets/hero-mockup.webp" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="1260" />
+<meta property="og:url" content="https://onewallet.app/whitepaper.html" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ONEWALLET Whitepaper v0.9" />
+<meta name="twitter:description" content="MPC custody, payments rail, token model, risks." />
+<meta name="twitter:image" content="https://onewallet.app/assets/hero-mockup.webp" />
+
+<link rel="icon" type="image/png" href="assets/logo.png" />
+<link rel="apple-touch-icon" href="assets/logo.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Sans+KR:wght@500;600;700&family=Noto+Sans+JP:wght@500;600;700&family=Noto+Sans+SC:wght@500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"ONEWALLET Whitepaper v0.9","description":"Technical and product whitepaper for ONEWALLET — Telegram-native Web3 wallet, payment rail, and token economy.","author":{"@type":"Organization","name":"ONEWALLET"},"publisher":{"@type":"Organization","name":"ONEWALLET","logo":{"@type":"ImageObject","url":"https://onewallet.app/assets/logo.png"}},"datePublished":"2026-05-13","inLanguage":"en"}
+</script>
+
+<style>
+  :root {
+    --bg: #0d1117; --bg-elevated: #131922; --bg-card: #161d28; --bg-code: #1c2330;
+    --border: #1f2530; --border-strong: #2a3340;
+    --fg: #d8dde2; --fg-strong: #ffffff; --fg-muted: #8b949e; --fg-subtle: #6b7480;
+    --brand: #2dd4a7; --brand-bright: #4cf0c0; --brand-dim: rgba(45,212,167,0.65); --brand-soft: rgba(45,212,167,0.10);
+    --teal: #5eead4; --info: #6aa6ff; --warning: #f59e0b; --warning-bg: rgba(245,158,11,0.08); --danger: #f87171;
+    --serif: "Playfair Display","Charter","Iowan Old Style",Cambria,Georgia,serif;
+    --sans: "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --mono: "JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+    --maxw: 1180px; --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px;
+    --shadow-md: 0 1px 0 rgba(255,255,255,0.04), 0 12px 32px rgba(0,0,0,0.4);
+    --shadow-glow: 0 0 0 1px var(--brand-soft), 0 18px 40px rgba(45,212,167,0.18);
+    --t-fast: 160ms cubic-bezier(0.2,0.7,0.2,1); --t-med: 280ms cubic-bezier(0.2,0.7,0.2,1);
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  body, main, section, article, aside { min-width: 0; }
+  .layout > *, article > *, aside > * { min-width: 0; }
+
+  html[lang="ko"] body { font-family: "Inter","Noto Sans KR",-apple-system,sans-serif; }
+  html[lang="ja"] body { font-family: "Inter","Noto Sans JP",-apple-system,sans-serif; }
+  html[lang="zh"] body { font-family: "Inter","Noto Sans SC",-apple-system,sans-serif; }
+  html[lang="ko"], html[lang="ja"], html[lang="zh"] { word-break: keep-all; overflow-wrap: break-word; line-break: strict; }
+  html[lang="ko"] h1, html[lang="ja"] h1, html[lang="zh"] h1,
+  html[lang="ko"] h2, html[lang="ja"] h2, html[lang="zh"] h2,
+  html[lang="ko"] h3, html[lang="ja"] h3, html[lang="zh"] h3 { font-family: inherit; font-weight: 700; letter-spacing: -0.01em; }
+  :lang(ko), :lang(ja), :lang(zh) { word-break: keep-all; overflow-wrap: break-word; line-break: strict; }
+
+  h1, h2, h3 { font-family: var(--serif); color: var(--fg-strong); margin: 0 0 0.4em; letter-spacing: -0.02em; }
+  h1 { font-size: clamp(30px, 5vw, 54px); line-height: 1.08; font-weight: 600; letter-spacing: -0.03em; }
+  h2 { font-size: clamp(24px, 3vw, 32px); line-height: 1.18; font-weight: 600; margin: 0 0 14px; }
+  h3 { font-size: 19px; font-weight: 600; margin-top: 1.6em; }
+  h4 { font-size: 15px; font-family: var(--sans); font-weight: 600; color: var(--fg-strong); margin: 0 0 6px; }
+  p { margin: 0 0 1em; }
+  a { color: var(--brand); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color var(--t-fast); }
+  a:hover { border-bottom-color: var(--brand); }
+  ul, ol { padding-left: 22px; margin: 0 0 1em; }
+  li { margin-bottom: 6px; }
+  .mono { font-family: var(--mono); }
+
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
+
+  header.bar { background: rgba(13,17,23,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+  .bar-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 16px; height: 58px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--fg-strong); text-decoration: none; font-size: 15px; transition: opacity var(--t-fast); }
+  .brand:hover { border: 0; opacity: 0.85; }
+  .brand img { width: 26px; height: 26px; border-radius: 50%; transition: transform var(--t-med); }
+  .brand:hover img { transform: rotate(-6deg) scale(1.05); }
+  .doc-meta { display: flex; gap: 18px; color: var(--fg-subtle); font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; flex: 1; }
+  html[lang="ko"] .doc-meta, html[lang="ja"] .doc-meta, html[lang="zh"] .doc-meta { font-family: inherit; letter-spacing: 0.02em; }
+  .doc-meta b { color: var(--fg-strong); font-weight: 500; }
+
+  .lang-switch { position: relative; }
+  .lang-trigger { font-family: var(--mono); font-size: 11px; color: var(--fg-muted); background: transparent; border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; cursor: pointer; letter-spacing: 0.06em; transition: border-color var(--t-fast), color var(--t-fast); display: inline-flex; align-items: center; gap: 6px; }
+  .lang-trigger:hover, .lang-trigger[aria-expanded="true"] { border-color: var(--border-strong); color: var(--fg-strong); }
+  .lang-trigger .caret { width: 10px; height: 10px; opacity: 0.6; transition: transform var(--t-fast); pointer-events: none; }
+  .lang-trigger[aria-expanded="true"] .caret { transform: rotate(180deg); }
+  .lang-trigger > * { pointer-events: none; }
+  .lang-menu { position: absolute; top: calc(100% + 6px); right: 0; background: var(--bg-card); border: 1px solid var(--border-strong); border-radius: 10px; padding: 6px; min-width: 160px; box-shadow: var(--shadow-md); display: none; flex-direction: column; z-index: 60; }
+  .lang-menu.open { display: flex; animation: dropFade var(--t-fast) ease both; }
+  @keyframes dropFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  .lang-menu button { background: transparent; border: 0; color: var(--fg); text-align: left; padding: 8px 10px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 13px; display: flex; justify-content: space-between; align-items: center; gap: 8px; transition: background var(--t-fast); }
+  .lang-menu button:hover { background: var(--bg-elevated); }
+  .lang-menu button[aria-checked="true"] { background: var(--brand-soft); color: var(--brand); }
+  .lang-menu button .code { font-family: var(--mono); font-size: 11px; color: var(--fg-subtle); }
+
+  .bar .btn { font-family: inherit; font-size: 13px; padding: 8px 14px; border-radius: 999px; background: var(--brand); color: #052119; text-decoration: none; font-weight: 500; border: 0; transition: background var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast); }
+  .bar .btn:hover { background: var(--brand-bright); border: 0; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(45,212,167,0.28); }
+  @media (max-width: 720px) { .doc-meta { display: none; } }
+  @media (max-width: 480px) { .brand .wordmark { display: none; } .bar .btn { font-size: 12px; padding: 7px 12px; } .lang-trigger { padding: 5px 10px; } }
+
+  .title-block { padding: 70px 0 84px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); background: radial-gradient(80% 60% at 50% 30%, rgba(45,212,167,0.08), transparent 70%), var(--bg); }
+  .title-block::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(80% 60% at 50% 50%, #000 30%, transparent 80%); pointer-events: none; }
+  .title-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  .title-block .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--brand); text-transform: uppercase; margin-bottom: 18px; display: inline-flex; gap: 10px; align-items: center; }
+  html[lang="ko"] .title-block .eyebrow, html[lang="ja"] .title-block .eyebrow, html[lang="zh"] .title-block .eyebrow { font-family: inherit; letter-spacing: 0.06em; }
+  .title-block .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--brand); }
+  .title-block h1 { max-width: 18ch; font-weight: 500; }
+  .title-block h1 em { color: var(--brand); font-style: italic; font-weight: 500; }
+  html[lang="ko"] .title-block h1 em, html[lang="ja"] .title-block h1 em, html[lang="zh"] .title-block h1 em { font-style: normal; }
+  .title-block .sub { color: var(--fg-muted); max-width: 60ch; font-size: clamp(16px, 1.5vw, 19px); margin: 18px 0 28px; }
+  .title-meta { display: flex; gap: clamp(20px, 4vw, 40px); flex-wrap: wrap; margin-top: 28px; font-size: 13px; color: var(--fg-muted); }
+  .title-meta div b { display: block; color: var(--fg-strong); font-weight: 500; margin-bottom: 4px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+  html[lang="ko"] .title-meta div b, html[lang="ja"] .title-meta div b, html[lang="zh"] .title-meta div b { font-family: inherit; letter-spacing: 0.04em; }
+
+  .i18n-notice { max-width: var(--maxw); margin: 24px auto 0; padding: 14px 18px; background: rgba(106,166,255,0.06); border: 1px solid rgba(106,166,255,0.18); border-left: 3px solid var(--info); border-radius: var(--radius-sm); color: var(--fg-muted); font-size: 13px; display: none; }
+  .i18n-notice.show { display: block; }
+  .i18n-notice b { color: var(--info); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin-right: 8px; }
+  html[lang="ko"] .i18n-notice b, html[lang="ja"] .i18n-notice b, html[lang="zh"] .i18n-notice b { font-family: inherit; letter-spacing: 0.04em; }
+
+  .layout { max-width: var(--maxw); margin: 0 auto; padding: 56px 24px 60px; display: grid; grid-template-columns: 240px 1fr; gap: 56px; }
+  @media (max-width: 940px) { .layout { grid-template-columns: 1fr; gap: 28px; padding-top: 32px; } }
+
+  aside.toc { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; }
+  @media (max-width: 940px) { aside.toc { position: relative; top: 0; max-height: none; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; } }
+  .toc h5 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-subtle); margin: 0 0 14px; font-weight: 500; }
+  html[lang="ko"] .toc h5, html[lang="ja"] .toc h5, html[lang="zh"] .toc h5 { font-family: inherit; letter-spacing: 0.04em; }
+  .toc ol { list-style: none; padding: 0; margin: 0; counter-reset: ch; }
+  .toc ol li { counter-increment: ch; margin-bottom: 8px; padding-left: 30px; position: relative; }
+  .toc ol li::before { content: counter(ch, decimal-leading-zero); position: absolute; left: 0; top: 1px; font-family: var(--mono); font-size: 11px; color: var(--fg-subtle); }
+  .toc ol li a { color: var(--fg-muted); border: 0; font-size: 14px; transition: color var(--t-fast); }
+  .toc ol li a:hover, .toc ol li a.active { color: var(--brand); border: 0; }
+
+  article { font-size: 16.5px; }
+  .chap { border-top: 1px solid var(--border); padding-top: 48px; margin-top: 48px; }
+  .chap:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+  .chap-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--brand); text-transform: uppercase; margin-bottom: 10px; }
+  html[lang="ko"] .chap-num, html[lang="ja"] .chap-num, html[lang="zh"] .chap-num { font-family: inherit; letter-spacing: 0.06em; }
+
+  .summary-card { background: var(--bg-elevated); border: 1px solid var(--border); border-left: 3px solid var(--brand); border-radius: var(--radius-sm); padding: 18px 22px; margin: 18px 0 26px; font-size: 15.5px; color: var(--fg); }
+  .summary-card b { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); display: block; margin-bottom: 6px; }
+  html[lang="ko"] .summary-card b, html[lang="ja"] .summary-card b, html[lang="zh"] .summary-card b { font-family: inherit; letter-spacing: 0.04em; }
+
+  .callout { padding: 14px 20px; border-radius: var(--radius-sm); margin: 18px 0; font-size: 14.5px; line-height: 1.65; border-left: 3px solid; background: var(--bg-elevated); }
+  .callout b { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; display: inline-block; margin-right: 8px; }
+  html[lang="ko"] .callout b, html[lang="ja"] .callout b, html[lang="zh"] .callout b { font-family: inherit; letter-spacing: 0.04em; }
+  .c-approved { border-color: var(--brand); background: var(--brand-soft); } .c-approved b { color: var(--brand); }
+  .c-assume { border-color: var(--info); background: rgba(106,166,255,0.06); } .c-assume b { color: var(--info); }
+  .c-risk { border-color: var(--warning); background: var(--warning-bg); } .c-risk b { color: var(--warning); }
+
+  .t-wrap { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
+  table.t { width: 100%; min-width: 480px; border-collapse: collapse; margin: 18px 0; font-size: 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  table.t th, table.t td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table.t tr:last-child td { border-bottom: 0; }
+  table.t th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-subtle); font-weight: 500; background: var(--bg-elevated); }
+  html[lang="ko"] table.t th, html[lang="ja"] table.t th, html[lang="zh"] table.t th { font-family: inherit; letter-spacing: 0.04em; }
+  table.t tr:nth-child(even) td { background: rgba(94,234,212,0.025); }
+
+  .diagram { background: var(--bg-code); border: 1px solid var(--border); border-radius: var(--radius-md); padding: clamp(18px, 3vw, 30px); margin: 24px 0; box-shadow: 0 1px 0 rgba(255,255,255,0.03), 0 12px 32px rgba(0,0,0,0.3); }
+  .diagram-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed var(--border-strong); }
+  .diagram-title { font-family: var(--mono); font-size: 12.5px; color: var(--fg-strong); letter-spacing: 0.04em; }
+  .diagram-sub { font-family: var(--mono); font-size: 11px; color: var(--fg-subtle); }
+  html[lang="ko"] .diagram-title, html[lang="ja"] .diagram-title, html[lang="zh"] .diagram-title,
+  html[lang="ko"] .diagram-sub, html[lang="ja"] .diagram-sub, html[lang="zh"] .diagram-sub { font-family: inherit; }
+  .diagram-legend { display: flex; gap: 14px; font-family: var(--mono); font-size: 10.5px; color: var(--fg-muted); }
+  .diagram-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .diagram-legend i { width: 18px; height: 2px; border-radius: 2px; display: inline-block; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .diagram svg .node { fill: var(--bg-card); stroke: var(--brand); stroke-width: 1.5; }
+  .diagram svg .node.alt { stroke: var(--warning); }
+  .diagram svg .node-lbl { font: 600 13px var(--mono); fill: var(--brand-bright); }
+  .diagram svg .node-lbl.alt { fill: var(--warning); }
+  .diagram svg .node-sub { font: 11px var(--mono); fill: var(--fg-subtle); }
+  .diagram svg .edge { stroke: var(--brand); stroke-width: 1.4; fill: none; }
+  .diagram svg .edge.alt { stroke: var(--warning); stroke-dasharray: 5 4; }
+  .diagram svg .edge.dim { stroke: var(--brand-dim); stroke-dasharray: 4 4; }
+  .diagram svg .edge-lbl { font: 500 11px var(--mono); fill: var(--fg-muted); }
+  .diagram figcaption { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-subtle); margin-top: 12px; }
+  @media (max-width: 720px) { .diagram { overflow-x: auto; } .diagram svg { min-width: 540px; } }
+
+  figure.svg-fig { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px; margin: 24px 0; }
+  figure.svg-fig svg { width: 100%; height: auto; display: block; }
+  figure.svg-fig figcaption { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-subtle); margin-top: 14px; }
+  @media (max-width: 720px) { figure.svg-fig { overflow-x: auto; } figure.svg-fig svg { min-width: 540px; } }
+
+  /* Team cards inside whitepaper (mirrors homepage style) */
+  .wp-team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px auto; max-width: 100%; }
+  @media (max-width: 720px) { .wp-team { grid-template-columns: 1fr; } }
+  .wp-member { position: relative; background: linear-gradient(180deg, rgba(45,212,167,0.04), transparent 60%), var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); overflow: hidden; }
+  .wp-member:hover { border-color: var(--brand-dim); transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+  .wp-member .top { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; }
+  .wp-member .photo { width: 64px; height: 64px; border-radius: 14px; overflow: hidden; background: var(--bg-elevated); border: 1px solid var(--border); flex-shrink: 0; }
+  .wp-member .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .wp-member .role { font-family: var(--mono); font-size: 10.5px; color: var(--brand); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px; }
+  html[lang="ko"] .wp-member .role, html[lang="ja"] .wp-member .role, html[lang="zh"] .wp-member .role { font-family: inherit; letter-spacing: 0.06em; }
+  .wp-member .name { color: var(--fg-strong); font-size: 16px; font-weight: 600; line-height: 1.3; }
+  .wp-member .name .kr { margin-right: 8px; opacity: 0.92; }
+  .wp-member ul { list-style: none; padding: 0; margin: 0; color: var(--fg-muted); font-size: 13px; line-height: 1.7; }
+  .wp-member ul li { position: relative; padding-left: 14px; margin-bottom: 2px; }
+  .wp-member ul li::before { content: "·"; position: absolute; left: 4px; color: var(--brand); font-weight: 700; }
+
+  .risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 22px 0; }
+  @media (max-width: 720px) { .risk-grid { grid-template-columns: 1fr; } }
+  .risk-cell { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; }
+  .risk-cell .lvl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; padding: 3px 8px; border-radius: 4px; }
+  html[lang="ko"] .risk-cell .lvl, html[lang="ja"] .risk-cell .lvl, html[lang="zh"] .risk-cell .lvl { font-family: inherit; letter-spacing: 0.04em; }
+  .lvl-h { background: rgba(248,113,113,0.12); color: var(--danger); }
+  .lvl-m { background: var(--warning-bg); color: var(--warning); }
+  .lvl-l { background: var(--brand-soft); color: var(--brand); }
+  .risk-cell h4 { margin: 10px 0 4px; }
+  .risk-cell p { margin: 0; color: var(--fg); font-size: 14px; }
+  .risk-cell small { display: block; margin-top: 8px; color: var(--fg-muted); font-size: 13px; }
+
+  dl.glossary { margin: 16px 0; }
+  dl.glossary dt { font-family: var(--mono); font-size: 13.5px; color: var(--fg-strong); font-weight: 500; margin-top: 14px; }
+  html[lang="ko"] dl.glossary dt, html[lang="ja"] dl.glossary dt, html[lang="zh"] dl.glossary dt { font-family: inherit; }
+  dl.glossary dd { margin: 4px 0 0; color: var(--fg-muted); font-size: 15px; }
+
+  footer.doc-foot { background: var(--bg-elevated); color: var(--fg-muted); padding: 36px 0; margin-top: 56px; font-size: 13px; border-top: 1px solid var(--border); }
+  .foot-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer.doc-foot a { color: var(--fg); }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 480ms ease, transform 480ms ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } *,*::before,*::after { transition: none !important; animation: none !important; } }
+
+  @media print {
+    :root { --bg: #fff; --bg-elevated: #f7f7f4; --bg-card: #fff; --bg-code: #1c2330; --border: #ddd; --fg: #111; --fg-strong: #000; --fg-muted: #555; --fg-subtle: #777; }
+    body { font-size: 11pt; }
+    header.bar, aside.toc { display: none; }
+    .layout { grid-template-columns: 1fr; padding: 0; }
+    .chap { page-break-inside: avoid; }
+    h1, h2 { page-break-after: avoid; }
+    a { color: #000; border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-inner">
+    <a class="brand" href="index.html" aria-label="ONEWALLET home" data-i18n-attr="aria-label:common.aria.home"><img src="assets/logo.png" alt="" width="26" height="26" /><span class="wordmark">ONEWALLET</span></a>
+    <div class="doc-meta">
+      <span data-i18n="wp.bar.wpv">Whitepaper · v0.9 draft</span>
+      <span data-i18n="wp.bar.updated">Updated May 2026</span>
+    </div>
+    <div class="lang-switch">
+      <button class="lang-trigger" type="button" id="langTrigger" aria-haspopup="menu" aria-expanded="false">
+        <span id="langLabel">EN</span>
+        <svg class="caret" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <button type="button" role="menuitemradio" data-lang="en" aria-checked="true">English<span class="code">EN</span></button>
+        <button type="button" role="menuitemradio" data-lang="ko" aria-checked="false">한국어<span class="code">KO</span></button>
+        <button type="button" role="menuitemradio" data-lang="ja" aria-checked="false">日本語<span class="code">JA</span></button>
+        <button type="button" role="menuitemradio" data-lang="zh" aria-checked="false">中文<span class="code">ZH</span></button>
+      </div>
+    </div>
+    <a class="btn" href="https://t.me/onedollar_wallet_bot/app" target="_blank" rel="noopener" data-i18n="common.openInTelegram">Open in Telegram</a>
+  </div>
+</header>
+
+<section class="title-block">
+  <div class="title-inner">
+    <span class="eyebrow" data-i18n="wp.title.eb">Technical &amp; product whitepaper · v0.9</span>
+    <h1 data-i18n="wp.title.h">The Telegram-native <em>wallet</em>,<br>payment rail, and ecosystem.</h1>
+    <p class="sub" data-i18n="wp.title.sub">ONEWALLET is a keyless MPC wallet, payment network, and token economy designed to make Web3 finance work like sending a message inside Telegram.</p>
+    <div class="title-meta">
+      <div><b data-i18n="wp.m.v">Version</b><span data-i18n="wp.mv">0.9 draft · 2026-05</span></div>
+      <div><b data-i18n="wp.m.a">Audience</b><span data-i18n="wp.ma">Users · Investors · Partners</span></div>
+      <div><b data-i18n="wp.m.s">Status</b><span data-i18n="wp.ms">Pre-mainnet · Private testing</span></div>
+      <div><b data-i18n="wp.m.l">Languages</b><span data-i18n="wp.ml">EN · KO · JA · ZH</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="i18n-notice" id="i18nNotice" role="status">
+  <b data-i18n="wp.notice.tag">Notice</b><span data-i18n="wp.notice.text">Whitepaper body translation is supported on this page — content is now showing in the selected language.</span>
+</div>
+
+<div class="layout">
+
+  <aside class="toc" aria-label="Whitepaper contents" data-i18n-attr="aria-label:common.aria.toc">
+    <h5 data-i18n="wp.toc">Contents</h5>
+    <ol>
+      <li><a href="#ch1" data-i18n="wp.ch.1">Executive summary</a></li>
+      <li><a href="#ch2" data-i18n="wp.ch.2">Product thesis</a></li>
+      <li><a href="#ch3" data-i18n="wp.ch.3">User experience</a></li>
+      <li><a href="#ch4" data-i18n="wp.ch.4">Technical architecture</a></li>
+      <li><a href="#ch5" data-i18n="wp.ch.5">Security model</a></li>
+      <li><a href="#ch6" data-i18n="wp.ch.6">Token model</a></li>
+      <li><a href="#ch7" data-i18n="wp.ch.7">Growth model</a></li>
+      <li><a href="#ch8" data-i18n="wp.ch.8">Business model</a></li>
+      <li><a href="#ch9" data-i18n="wp.ch.9">Roadmap</a></li>
+      <li><a href="#ch10" data-i18n="wp.ch.10">Team &amp; governance</a></li>
+      <li><a href="#ch11" data-i18n="wp.ch.11">Risks &amp; mitigations</a></li>
+      <li><a href="#ch12" data-i18n="wp.ch.12">Appendix</a></li>
+    </ol>
+  </aside>
+
+  <article>
+
+    <section class="chap reveal" id="ch1">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 01</div>
+      <h2 data-i18n="wp.ch.1">Executive summary</h2>
+      <div class="summary-card"><b data-i18n="wp.c1.sum.t">In one paragraph</b><span data-i18n="wp.c1.sum.p">ONEWALLET is a Telegram-native Web3 wallet that replaces seed phrases with 2-of-3 MPC custody…</span></div>
+      <p data-i18n="wp.c1.p1">Most consumer crypto products still ask users to memorize twelve words…</p>
+      <p data-i18n="wp.c1.p2">This document covers product, architecture, security…</p>
+      <div class="callout c-approved"><b data-i18n="wp.c1.cal.t">Approved</b><span data-i18n="wp.c1.cal.p">Brand name, product positioning…</span></div>
+    </section>
+
+    <section class="chap reveal" id="ch2">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 02</div>
+      <h2 data-i18n="wp.ch.2">Product thesis</h2>
+      <div class="summary-card"><b data-i18n="wp.c2.sum.t">Thesis</b><span data-i18n="wp.c2.sum.p">Web3 distribution will be won inside chat…</span></div>
+      <h3 data-i18n="wp.c2.h1">Why now</h3>
+      <ul>
+        <li data-i18n="wp.c2.li1">Telegram Mini Apps run native-feeling UIs without app-store gatekeeping.</li>
+        <li data-i18n="wp.c2.li2">MPC custody has matured from research to production-grade libraries.</li>
+        <li data-i18n="wp.c2.li3">Stablecoin volume has become structurally meaningful for merchant payments.</li>
+        <li data-i18n="wp.c2.li4">Consumer fatigue with seed-phrase ceremonies opens the field for keyless wallets.</li>
+      </ul>
+      <h3 data-i18n="wp.c2.h2">What ONEWALLET is</h3>
+      <ol>
+        <li data-i18n="wp.c2.ol1">A wallet — multi-chain, keyless, Telegram-native.</li>
+        <li data-i18n="wp.c2.ol2">A payment rail — QR invoices, stablecoin settlement, merchant webhooks.</li>
+        <li data-i18n="wp.c2.ol3">An ecosystem — $1 token utility, mini-app distribution, ecosystem rewards.</li>
+      </ol>
+    </section>
+
+    <section class="chap reveal" id="ch3">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 03</div>
+      <h2 data-i18n="wp.ch.3">User experience</h2>
+      <div class="summary-card"><b data-i18n="wp.c3.sum.t">UX principles</b><span data-i18n="wp.c3.sum.p">Open like a chat. Recover without ceremony…</span></div>
+      <h3 data-i18n="wp.c3.h1">Onboarding</h3>
+      <p data-i18n="wp.c3.p1">ONEWALLET launches as a Telegram Mini App…</p>
+
+      <figure class="diagram">
+        <div class="diagram-head">
+          <div>
+            <div class="diagram-title" data-i18n="wp.c3.d.t">Onboarding flow</div>
+            <div class="diagram-sub" data-i18n="wp.c3.d.s">Telegram · Mini App · device share · wallet</div>
+          </div>
+          <div class="diagram-legend">
+            <span><i style="background:var(--brand)"></i><span data-i18n="wp.c3.d.l1">Primary path</span></span>
+            <span><i style="background:var(--fg-subtle)"></i><span data-i18n="wp.c3.d.l2">No friction</span></span>
+          </div>
+        </div>
+        <svg viewBox="0 0 880 240" xmlns="http://www.w3.org/2000/svg" role="img">
+          <defs><marker id="ob-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/></marker></defs>
+          <g><rect class="node" x="20" y="60" width="180" height="64" rx="10"/><text class="node-lbl" x="110" y="90" text-anchor="middle" data-i18n-svg="wp.c3.d.n1">Telegram</text><text class="node-sub" x="110" y="108" text-anchor="middle" data-i18n-svg="wp.c3.d.n1s">chat runtime</text></g>
+          <g><rect class="node" x="240" y="60" width="180" height="64" rx="10"/><text class="node-lbl" x="330" y="90" text-anchor="middle" data-i18n-svg="wp.c3.d.n2">Open Mini App</text><text class="node-sub" x="330" y="108" text-anchor="middle" data-i18n-svg="wp.c3.d.n2s">launch in-app</text></g>
+          <g><rect class="node" x="460" y="60" width="180" height="64" rx="10"/><text class="node-lbl" x="550" y="90" text-anchor="middle" data-i18n-svg="wp.c3.d.n3">Device check</text><text class="node-sub" x="550" y="108" text-anchor="middle" data-i18n-svg="wp.c3.d.n3s">session · device share</text></g>
+          <g><rect class="node" x="680" y="60" width="180" height="64" rx="10" fill="#0f1a17"/><text class="node-lbl" x="770" y="90" text-anchor="middle" data-i18n-svg="wp.c3.d.n4">Create wallet</text><text class="node-sub" x="770" y="108" text-anchor="middle" data-i18n-svg="wp.c3.d.n4s">MPC shares split</text></g>
+          <path class="edge" d="M 200 92 L 240 92" marker-end="url(#ob-arr)"/>
+          <path class="edge" d="M 420 92 L 460 92" marker-end="url(#ob-arr)"/>
+          <path class="edge" d="M 640 92 L 680 92" marker-end="url(#ob-arr)"/>
+          <g>
+            <line x1="20" y1="170" x2="860" y2="170" stroke="#1f2530" stroke-dasharray="3 4"/>
+            <text class="node-sub" x="110" y="194" text-anchor="middle" data-i18n-svg="wp.c3.d.b1">no app store</text>
+            <text class="node-sub" x="330" y="194" text-anchor="middle" data-i18n-svg="wp.c3.d.b2">no download</text>
+            <text class="node-sub" x="550" y="194" text-anchor="middle" data-i18n-svg="wp.c3.d.b3">no seed phrase</text>
+            <text class="node-sub" x="770" y="194" text-anchor="middle" data-i18n-svg="wp.c3.d.b4">no email</text>
+          </g>
+        </svg>
+        <figcaption data-i18n="wp.c3.fig">Figure 3.1 — Onboarding flow</figcaption>
+      </figure>
+
+      <h3 data-i18n="wp.c3.h2">Daily actions</h3>
+      <ul>
+        <li><b data-i18n="wp.c3.a1.b">Send</b> <span data-i18n="wp.c3.a1.p">— pick a recipient from Telegram contacts or paste an address.</span></li>
+        <li><b data-i18n="wp.c3.a2.b">Pay</b> <span data-i18n="wp.c3.a2.p">— scan a merchant QR; ONEWALLET resolves chain, amount, and FX.</span></li>
+        <li><b data-i18n="wp.c3.a3.b">Receive</b> <span data-i18n="wp.c3.a3.p">— share a chat-native deep link or QR.</span></li>
+        <li><b data-i18n="wp.c3.a4.b">Swap</b> <span data-i18n="wp.c3.a4.p">— in-app stablecoin and major-asset swaps with route preview.</span></li>
+        <li><b data-i18n="wp.c3.a5.b">Earn</b> <span data-i18n="wp.c3.a5.p">— rewards in $1 for active payment and referral behavior.</span></li>
+      </ul>
+    </section>
+
+    <section class="chap reveal" id="ch4">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 04</div>
+      <h2 data-i18n="wp.ch.4">Technical architecture</h2>
+      <div class="summary-card"><b data-i18n="wp.c4.sum.t">Four-layer model</b><span data-i18n="wp.c4.sum.p">Client (TMA) · Edge · Custody · Settlement.</span></div>
+      <figure class="svg-fig">
+        <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img">
+          <style>
+            .lbl { font: 600 13px Inter, sans-serif; fill: #e6e8eb; }
+            .sub { font: 12px Inter, sans-serif; fill: #8b949e; }
+            .tag { font: 500 10px "JetBrains Mono", monospace; fill: #2dd4a7; letter-spacing: 1.4px; }
+            .lane { fill: #161d28; stroke: #2a3340; }
+            .arr { stroke: #8b949e; stroke-width: 1.4; fill: none; marker-end: url(#aa); }
+          </style>
+          <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/></marker>
+          <rect class="lane" x="20" y="20" width="760" height="62" rx="10"/>
+          <text class="tag" x="36" y="40" data-i18n-svg="wp.c4.l1.t">LAYER 01 · CLIENT</text>
+          <text class="lbl" x="36" y="62" data-i18n-svg="wp.c4.l1.h">Telegram Mini App · React + TMA SDK</text>
+          <text class="sub" x="36" y="78" data-i18n-svg="wp.c4.l1.s">UI · session · device share · UX state</text>
+          <rect class="lane" x="20" y="100" width="760" height="62" rx="10"/>
+          <text class="tag" x="36" y="120" data-i18n-svg="wp.c4.l2.t">LAYER 02 · EDGE</text>
+          <text class="lbl" x="36" y="142" data-i18n-svg="wp.c4.l2.h">Auth · MPC orchestration · price feeds · webhooks</text>
+          <text class="sub" x="36" y="158" data-i18n-svg="wp.c4.l2.s">stateless functions · zero-knowledge of full keys</text>
+          <rect class="lane" x="20" y="180" width="760" height="62" rx="10"/>
+          <text class="tag" x="36" y="200" data-i18n-svg="wp.c4.l3.t">LAYER 03 · CUSTODY (target architecture)</text>
+          <text class="lbl" x="36" y="222" data-i18n-svg="wp.c4.l3.h">MPC server share · signer service · recovery share registry</text>
+          <text class="sub" x="36" y="238" data-i18n-svg="wp.c4.l3.s">isolated environment · hardware-protected key storage (planned) · cannot sign alone</text>
+          <rect class="lane" x="20" y="260" width="760" height="62" rx="10"/>
+          <text class="tag" x="36" y="280" data-i18n-svg="wp.c4.l4.t">LAYER 04 · SETTLEMENT</text>
+          <text class="lbl" x="36" y="302" data-i18n-svg="wp.c4.l4.h">Chain adapters · payment processor · indexer · merchant API</text>
+          <text class="sub" x="36" y="318" data-i18n-svg="wp.c4.l4.s">TON · EVM · stablecoin rails · idempotent settlement</text>
+          <path class="arr" d="M 700 82 L 700 100"/>
+          <path class="arr" d="M 700 162 L 700 180"/>
+          <path class="arr" d="M 700 242 L 700 260"/>
+        </svg>
+        <figcaption data-i18n="wp.c4.fig">Figure 4.1 — Four-layer architecture (target)</figcaption>
+      </figure>
+      <h3 data-i18n="wp.c4.h1">Trust boundaries</h3>
+      <ul>
+        <li data-i18n="wp.c4.li1">Client never holds the full private key.</li>
+        <li data-i18n="wp.c4.li2">Edge services see signing requests but never the complete key material.</li>
+        <li data-i18n="wp.c4.li3">Custody stores only one MPC share and cannot sign unilaterally.</li>
+        <li data-i18n="wp.c4.li4">Settlement broadcasts only after a valid threshold signature returns.</li>
+      </ul>
+      <div class="callout c-assume"><b data-i18n="wp.c4.cal.t">Assumption</b><span data-i18n="wp.c4.cal.p">Custody isolation and hardware-protected key storage are stated as target architecture.</span></div>
+    </section>
+
+    <section class="chap reveal" id="ch5">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 05</div>
+      <h2 data-i18n="wp.ch.5">Security model</h2>
+      <div class="summary-card"><b data-i18n="wp.c5.sum.t">Custody promise</b><span data-i18n="wp.c5.sum.p">No single party can move user funds.</span></div>
+      <h3 data-i18n="wp.c5.h1">MPC threshold signing</h3>
+
+      <figure class="diagram">
+        <div class="diagram-head">
+          <div>
+            <div class="diagram-title" data-i18n="wp.c5.d.t">2-of-3 MPC topology</div>
+            <div class="diagram-sub" data-i18n="wp.c5.d.s">device · server · recovery → threshold signature</div>
+          </div>
+          <div class="diagram-legend">
+            <span><i style="background:var(--brand)"></i><span data-i18n="wp.c5.d.l1">Active share</span></span>
+            <span><i style="background:var(--warning)"></i><span data-i18n="wp.c5.d.l2">Recovery</span></span>
+          </div>
+        </div>
+        <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img">
+          <defs>
+            <marker id="mp-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/></marker>
+            <marker id="mp-arr-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/></marker>
+          </defs>
+          <rect x="20" y="20" width="840" height="280" rx="14" fill="#10161f" stroke="#1f2530" stroke-dasharray="4 4"/>
+          <text style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:1.4px;fill:#6b7480" x="40" y="44" data-i18n-svg="wp.c5.d.frame">MPC · 2-of-3 THRESHOLD</text>
+          <g><rect class="node" x="60" y="78" width="200" height="50" rx="10"/><text class="node-lbl" x="160" y="108" text-anchor="middle" data-i18n-svg="wp.c5.d.n1">Device share</text></g>
+          <g><rect class="node" x="60" y="148" width="200" height="50" rx="10"/><text class="node-lbl" x="160" y="178" text-anchor="middle" data-i18n-svg="wp.c5.d.n2">Server share</text></g>
+          <g><rect class="node alt" x="60" y="218" width="200" height="50" rx="10"/><text class="node-lbl alt" x="160" y="248" text-anchor="middle" data-i18n-svg="wp.c5.d.n3">Recovery share</text></g>
+          <g><rect class="node" x="380" y="120" width="200" height="80" rx="12" fill="#0f1a17"/><text class="node-lbl" x="480" y="156" text-anchor="middle" data-i18n-svg="wp.c5.d.thr">threshold signing</text></g>
+          <path class="edge" d="M 260 103 L 380 145" marker-end="url(#mp-arr)"/>
+          <path class="edge" d="M 260 173 L 380 165" marker-end="url(#mp-arr)"/>
+          <path class="edge alt" d="M 260 243 L 380 185" marker-end="url(#mp-arr-w)"/>
+          <g><rect class="node" x="660" y="138" width="180" height="46" rx="10"/><text class="node-lbl" x="750" y="166" text-anchor="middle" data-i18n-svg="wp.c5.d.out">signed tx</text></g>
+          <path class="edge" d="M 580 160 L 660 160" marker-end="url(#mp-arr)"/>
+          <g>
+            <rect x="380" y="218" width="460" height="62" rx="10" fill="#10161f" stroke="#1f2530"/>
+            <text class="node-sub" x="396" y="240" style="fill:#e6e8eb;font-size:12px" data-i18n-svg="wp.c5.d.r0">rules</text>
+            <text class="node-sub" x="396" y="258" data-i18n-svg="wp.c5.d.r1">·  any 2 shares sign  ·  any 1 share insufficient</text>
+            <text class="node-sub" x="396" y="272" data-i18n-svg="wp.c5.d.r2">·  shares are rotatable  ·  no full key exists at any moment</text>
+          </g>
+        </svg>
+        <figcaption data-i18n="wp.c5.fig">Figure 5.1 — 2-of-3 MPC topology</figcaption>
+      </figure>
+
+      <h3 data-i18n="wp.c5.h2">Threat model</h3>
+      <div class="t-wrap"><table class="t">
+        <thead><tr><th scope="col" data-i18n="wp.c5.t.h1">Vector</th><th scope="col" data-i18n="wp.c5.t.h2">Impact</th><th scope="col" data-i18n="wp.c5.t.h3">Mitigation</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="wp.c5.t.1.1">Device theft</td><td data-i18n="wp.c5.t.1.2">Loss of one share</td><td data-i18n="wp.c5.t.1.3">Rotate device share via server + recovery cooperation.</td></tr>
+          <tr><td data-i18n="wp.c5.t.2.1">Server compromise</td><td data-i18n="wp.c5.t.2.2">Loss of one share</td><td data-i18n="wp.c5.t.2.3">Server share alone cannot sign.</td></tr>
+          <tr><td data-i18n="wp.c5.t.3.1">Telegram session hijack</td><td data-i18n="wp.c5.t.3.2">Account-level access</td><td data-i18n="wp.c5.t.3.3">Re-auth + cooldown.</td></tr>
+          <tr><td data-i18n="wp.c5.t.4.1">Phishing QR</td><td data-i18n="wp.c5.t.4.2">Misdirected payment</td><td data-i18n="wp.c5.t.4.3">Receiver preview, limits.</td></tr>
+          <tr><td data-i18n="wp.c5.t.5.1">Recovery social engineering</td><td data-i18n="wp.c5.t.5.2">Coerced recovery share</td><td data-i18n="wp.c5.t.5.3">Time-locked recovery.</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout c-risk"><b data-i18n="wp.c5.cal.t">Risk</b><span data-i18n="wp.c5.cal.p">No custody model is unbreakable.</span></div>
+    </section>
+
+    <section class="chap reveal" id="ch6">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 06</div>
+      <h2 data-i18n="wp.ch.6">Token model</h2>
+      <div class="summary-card"><b data-i18n="wp.c6.sum.t">$1 utility</b><span data-i18n="wp.c6.sum.p">Fee discounts, user rewards, merchant incentives, ecosystem access, governance signals.</span></div>
+      <h3 data-i18n="wp.c6.h1">Utility before allocation</h3>
+      <div class="t-wrap"><table class="t">
+        <thead><tr><th scope="col" data-i18n="wp.c6.t1.h1">Utility</th><th scope="col" data-i18n="wp.c6.t1.h2">Demand driver</th><th scope="col" data-i18n="wp.c6.t1.h3">Status</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="wp.c6.t1.1.1">Fee discount</td><td data-i18n="wp.c6.t1.1.2">Holding $1 reduces payment/swap fees.</td><td data-i18n="wp.c6.t1.1.3">Designed</td></tr>
+          <tr><td data-i18n="wp.c6.t1.2.1">User rewards</td><td data-i18n="wp.c6.t1.2.2">Earn $1 for payments and referrals.</td><td data-i18n="wp.c6.t1.2.3">Designed</td></tr>
+          <tr><td data-i18n="wp.c6.t1.3.1">Merchant incentives</td><td data-i18n="wp.c6.t1.3.2">$1 top-up lowers acceptance fees.</td><td data-i18n="wp.c6.t1.3.3">Designed</td></tr>
+          <tr><td data-i18n="wp.c6.t1.4.1">Ecosystem access</td><td data-i18n="wp.c6.t1.4.2">Unlock premium mini-apps.</td><td data-i18n="wp.c6.t1.4.3">Planned</td></tr>
+          <tr><td data-i18n="wp.c6.t1.5.1">Governance signal</td><td data-i18n="wp.c6.t1.5.2">Vote on rewards, fees.</td><td data-i18n="wp.c6.t1.5.3">Planned</td></tr>
+        </tbody>
+      </table></div>
+      <h3 data-i18n="wp.c6.h2">Indicative allocation</h3>
+      <p class="mono" style="color:var(--fg-subtle);font-size:13px;" data-i18n="wp.c6.note">Percentages are placeholder until token / legal review completes.</p>
+      <div class="t-wrap"><table class="t">
+        <thead><tr><th scope="col" data-i18n="wp.c6.t2.h1">Bucket</th><th scope="col" data-i18n="wp.c6.t2.h2">Share</th><th scope="col" data-i18n="wp.c6.t2.h3">Vesting</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="wp.c6.t2.1.1">Ecosystem &amp; rewards</td><td>40%</td><td data-i18n="wp.c6.t2.1.3">Released against verifiable on-chain activity</td></tr>
+          <tr><td data-i18n="wp.c6.t2.2.1">Team &amp; advisors</td><td>18%</td><td data-i18n="wp.c6.t2.2.3">4-year vest, 1-year cliff</td></tr>
+          <tr><td data-i18n="wp.c6.t2.3.1">Treasury</td><td>15%</td><td data-i18n="wp.c6.t2.3.3">DAO-controlled after governance live</td></tr>
+          <tr><td data-i18n="wp.c6.t2.4.1">Strategic partners</td><td>12%</td><td data-i18n="wp.c6.t2.4.3">Bespoke, milestone-locked</td></tr>
+          <tr><td data-i18n="wp.c6.t2.5.1">Liquidity</td><td>10%</td><td data-i18n="wp.c6.t2.5.3">Pool seeding and market depth</td></tr>
+          <tr><td data-i18n="wp.c6.t2.6.1">Public &amp; community</td><td>5%</td><td data-i18n="wp.c6.t2.6.3">Phased distribution</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout c-risk"><b data-i18n="wp.c6.cal.t">Disclaimer</b><span data-i18n="wp.c6.cal.p">$1 is a utility token.</span></div>
+    </section>
+
+    <section class="chap reveal" id="ch7">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 07</div>
+      <h2 data-i18n="wp.ch.7">Growth model</h2>
+      <div class="summary-card"><b data-i18n="wp.c7.sum.t">Loops, not campaigns</b><span data-i18n="wp.c7.sum.p">Telegram referrals, merchant payments…</span></div>
+
+      <figure class="diagram">
+        <div class="diagram-head">
+          <div>
+            <div class="diagram-title" data-i18n="wp.c7.d.t">Growth loop</div>
+            <div class="diagram-sub" data-i18n="wp.c7.d.s">users · wallet · merchants · $1 rewards · referrals</div>
+          </div>
+          <div class="diagram-legend">
+            <span><i style="background:var(--brand)"></i><span data-i18n="wp.c7.d.l1">Forward</span></span>
+            <span><i style="background:var(--brand-dim);background-image:linear-gradient(90deg,var(--brand-dim) 50%,transparent 0);background-size:8px 2px"></i><span data-i18n="wp.c7.d.l2">Feedback</span></span>
+          </div>
+        </div>
+        <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img">
+          <defs>
+            <marker id="gl-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/></marker>
+            <marker id="gl-arr-dim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="rgba(45,212,167,0.65)"/></marker>
+          </defs>
+          <g><rect class="node" x="40" y="120" width="160" height="64" rx="10"/><text class="node-lbl" x="120" y="150" text-anchor="middle" data-i18n-svg="wp.c7.d.n1">Users</text><text class="node-sub" x="120" y="168" text-anchor="middle" data-i18n-svg="wp.c7.d.n1s">Telegram audience</text></g>
+          <g><rect class="node" x="260" y="120" width="160" height="64" rx="10"/><text class="node-lbl" x="340" y="150" text-anchor="middle" data-i18n-svg="wp.c7.d.n2">Wallet</text><text class="node-sub" x="340" y="168" text-anchor="middle" data-i18n-svg="wp.c7.d.n2s">open · pay</text></g>
+          <g><rect class="node" x="480" y="120" width="160" height="64" rx="10"/><text class="node-lbl" x="560" y="150" text-anchor="middle" data-i18n-svg="wp.c7.d.n3">Merchants</text><text class="node-sub" x="560" y="168" text-anchor="middle" data-i18n-svg="wp.c7.d.n3s">QR · settlement</text></g>
+          <g><rect class="node" x="700" y="120" width="160" height="64" rx="10" fill="#0f1a17"/><text class="node-lbl" x="780" y="150" text-anchor="middle" data-i18n-svg="wp.c7.d.n4">$1 rewards</text><text class="node-sub" x="780" y="168" text-anchor="middle" data-i18n-svg="wp.c7.d.n4s">activity-linked</text></g>
+          <path class="edge" d="M 200 152 L 260 152" marker-end="url(#gl-arr)"/>
+          <path class="edge" d="M 420 152 L 480 152" marker-end="url(#gl-arr)"/>
+          <path class="edge" d="M 640 152 L 700 152" marker-end="url(#gl-arr)"/>
+          <text class="edge-lbl" x="230" y="142" text-anchor="middle" data-i18n-svg="wp.c7.d.e1">open</text>
+          <text class="edge-lbl" x="450" y="142" text-anchor="middle" data-i18n-svg="wp.c7.d.e2">pay</text>
+          <text class="edge-lbl" x="670" y="142" text-anchor="middle" data-i18n-svg="wp.c7.d.e3">earn</text>
+          <path class="edge dim" d="M 780 184 C 780 280, 120 280, 120 184" marker-end="url(#gl-arr-dim)"/>
+          <text class="edge-lbl" x="440" y="270" text-anchor="middle" style="fill:#6b7480" data-i18n-svg="wp.c7.d.fb">referrals · re-engagement</text>
+        </svg>
+        <figcaption data-i18n="wp.c7.fig">Figure 7.1 — Growth loop</figcaption>
+      </figure>
+
+      <ul>
+        <li><b data-i18n="wp.c7.l1.b">Referral loop</b> <span data-i18n="wp.c7.l1.p">— every active user can refer inside chat with one tap.</span></li>
+        <li><b data-i18n="wp.c7.l2.b">Merchant loop</b> <span data-i18n="wp.c7.l2.p">— accepting ONEWALLET introduces customers to the wallet.</span></li>
+        <li><b data-i18n="wp.c7.l3.b">Mini-app loop</b> <span data-i18n="wp.c7.l3.p">— partner mini-apps require a wallet, driving new sign-ups.</span></li>
+      </ul>
+    </section>
+
+    <section class="chap reveal" id="ch8">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 08</div>
+      <h2 data-i18n="wp.ch.8">Business model</h2>
+      <div class="summary-card"><b data-i18n="wp.c8.sum.t">Where revenue comes from</b><span data-i18n="wp.c8.sum.p">Transparent fees…</span></div>
+      <div class="t-wrap"><table class="t">
+        <thead><tr><th scope="col" data-i18n="wp.c8.t.h1">Stream</th><th scope="col" data-i18n="wp.c8.t.h2">Mechanism</th><th scope="col" data-i18n="wp.c8.t.h3">Status</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="wp.c8.t.1.1">Swap fee</td><td data-i18n="wp.c8.t.1.2">Bps on in-app token swaps; $1 holders pay less.</td><td data-i18n="wp.c8.t.1.3">Designed</td></tr>
+          <tr><td data-i18n="wp.c8.t.2.1">Merchant fee</td><td data-i18n="wp.c8.t.2.2">Bps on settled merchant volume.</td><td data-i18n="wp.c8.t.2.3">Designed</td></tr>
+          <tr><td data-i18n="wp.c8.t.3.1">Mini-app revenue share</td><td data-i18n="wp.c8.t.3.2">Take rate on premium mini-app transactions.</td><td data-i18n="wp.c8.t.3.3">Planned</td></tr>
+          <tr><td data-i18n="wp.c8.t.4.1">Merchant SaaS</td><td data-i18n="wp.c8.t.4.2">Subscription for analytics, refunds, multi-store.</td><td data-i18n="wp.c8.t.4.3">Planned</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout c-assume"><b data-i18n="wp.c8.cal.t">Assumption</b><span data-i18n="wp.c8.cal.p">Revenue mix is illustrative.</span></div>
+    </section>
+
+    <section class="chap reveal" id="ch9">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 09</div>
+      <h2 data-i18n="wp.ch.9">Roadmap</h2>
+      <div class="t-wrap"><table class="t">
+        <thead><tr><th scope="col" data-i18n="wp.c9.t.h1">Phase</th><th scope="col" data-i18n="wp.c9.t.h2">Deliverable</th><th scope="col" data-i18n="wp.c9.t.h3">Status</th></tr></thead>
+        <tbody>
+          <tr><td data-i18n="wp.c9.t.1.1">Phase 1 — Core wallet</td><td data-i18n="wp.c9.t.1.2">MPC custody, TMA, multi-chain</td><td data-i18n="wp.c9.t.1.3">Completed</td></tr>
+          <tr><td data-i18n="wp.c9.t.2.1">Phase 2 — Payments rail</td><td data-i18n="wp.c9.t.2.2">QR invoices, settlement webhooks</td><td data-i18n="wp.c9.t.2.3">In progress</td></tr>
+          <tr><td data-i18n="wp.c9.t.3.1">Phase 3 — $1 utility</td><td data-i18n="wp.c9.t.3.2">Fee discount layer, reward engine</td><td data-i18n="wp.c9.t.3.3">Planned</td></tr>
+          <tr><td data-i18n="wp.c9.t.4.1">Phase 4 — Ecosystem</td><td data-i18n="wp.c9.t.4.2">Mini-app store, partner program</td><td data-i18n="wp.c9.t.4.3">Planned</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout c-assume"><b data-i18n="wp.c9.cal.t">Assumption</b><span data-i18n="wp.c9.cal.p">Dates are intentionally omitted.</span></div>
+    </section>
+
+    <section class="chap reveal" id="ch10">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 10</div>
+      <h2 data-i18n="wp.ch.10">Team &amp; governance</h2>
+      <div class="summary-card"><b data-i18n="wp.c10.sum.t">Operators, not generalists</b><span data-i18n="wp.c10.sum.p">Shipping history across consumer fintech…</span></div>
+      <div class="wp-team" id="wpTeamGrid"></div>
+    </section>
+
+    <section class="chap reveal" id="ch11">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 11</div>
+      <h2 data-i18n="wp.ch.11">Risks &amp; mitigations</h2>
+      <div class="summary-card"><b data-i18n="wp.c11.sum.t">Honesty as credibility</b><span data-i18n="wp.c11.sum.p">Disclosing risks is part of the product.</span></div>
+      <div class="risk-grid">
+        <div class="risk-cell"><span class="lvl lvl-h" data-i18n="wp.c11.r1.lvl">HIGH</span><h4 data-i18n="wp.c11.r1.h">Custody compromise</h4><p data-i18n="wp.c11.r1.p">Any flaw in MPC share rotation could expose funds.</p><small data-i18n="wp.c11.r1.s">Planned mitigation…</small></div>
+        <div class="risk-cell"><span class="lvl lvl-h" data-i18n="wp.c11.r2.lvl">HIGH</span><h4 data-i18n="wp.c11.r2.h">Platform dependency</h4><p data-i18n="wp.c11.r2.p">Telegram is the runtime.</p><small data-i18n="wp.c11.r2.s">Mitigation: progressive web fallback.</small></div>
+        <div class="risk-cell"><span class="lvl lvl-m" data-i18n="wp.c11.r3.lvl">MED</span><h4 data-i18n="wp.c11.r3.h">Regulatory shift</h4><p data-i18n="wp.c11.r3.p">Rules vary by region.</p><small data-i18n="wp.c11.r3.s">Mitigation: legal counsel.</small></div>
+        <div class="risk-cell"><span class="lvl lvl-m" data-i18n="wp.c11.r4.lvl">MED</span><h4 data-i18n="wp.c11.r4.h">Merchant adoption</h4><p data-i18n="wp.c11.r4.p">Requires integration density.</p><small data-i18n="wp.c11.r4.s">Mitigation: anchor partners.</small></div>
+        <div class="risk-cell"><span class="lvl lvl-l" data-i18n="wp.c11.r5.lvl">LOW</span><h4 data-i18n="wp.c11.r5.h">Token utility drift</h4><p data-i18n="wp.c11.r5.p">Utility decoupling dilutes demand.</p><small data-i18n="wp.c11.r5.s">Mitigation: activity-linked rewards.</small></div>
+        <div class="risk-cell"><span class="lvl lvl-l" data-i18n="wp.c11.r6.lvl">LOW</span><h4 data-i18n="wp.c11.r6.h">Localization quality</h4><p data-i18n="wp.c11.r6.p">Weak translations damage trust.</p><small data-i18n="wp.c11.r6.s">Mitigation: native review pipeline.</small></div>
+      </div>
+    </section>
+
+    <section class="chap reveal" id="ch12">
+      <div class="chap-num"><span data-i18n="wp.chnum">Chapter</span> 12</div>
+      <h2 data-i18n="wp.ch.12">Appendix</h2>
+      <h3 data-i18n="wp.c12.h1">Glossary</h3>
+      <dl class="glossary">
+        <dt data-i18n="wp.c12.g.mpc.t">MPC</dt><dd data-i18n="wp.c12.g.mpc.d">Multi-party computation.</dd>
+        <dt data-i18n="wp.c12.g.thr.t">Threshold signature</dt><dd data-i18n="wp.c12.g.thr.d">A signature produced by any qualifying subset of share-holders.</dd>
+        <dt data-i18n="wp.c12.g.tma.t">TMA</dt><dd data-i18n="wp.c12.g.tma.d">Telegram Mini App.</dd>
+        <dt data-i18n="wp.c12.g.set.t">Settlement webhook</dt><dd data-i18n="wp.c12.g.set.d">A signed HTTP callback.</dd>
+        <dt data-i18n="wp.c12.g.rec.t">Recovery share</dt><dd data-i18n="wp.c12.g.rec.d">A non-online MPC share.</dd>
+      </dl>
+      <h3 data-i18n="wp.c12.h2">References</h3>
+      <ul>
+        <li data-i18n="wp.c12.r1">Telegram Mini Apps documentation — platform reference.</li>
+        <li data-i18n="wp.c12.r2">MPC academic literature — threshold cryptography fundamentals.</li>
+        <li data-i18n="wp.c12.r3">ONEWALLET homepage and product brief — companion materials.</li>
+      </ul>
+      <h3 data-i18n="wp.c12.h3">Document control</h3>
+      <p class="mono" style="font-size:13px;color:var(--fg-subtle);" data-i18n="wp.c12.ctl">v0.9 · 2026-05 · prototype draft</p>
+    </section>
+
+  </article>
+</div>
+
+<footer class="doc-foot">
+  <div class="foot-inner">
+    <span data-i18n="wp.foot.copy">© 2026 ONEWALLET · Whitepaper v0.9 draft · Not financial advice.</span>
+    <span><a href="index.html" data-i18n="common.back">Back to homepage</a> · <span data-i18n="common.langStrip">EN · 한국어 · 日本語 · 中文</span></span>
+  </div>
+</footer>
+
+<script src="assets/i18n.js"></script>
+<script>
+  (function(){
+    const KEY = 'onewallet_lang';
+    const LABEL = { en: 'EN', ko: 'KO', ja: 'JA', zh: 'ZH' };
+    const trigger = document.getElementById('langTrigger');
+    const menu = document.getElementById('langMenu');
+    const label = document.getElementById('langLabel');
+    const notice = document.getElementById('i18nNotice');
+    const buttons = document.querySelectorAll('[data-lang]');
+
+    function getLang() { try { return localStorage.getItem(KEY) || 'en'; } catch(e) { return 'en'; }}
+    function setStored(lang) { try { localStorage.setItem(KEY, lang); } catch(e) {} }
+
+    function renderTeam(lang) {
+      const grid = document.getElementById('wpTeamGrid');
+      if (!grid || !window.I18N || !window.I18N.TEAM) return;
+      const members = window.I18N.TEAM[lang] || window.I18N.TEAM.en;
+      const photos = ['james-kim','kim-jae-mo','khoo-yih-shian','park-ju-jin','lee-jun-bong'];
+      grid.innerHTML = members.map((m, i) => {
+        const lis = m.li.map(t => `<li>${t}</li>`).join('');
+        const kr = m.krName ? `<span class="kr">${m.krName}</span>` : '';
+        return `<article class="wp-member">
+          <div class="top">
+            <div class="photo"><img src="assets/team/${photos[i]}.webp" alt="${m.name}" width="64" height="64" loading="lazy" /></div>
+            <div>
+              <div class="role">${m.role}</div>
+              <div class="name">${kr}${m.name}</div>
+            </div>
+          </div>
+          <ul>${lis}</ul>
+        </article>`;
+      }).join('');
+    }
+
+    function apply(lang) {
+      if (!window.I18N || !window.I18N[lang]) lang = 'en';
+      const dict = window.I18N[lang];
+      document.documentElement.lang = lang;
+      label.textContent = LABEL[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-svg]').forEach(el => {
+        const key = el.getAttribute('data-i18n-svg');
+        if (dict[key] !== undefined) el.textContent = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+        const spec = el.getAttribute('data-i18n-attr');
+        spec.split(',').forEach(pair => {
+          const [attr, key] = pair.trim().split(':');
+          if (attr && key && dict[key] !== undefined) el.setAttribute(attr, dict[key]);
+        });
+      });
+      buttons.forEach(b => b.setAttribute('aria-checked', b.dataset.lang === lang ? 'true' : 'false'));
+      renderTeam(lang);
+      // Show notice only when a non-EN selection is active
+      if (notice) notice.classList.toggle('show', lang !== 'en');
+      setStored(lang);
+    }
+
+    apply(getLang());
+
+    if (trigger && menu) {
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = menu.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !trigger.contains(e.target)) {
+          menu.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { menu.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); }});
+    }
+    buttons.forEach(b => b.addEventListener('click', () => {
+      apply(b.dataset.lang);
+      if (menu) { menu.classList.remove('open'); trigger && trigger.setAttribute('aria-expanded', 'false'); }
+    }));
+  })();
+
+  // Reveal
+  (function(){
+    if (!('IntersectionObserver' in window)) { document.querySelectorAll('.reveal').forEach(el => el.classList.add('in')); return; }
+    const io = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }}), { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  })();
+
+  // TOC scroll-spy
+  (function(){
+    const links = document.querySelectorAll('.toc a');
+    const chapters = Array.from(document.querySelectorAll('.chap[id]'));
+    if (!chapters.length) return;
+    const onScroll = () => {
+      let active = chapters[0].id;
+      const y = window.scrollY + 120;
+      for (const c of chapters) { if (c.offsetTop <= y) active = c.id; }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>
