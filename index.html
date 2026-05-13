@@ -96,30 +96,33 @@
   .mono { font-family: var(--mono); }
 
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
-  section { padding: clamp(56px, 8vw, 110px) 0; position: relative; }
-  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--brand); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 18px; }
-  .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--brand); }
-  .sect-head { max-width: 760px; }
-  .sect-head h2 { margin-bottom: 14px; }
-  .sect-head p { color: var(--fg-muted); font-size: clamp(15px, 1.4vw, 17px); }
+  section { padding: clamp(64px, 8vw, 112px) 0; position: relative; }
+  section + section { padding-top: clamp(48px, 6vw, 88px); }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--brand); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 20px; }
+  html[lang="ko"] .eyebrow, html[lang="ja"] .eyebrow, html[lang="zh"] .eyebrow { font-family: inherit; letter-spacing: 0.04em; }
+  .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--brand); border-radius: 1px; }
+  .sect-head { max-width: 780px; }
+  .sect-head h2 { margin-bottom: 16px; }
+  .sect-head p { color: var(--fg-muted); font-size: clamp(16px, 1.4vw, 18px); line-height: 1.55; }
   .sect-head-center { max-width: 760px; margin: 0 auto; text-align: center; }
   .sect-head-center .eyebrow { justify-content: center; }
   .sect-head-center .eyebrow::before { display: none; }
 
-  :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
+  :focus-visible { outline: 2.5px solid var(--brand); outline-offset: 3px; border-radius: 6px; }
+  .btn:focus-visible { outline-offset: 4px; }
   .skip { position: absolute; left: -9999px; }
   .skip:focus { position: absolute; left: 12px; top: 12px; background: var(--brand); color: #ffffff; padding: 8px 12px; border-radius: 6px; z-index: 100; }
 
-  header.nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(255,255,255,0.82); border-bottom: 1px solid var(--border); transition: border-color var(--t-fast), background var(--t-fast); }
-  header.nav.scrolled { background: rgba(255,255,255,0.96); box-shadow: 0 1px 0 rgba(6,17,43,0.04); }
-  .nav-inner { display: flex; align-items: center; gap: 16px; height: 60px; }
-  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: 0.02em; color: var(--fg-strong); font-size: 15px; transition: opacity var(--t-fast); }
+  header.nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); background: rgba(255,255,255,0.72); border-bottom: 1px solid transparent; transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast); }
+  header.nav.scrolled { background: rgba(255,255,255,0.92); border-bottom-color: var(--border); box-shadow: 0 1px 0 rgba(41,35,59,0.03), 0 4px 16px rgba(41,35,59,0.04); }
+  .nav-inner { display: flex; align-items: center; gap: 16px; height: 64px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.012em; color: var(--fg-strong); font-size: 15px; transition: opacity var(--t-fast); }
   .brand:hover { opacity: 0.85; }
   .brand img { width: 28px; height: 28px; border-radius: 50%; transition: transform var(--t-med); }
   .brand:hover img { transform: rotate(-6deg) scale(1.05); }
-  nav.links { display: flex; gap: 22px; margin-left: 22px; flex: 1; }
-  nav.links a { color: var(--fg-muted); font-size: 14px; transition: color var(--t-fast); position: relative; padding: 4px 0; }
-  nav.links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: var(--brand); transform: scaleX(0); transform-origin: left; transition: transform var(--t-med); }
+  nav.links { display: flex; gap: 28px; margin-left: 28px; flex: 1; }
+  nav.links a { color: var(--fg-muted); font-size: 14px; font-weight: 500; transition: color var(--t-fast); position: relative; padding: 4px 0; }
+  nav.links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--brand); transform: scaleX(0); transform-origin: left; transition: transform var(--t-med); border-radius: 1px; }
   nav.links a:hover { color: var(--fg-strong); }
   nav.links a:hover::after { transform: scaleX(1); }
   .nav-cta { display: flex; gap: 8px; align-items: center; margin-left: auto; }
@@ -186,14 +189,14 @@
   .chip:hover { color: var(--fg-strong); border-color: var(--border-strong); }
   .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
 
-  /* SVG-composed hero visual: floating discs + phone outlines */
-  .hero-visual { position: relative; aspect-ratio: 1/1; max-width: 560px; margin-left: auto; }
-  .hero-visual svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 24px 60px rgba(41,35,59,0.10)); }
-  .hero-visual .disc-anim { transform-origin: center; animation: discFloat 7s ease-in-out infinite; }
-  .hero-visual .disc-anim.d2 { animation-duration: 9s; animation-delay: -2s; }
-  .hero-visual .disc-anim.d3 { animation-duration: 11s; animation-delay: -4s; }
-  @keyframes discFloat { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
-  @media (prefers-reduced-motion: reduce) { .hero-visual .disc-anim { animation: none; } }
+  /* Hero visual: framed product mockup */
+  .hero-visual { position: relative; aspect-ratio: 1/1.05; max-width: 560px; margin-left: auto; border-radius: var(--radius-lg); overflow: hidden; background: linear-gradient(135deg, #ffffff 0%, var(--bg-hero) 100%); box-shadow: var(--shadow-soft), 0 0 0 1px rgba(41,35,59,0.04); transition: transform var(--t-med), box-shadow var(--t-med); }
+  .hero-visual::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 20% 15%, rgba(15,122,90,0.08), transparent 70%), radial-gradient(50% 50% at 85% 90%, rgba(134,86,239,0.06), transparent 70%); pointer-events: none; z-index: 1; }
+  .hero-visual img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 0; transition: transform var(--t-slow); }
+  .hero-visual:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft), 0 0 0 1px rgba(41,35,59,0.08); }
+  .hero-visual:hover img { transform: scale(1.02); }
+  .hero-meta { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 10px; color: var(--fg-muted); letter-spacing: 0.1em; text-transform: uppercase; z-index: 2; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+  .hero-meta b { color: var(--fg-strong); font-weight: 600; }
 
   .trust { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 48px 0; background: #ffffff; }
   .trust-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--fg-subtle); letter-spacing: 0.14em; text-transform: uppercase; text-align: center; margin-bottom: 24px; }
@@ -209,14 +212,20 @@
   .platform-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 48px; }
   @media (max-width: 940px) { .platform-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .platform-grid { grid-template-columns: 1fr; } }
-  .plat-card { display: flex; flex-direction: column; padding: 32px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med); position: relative; overflow: hidden; min-height: 260px; }
-  .plat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); border-color: transparent; }
-  .plat-card .plat-tag { font-family: var(--mono); font-size: 11px; color: var(--brand); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; }
+  .plat-card { display: flex; flex-direction: column; padding: 32px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med); position: relative; overflow: hidden; min-height: 280px; }
+  .plat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); border-color: transparent; }
+  .plat-card:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+  .plat-card .plat-tag { font-family: var(--mono); font-size: 11px; color: var(--brand); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; font-weight: 600; }
   html[lang="ko"] .plat-card .plat-tag, html[lang="ja"] .plat-card .plat-tag, html[lang="zh"] .plat-card .plat-tag { font-family: inherit; letter-spacing: 0.04em; }
-  .plat-card h3 { font-size: clamp(20px, 1.8vw, 24px); line-height: 1.22; margin-bottom: 10px; color: var(--fg-strong); }
+  .plat-card h3 { font-size: clamp(20px, 1.8vw, 26px); line-height: 1.18; margin-bottom: 10px; color: var(--fg-strong); }
   .plat-card p { color: var(--fg-muted); font-size: 14.5px; margin: 0; flex: 1; line-height: 1.55; }
-  .plat-card .plat-vis { margin-top: 20px; }
-  .plat-card .plat-vis svg { width: 100%; height: auto; display: block; }
+  .plat-card .plat-vis { margin-top: 24px; border-radius: var(--radius-md); overflow: hidden; background: rgba(255,255,255,0.55); aspect-ratio: 4/3; position: relative; }
+  .plat-card .plat-vis svg { width: 100%; height: 100%; display: block; }
+  .plat-card .plat-vis img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--t-slow); }
+  .plat-card:hover .plat-vis img { transform: scale(1.04); }
+  .plat-card.plat-lead .plat-vis { aspect-ratio: 16/9; }
+  .plat-vis-dark { background: rgba(255,255,255,0.08) !important; }
+  .plat-vis-dark img { mix-blend-mode: screen; opacity: 0.85; filter: brightness(1.4) contrast(1.1); }
   .plat-lead { grid-column: span 4; background: linear-gradient(135deg, #ffffff 0%, var(--bg-hero) 100%); }
   .plat-blue { grid-column: span 2; background: var(--bg-soft-blue); }
   .plat-mint { grid-column: span 2; background: var(--brand-soft); }
@@ -235,9 +244,9 @@
 
   .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
   @media (max-width: 820px) { .audience-grid { grid-template-columns: 1fr; } }
-  .audience-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 30px 26px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); display: flex; flex-direction: column; min-height: 260px; position: relative; overflow: hidden; }
+  .audience-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 28px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); display: flex; flex-direction: column; min-height: 280px; position: relative; overflow: hidden; }
   .audience-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(80% 60% at 50% 0%, rgba(15,122,90,0.06), transparent 70%); opacity: 0; transition: opacity var(--t-med); pointer-events: none; }
-  .audience-card:hover { border-color: var(--brand); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+  .audience-card:hover { border-color: transparent; transform: translateY(-4px); box-shadow: var(--shadow-soft); }
   .audience-card:hover::before { opacity: 1; }
   .audience-card .tag { font-family: var(--mono); font-size: 10px; color: var(--brand); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
   html[lang="ko"] .audience-card .tag, html[lang="ja"] .audience-card .tag, html[lang="zh"] .audience-card .tag { font-family: inherit; letter-spacing: 0.06em; }
@@ -247,15 +256,18 @@
   html[lang="ko"] .audience-card .more, html[lang="ja"] .audience-card .more, html[lang="zh"] .audience-card .more { font-family: inherit; }
   .audience-card:hover .more { gap: 10px; }
 
-  .flow { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); margin-top: 48px; }
+  .flow { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); margin-top: 48px; box-shadow: var(--shadow-sm); }
+  .flow-banner { margin: 0 0 32px; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 21/8; background: linear-gradient(135deg, #ffffff, var(--bg-hero)); border: 1px solid var(--border); }
+  .flow-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   @media (max-width: 820px) { .flow-steps { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 480px) { .flow-steps { grid-template-columns: 1fr; } }
-  .step { position: relative; padding: 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); transition: border-color var(--t-fast), transform var(--t-fast); }
-  .step:hover { border-color: var(--brand-dim); transform: translateY(-2px); }
-  .step .n { font-family: var(--mono); font-size: 11px; color: var(--brand); letter-spacing: 0.14em; margin-bottom: 12px; display: block; }
-  .step p { color: var(--fg-muted); font-size: 13px; margin: 0; }
-  .step:not(:last-child)::after { content: "→"; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); color: var(--fg-subtle); font-family: var(--mono); }
+  .step { position: relative; padding: 24px; background: var(--bg-hero); border: 1px solid transparent; border-radius: var(--radius-md); transition: border-color var(--t-fast), transform var(--t-fast), background var(--t-fast); }
+  .step:hover { border-color: var(--brand-dim); transform: translateY(-2px); background: #ffffff; box-shadow: var(--shadow-sm); }
+  .step .n { font-family: var(--mono); font-size: 11px; color: var(--brand); letter-spacing: 0.14em; margin-bottom: 12px; display: block; font-weight: 600; }
+  .step h4 { margin-bottom: 6px; }
+  .step p { color: var(--fg-muted); font-size: 13.5px; margin: 0; line-height: 1.55; }
+  .step:not(:last-child)::after { content: "→"; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); color: var(--fg-subtle); font-family: var(--mono); z-index: 1; }
   @media (max-width: 820px) { .step:not(:last-child)::after { display: none; } }
 
   .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 60px); align-items: start; margin-top: 44px; }
@@ -277,19 +289,21 @@
   .payments { background: linear-gradient(180deg, var(--bg), var(--bg-elevated)); }
   .pay-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 5vw, 60px); align-items: start; margin-top: 44px; }
   @media (max-width: 940px) { .pay-grid { grid-template-columns: 1fr; } }
-  .pay-flow { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 26px; }
+  .pay-visual { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; border: 1px solid var(--border); background: linear-gradient(135deg, #ffffff, var(--bg-hero)); margin-bottom: 24px; }
+  .pay-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pay-flow { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-sm); }
   .pay-flow ol { padding-left: 0; list-style: none; counter-reset: step; margin: 0; }
   .pay-flow li { counter-increment: step; padding: 14px 0; border-bottom: 1px dashed var(--border); display: flex; gap: 16px; align-items: start; }
   .pay-flow li:last-child { border-bottom: 0; }
-  .pay-flow li::before { content: counter(step, decimal-leading-zero); font-family: var(--mono); color: var(--brand); font-size: 12px; min-width: 28px; padding-top: 2px; }
+  .pay-flow li::before { content: counter(step, decimal-leading-zero); font-family: var(--mono); color: var(--brand); font-size: 12px; min-width: 28px; padding-top: 2px; font-weight: 700; }
   .pay-flow li b { display: block; color: var(--fg-strong); font-weight: 500; margin-bottom: 2px; }
   .pay-flow li span { color: var(--fg-muted); font-size: 14px; }
 
   .token-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
   @media (max-width: 820px) { .token-grid { grid-template-columns: 1fr; } }
-  .token-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 26px; transition: border-color var(--t-fast), transform var(--t-fast); }
-  .token-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
-  .token-card .icon { width: 32px; height: 32px; border-radius: 8px; background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; font-family: var(--mono); font-weight: 500; font-size: 14px; margin-bottom: 16px; }
+  .token-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 24px; transition: border-color var(--t-med), transform var(--t-med), box-shadow var(--t-med); }
+  .token-card:hover { border-color: transparent; transform: translateY(-3px); box-shadow: var(--shadow-soft); }
+  .token-card .icon { width: 36px; height: 36px; border-radius: 10px; background: var(--brand-soft); color: var(--brand); display: grid; place-items: center; font-family: var(--mono); font-weight: 700; font-size: 15px; margin-bottom: 18px; }
   .token-card p { color: var(--fg-muted); font-size: 14px; margin: 0; }
   .legal-note { margin-top: 28px; padding: 16px 20px; background: var(--warning-bg); border-left: 3px solid var(--warning); border-radius: var(--radius-sm); font-size: 13px; color: var(--fg-muted); }
   .legal-note b { color: var(--warning); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin-right: 8px; }
@@ -320,11 +334,11 @@
   .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 44px; }
   @media (max-width: 820px) { .roadmap { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .roadmap { grid-template-columns: 1fr; } }
-  .milestone { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px; position: relative; transition: border-color var(--t-fast), transform var(--t-fast); }
-  .milestone:hover { border-color: var(--border-strong); transform: translateY(-2px); }
-  .milestone .q { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--fg-subtle); }
-  .milestone h4 { margin: 8px 0 10px; font-size: 16px; }
-  .milestone ul { padding-left: 16px; margin: 0; color: var(--fg-muted); font-size: 13px; line-height: 1.6; }
+  .milestone { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px 24px; position: relative; transition: border-color var(--t-med), transform var(--t-med), box-shadow var(--t-med); }
+  .milestone:hover { border-color: transparent; transform: translateY(-3px); box-shadow: var(--shadow-soft); }
+  .milestone .q { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--fg-subtle); font-weight: 600; }
+  .milestone h4 { margin: 10px 0 12px; font-size: 17px; }
+  .milestone ul { padding-left: 16px; margin: 0; color: var(--fg-muted); font-size: 13.5px; line-height: 1.7; }
   .ms-status { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; padding: 3px 8px; border-radius: 4px; position: absolute; top: 22px; right: 22px; }
   html[lang="ko"] .ms-status, html[lang="ja"] .ms-status, html[lang="zh"] .ms-status { font-family: inherit; letter-spacing: 0.02em; }
   .ms-done { background: var(--brand-soft); color: var(--brand); }
@@ -336,9 +350,9 @@
   .team-wrap .member { flex: 0 1 calc(33.333% - 12px); max-width: 340px; min-width: 280px; }
   @media (max-width: 940px) { .team-wrap .member { flex-basis: calc(50% - 9px); } }
   @media (max-width: 600px) { .team-wrap .member { flex-basis: 100%; min-width: 0; } }
-  .member { position: relative; background: linear-gradient(180deg, rgba(15,122,90,0.03), transparent 60%), var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px 26px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); overflow: hidden; }
+  .member { position: relative; background: linear-gradient(180deg, rgba(15,122,90,0.03), transparent 60%), var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 28px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); overflow: hidden; }
   .member::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--brand), transparent); opacity: 0; transition: opacity var(--t-med); }
-  .member:hover { border-color: var(--brand-dim); transform: translateY(-3px); box-shadow: var(--shadow-glow); }
+  .member:hover { border-color: transparent; transform: translateY(-4px); box-shadow: var(--shadow-soft); }
   .member:hover::after { opacity: 1; }
   .member .photo { width: 88px; height: 88px; border-radius: 16px; overflow: hidden; background: var(--bg-elevated); border: 1px solid var(--border); margin-bottom: 22px; box-shadow: 0 6px 18px rgba(6,17,43,0.10); transition: transform var(--t-med); }
   .member:hover .photo { transform: scale(1.04); }
@@ -353,20 +367,29 @@
   .member ul li::before { content: "·"; position: absolute; left: 4px; color: var(--brand); font-weight: 700; }
 
   .faq { max-width: 820px; margin: 44px auto 0; }
-  .faq details { border-top: 1px solid var(--border); padding: 16px 4px; }
+  .faq details { border-top: 1px solid var(--border); padding: 20px 4px; transition: padding var(--t-fast); }
   .faq details:last-of-type { border-bottom: 1px solid var(--border); }
   .faq details[open] summary { color: var(--brand); }
-  .faq summary { cursor: pointer; font-weight: 500; color: var(--fg-strong); display: flex; justify-content: space-between; align-items: center; font-size: 16px; list-style: none; gap: 16px; }
+  .faq summary { cursor: pointer; font-weight: 600; color: var(--fg-strong); display: flex; justify-content: space-between; align-items: center; font-size: 17px; list-style: none; gap: 16px; letter-spacing: -0.012em; transition: color var(--t-fast); }
+  .faq summary:hover { color: var(--brand); }
   .faq summary::-webkit-details-marker { display: none; }
-  .faq summary::after { content: "+"; font-family: var(--mono); color: var(--fg-subtle); transition: transform var(--t-fast); }
+  .faq summary::after { content: "+"; font-family: var(--mono); color: var(--fg-subtle); font-size: 18px; transition: transform var(--t-med), color var(--t-fast); }
   .faq details[open] summary::after { content: "−"; color: var(--brand); }
-  .faq details p { color: var(--fg-muted); font-size: 14px; margin: 12px 0 0; padding-right: 36px; line-height: 1.65; }
+  .faq details p { color: var(--fg-muted); font-size: 14.5px; margin: 14px 0 0; padding-right: 36px; line-height: 1.7; }
 
-  .cta-banner { margin-top: 80px; padding: clamp(36px, 6vw, 64px); background: radial-gradient(60% 80% at 80% 50%, rgba(15,122,90,0.10), transparent 60%), var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg); display: flex; gap: 24px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+  .cta-banner { margin-top: 80px; padding: clamp(40px, 6vw, 72px); background: linear-gradient(135deg, var(--fg-strong) 0%, #0b5f47 100%); color: #ffffff; border-radius: var(--radius-lg); display: flex; gap: 24px; justify-content: space-between; align-items: center; flex-wrap: wrap; position: relative; overflow: hidden; }
+  .cta-banner::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 80% at 90% 50%, rgba(15,122,90,0.4), transparent 60%); pointer-events: none; }
+  .cta-banner > * { position: relative; z-index: 1; }
+  .cta-banner h3 { color: #ffffff; }
+  .cta-banner p { color: rgba(255,255,255,0.78); }
+  .cta-banner .btn-primary { background: #ffffff; color: var(--fg-strong); }
+  .cta-banner .btn-primary:hover { background: var(--brand); color: #ffffff; }
+  .cta-banner .btn-ghost { color: #ffffff; border-color: rgba(255,255,255,0.4); }
+  .cta-banner .btn-ghost:hover { background: #ffffff; color: var(--fg-strong); border-color: #ffffff; }
   .cta-banner h3 { font-size: clamp(24px, 2.8vw, 34px); margin: 0 0 8px; font-family: var(--sans); font-weight: 600; letter-spacing: -0.018em; }
   .cta-banner p { color: var(--fg-muted); margin: 0; max-width: 48ch; font-size: 15px; }
 
-  footer { border-top: 1px solid var(--border); padding: 56px 0 36px; margin-top: 80px; background: var(--bg-elevated); }
+  footer { border-top: 1px solid var(--border); padding: 72px 0 40px; margin-top: 96px; background: var(--bg-elevated); }
   .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 36px; }
   @media (max-width: 820px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
   .foot-col h5 { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--fg-subtle); margin: 0 0 16px; font-weight: 500; }
@@ -470,93 +493,11 @@
         </div>
       </div>
       <div class="hero-visual reveal" aria-hidden="true">
-        <svg viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-          <defs>
-            <radialGradient id="discA" cx="35%" cy="30%" r="75%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-              <stop offset="60%" stop-color="#e7f8f1" stop-opacity="0.6"/>
-              <stop offset="100%" stop-color="#0f7a5a" stop-opacity="0.10"/>
-            </radialGradient>
-            <radialGradient id="discB" cx="30%" cy="25%" r="80%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
-              <stop offset="55%" stop-color="#f6f2ff" stop-opacity="0.55"/>
-              <stop offset="100%" stop-color="#8656ef" stop-opacity="0.10"/>
-            </radialGradient>
-            <radialGradient id="discC" cx="35%" cy="30%" r="80%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-              <stop offset="60%" stop-color="#f1f8ff" stop-opacity="0.55"/>
-              <stop offset="100%" stop-color="#0073c3" stop-opacity="0.10"/>
-            </radialGradient>
-            <linearGradient id="coinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#0f7a5a"/>
-              <stop offset="100%" stop-color="#0b5f47"/>
-            </linearGradient>
-            <linearGradient id="phoneScreen" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="100%" stop-color="#f4fff9"/>
-            </linearGradient>
-          </defs>
-          <!-- Floating discs -->
-          <g class="disc-anim">
-            <circle cx="160" cy="140" r="92" fill="url(#discA)" stroke="#0f7a5a" stroke-opacity="0.22" stroke-width="1.2"/>
-          </g>
-          <g class="disc-anim d2">
-            <circle cx="430" cy="180" r="68" fill="url(#discB)" stroke="#29233b" stroke-opacity="0.18" stroke-width="1.2"/>
-          </g>
-          <g class="disc-anim d3">
-            <circle cx="400" cy="420" r="84" fill="url(#discC)" stroke="#0073c3" stroke-opacity="0.20" stroke-width="1.2"/>
-          </g>
-          <!-- $1 token coin -->
-          <g class="disc-anim" transform="translate(120,400)">
-            <circle cx="0" cy="0" r="52" fill="url(#coinGrad)"/>
-            <circle cx="0" cy="0" r="52" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="2"/>
-            <text x="0" y="8" text-anchor="middle" fill="#ffffff" font-family="Inter,sans-serif" font-size="28" font-weight="700" letter-spacing="-1">$1</text>
-          </g>
-          <!-- Phone outline 1 -->
-          <g transform="translate(220,180)">
-            <rect x="0" y="0" width="160" height="280" rx="28" fill="#ffffff" stroke="#29233b" stroke-opacity="0.18" stroke-width="1.4"/>
-            <rect x="10" y="14" width="140" height="252" rx="20" fill="url(#phoneScreen)"/>
-            <!-- screen content placeholders (no readable text) -->
-            <rect x="22" y="34" width="60" height="6" rx="3" fill="#29233b" fill-opacity="0.18"/>
-            <rect x="22" y="48" width="36" height="4" rx="2" fill="#29233b" fill-opacity="0.10"/>
-            <rect x="22" y="74" width="116" height="56" rx="12" fill="#e7f8f1" stroke="#0f7a5a" stroke-opacity="0.20"/>
-            <rect x="32" y="88" width="44" height="6" rx="3" fill="#0f7a5a" fill-opacity="0.55"/>
-            <rect x="32" y="102" width="80" height="10" rx="3" fill="#29233b" fill-opacity="0.55"/>
-            <rect x="22" y="146" width="54" height="42" rx="10" fill="#f1f8ff" stroke="#0073c3" stroke-opacity="0.18"/>
-            <rect x="82" y="146" width="54" height="42" rx="10" fill="#f6f2ff" stroke="#8656ef" stroke-opacity="0.18"/>
-            <rect x="22" y="202" width="116" height="6" rx="3" fill="#29233b" fill-opacity="0.10"/>
-            <rect x="22" y="214" width="86" height="6" rx="3" fill="#29233b" fill-opacity="0.10"/>
-            <rect x="22" y="226" width="100" height="6" rx="3" fill="#29233b" fill-opacity="0.10"/>
-            <!-- bottom CTA pill -->
-            <rect x="22" y="246" width="116" height="14" rx="7" fill="#29233b"/>
-            <!-- notch -->
-            <rect x="70" y="6" width="20" height="4" rx="2" fill="#29233b" fill-opacity="0.20"/>
-          </g>
-          <!-- Phone outline 2 (smaller, tucked) -->
-          <g transform="translate(70,260) rotate(-8)">
-            <rect x="0" y="0" width="120" height="210" rx="22" fill="#ffffff" stroke="#29233b" stroke-opacity="0.14" stroke-width="1.2"/>
-            <rect x="8" y="10" width="104" height="190" rx="16" fill="url(#phoneScreen)"/>
-            <!-- QR placeholder -->
-            <rect x="22" y="40" width="76" height="76" rx="8" fill="#ffffff" stroke="#29233b" stroke-opacity="0.30"/>
-            <g fill="#29233b">
-              <rect x="28" y="46" width="14" height="14"/>
-              <rect x="78" y="46" width="14" height="14"/>
-              <rect x="28" y="96" width="14" height="14"/>
-              <rect x="48" y="56" width="6" height="6"/>
-              <rect x="58" y="66" width="6" height="6"/>
-              <rect x="68" y="56" width="6" height="6"/>
-              <rect x="48" y="76" width="6" height="6"/>
-              <rect x="68" y="86" width="6" height="6"/>
-              <rect x="58" y="96" width="6" height="6"/>
-            </g>
-            <rect x="22" y="128" width="76" height="6" rx="3" fill="#29233b" fill-opacity="0.18"/>
-            <rect x="22" y="140" width="60" height="4" rx="2" fill="#29233b" fill-opacity="0.10"/>
-            <rect x="22" y="162" width="76" height="22" rx="6" fill="#0f7a5a"/>
-          </g>
-          <!-- subtle connector arcs -->
-          <path d="M 120 400 Q 200 320 220 250" stroke="#0f7a5a" stroke-opacity="0.30" stroke-width="1.4" fill="none" stroke-dasharray="3 5"/>
-          <path d="M 400 420 Q 350 380 300 360" stroke="#29233b" stroke-opacity="0.18" stroke-width="1.2" fill="none" stroke-dasharray="3 5"/>
-        </svg>
+        <img src="assets/hero-mockup.webp" alt="" width="720" height="756" loading="eager" decoding="async" fetchpriority="high" />
+        <div class="hero-meta">
+          <span><b>v0.9</b> · prototype</span>
+          <span>build · <b>0x9a4f…2c1e</b></span>
+        </div>
       </div>
     </div>
   </div>
@@ -588,58 +529,31 @@
         <div class="plat-tag" data-i18n="plat.1.t">Wallet</div>
         <h3 data-i18n="plat.1.h">Open a wallet inside a chat.</h3>
         <p data-i18n="plat.1.p">Keyless onboarding via Telegram. No app store. No seed phrase. Multi-chain by default.</p>
-        <div class="plat-vis" aria-hidden="true">
-          <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="20" width="280" height="140" rx="14" fill="#ffffff" stroke="#e8eaf0"/>
-            <circle cx="48" cy="48" r="14" fill="#e7f8f1" stroke="#0f7a5a" stroke-opacity="0.3"/>
-            <rect x="70" y="40" width="80" height="6" rx="3" fill="#29233b" fill-opacity="0.6"/>
-            <rect x="70" y="52" width="50" height="4" rx="2" fill="#29233b" fill-opacity="0.25"/>
-            <rect x="40" y="80" width="240" height="56" rx="10" fill="#f4fff9"/>
-            <rect x="52" y="92" width="60" height="6" rx="3" fill="#0f7a5a" fill-opacity="0.6"/>
-            <rect x="52" y="106" width="120" height="14" rx="3" fill="#29233b"/>
-            <rect x="200" y="100" width="64" height="22" rx="6" fill="#0f7a5a"/>
-          </svg>
-        </div>
+        <div class="plat-vis" aria-hidden="true"><img src="assets/platform/wallet.webp" alt="" loading="lazy" decoding="async" /></div>
       </a>
       <a class="plat-card plat-blue" href="#payments">
         <div class="plat-tag" data-i18n="plat.2.t">Payments</div>
         <h3 data-i18n="plat.2.h">QR rail, not a portfolio app.</h3>
         <p data-i18n="plat.2.p">Scan, sign, settle. Stablecoin settlement and signed webhooks for POS reconciliation.</p>
-        <div class="plat-vis" aria-hidden="true">
-          <svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
-            <rect x="40" y="20" width="160" height="120" rx="14" fill="#ffffff" stroke="#e8eaf0"/>
-            <g fill="#29233b" transform="translate(70,40)">
-              <rect width="20" height="20"/><rect x="80" width="20" height="20"/>
-              <rect y="80" width="20" height="20"/>
-              <rect x="30" y="6" width="6" height="6"/><rect x="40" y="14" width="6" height="6"/>
-              <rect x="50" y="6" width="6" height="6"/><rect x="60" y="22" width="6" height="6"/>
-              <rect x="30" y="30" width="6" height="6"/><rect x="50" y="40" width="6" height="6"/>
-              <rect x="30" y="50" width="6" height="6"/><rect x="40" y="60" width="6" height="6"/>
-              <rect x="50" y="70" width="6" height="6"/><rect x="60" y="50" width="6" height="6"/>
-              <rect x="80" y="40" width="6" height="20"/><rect x="80" y="70" width="6" height="14"/>
-              <rect x="40" y="80" width="6" height="6"/><rect x="60" y="80" width="6" height="6"/>
-            </g>
-            <rect x="38" y="18" width="20" height="20" fill="none" stroke="#0f7a5a" stroke-width="2"/>
-            <rect x="182" y="18" width="20" height="20" fill="none" stroke="#0f7a5a" stroke-width="2"/>
-            <rect x="38" y="122" width="20" height="20" fill="none" stroke="#0f7a5a" stroke-width="2"/>
-            <rect x="182" y="122" width="20" height="20" fill="none" stroke="#0f7a5a" stroke-width="2"/>
-          </svg>
-        </div>
+        <div class="plat-vis" aria-hidden="true"><img src="assets/platform/payments.webp" alt="" loading="lazy" decoding="async" /></div>
       </a>
       <a class="plat-card plat-mint" href="#security">
         <div class="plat-tag" data-i18n="plat.3.t">Security</div>
         <h3 data-i18n="plat.3.h">2-of-3 MPC.<br>No single point of failure.</h3>
         <p data-i18n="plat.3.p">Threshold signing across device, server, and recovery. Server share alone never moves funds.</p>
+        <div class="plat-vis" aria-hidden="true"><img src="assets/platform/security.webp" alt="" loading="lazy" decoding="async" /></div>
       </a>
       <a class="plat-card plat-lavender" href="#payments">
         <div class="plat-tag" data-i18n="plat.4.t">Merchant tools</div>
         <h3 data-i18n="plat.4.h">Web3 acceptance, Web2 ergonomics.</h3>
         <p data-i18n="plat.4.p">REST + webhooks, stablecoin payout, refunds first-class. Built for stores, not whitepapers.</p>
+        <div class="plat-vis" aria-hidden="true"><img src="assets/platform/merchant-tools.webp" alt="" loading="lazy" decoding="async" /></div>
       </a>
       <a class="plat-card plat-wide" href="#token">
         <div class="plat-tag" data-i18n="plat.5.t">Ecosystem utility</div>
         <h3 data-i18n="plat.5.h">$1 powers the working layer.</h3>
         <p data-i18n="plat.5.p">Fees, rewards, merchant incentives, and access — designed as a utility token, not a price story.</p>
+        <div class="plat-vis plat-vis-dark" aria-hidden="true"><img src="assets/platform/ecosystem.webp" alt="" loading="lazy" decoding="async" /></div>
       </a>
     </div>
   </div>
@@ -670,6 +584,9 @@
       <p data-i18n="flow.p">Telegram is the runtime. No app stores. No seed phrase ceremony. No broken redirects.</p>
     </div>
     <div class="flow reveal">
+      <div class="flow-banner" aria-hidden="true">
+        <img src="assets/product-flow-banner.webp" alt="" loading="lazy" decoding="async" />
+      </div>
       <div class="flow-steps reveal-stagger">
         <div class="step"><span class="n" data-i18n="flow.1.n">STEP 01</span><h4 data-i18n="flow.1.h">Open from Telegram</h4><p data-i18n="flow.1.p">Launch ONEWALLET as a Mini App. Nothing to download.</p></div>
         <div class="step"><span class="n" data-i18n="flow.2.n">STEP 02</span><h4 data-i18n="flow.2.h">Verify your device</h4><p data-i18n="flow.2.p">Lightweight Telegram session + device share check.</p></div>
@@ -746,12 +663,17 @@
       <p data-i18n="pay.p">Pay by QR. Settle in stablecoin. Reward in-ecosystem. Built for merchants who need predictability, not speculation.</p>
     </div>
     <div class="pay-grid">
-      <div class="pay-flow reveal"><ol>
+      <div class="reveal">
+        <div class="pay-visual" aria-hidden="true">
+          <img src="assets/payments-rail.webp" alt="" loading="lazy" decoding="async" />
+        </div>
+        <div class="pay-flow"><ol>
         <li><div><b data-i18n="pay.1.b">Merchant generates an invoice</b><span data-i18n="pay.1.s">Static or per-order QR with chain, amount, and memo.</span></div></li>
         <li><div><b data-i18n="pay.2.b">User scans inside Telegram</b><span data-i18n="pay.2.s">ONEWALLET resolves chain, displays receiver, fees, and FX preview.</span></div></li>
         <li><div><b data-i18n="pay.3.b">MPC signs and broadcasts</b><span data-i18n="pay.3.s">Threshold signature on the chosen chain. No seed prompt.</span></div></li>
         <li><div><b data-i18n="pay.4.b">Settlement webhook fires</b><span data-i18n="pay.4.s">Merchant receives stablecoin and a signed event for POS reconciliation.</span></div></li>
       </ol></div>
+      </div>
       <div class="reveal">
         <h3 data-i18n="pay.mg.h">Merchant-grade, not crypto-grade.</h3>
         <p data-i18n="pay.mg.p">A REST + webhook stack lets stores accept Web3 without learning Web3. Settlement defaults to stablecoin, fees are predictable, and refunds are first-class.</p>
