@@ -233,6 +233,57 @@
   .reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } *,*::before,*::after { transition: none !important; animation: none !important; } }
 
+  /* ── Reading progress bar ── */
+  .read-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--brand), #8656ef); z-index: 100; width: 0%; transition: none; pointer-events: none; }
+
+  /* ── Back-to-top FAB ── */
+  .back-to-top { position: fixed; bottom: 32px; right: 32px; z-index: 60; width: 44px; height: 44px; border-radius: 50%; background: var(--fg-strong); color: #fff; border: none; cursor: pointer; display: grid; place-items: center; box-shadow: var(--shadow-md); opacity: 0; transform: translateY(12px) scale(0.9); transition: opacity 280ms ease, transform 280ms ease, background 160ms ease; pointer-events: none; }
+  .back-to-top.visible { opacity: 1; transform: none; pointer-events: auto; }
+  .back-to-top:hover { background: var(--brand); transform: translateY(-2px); }
+  .back-to-top svg { width: 18px; height: 18px; }
+  @media (max-width: 600px) { .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; } }
+
+  /* ── Enhanced TOC active state ── */
+  .toc ol li a { position: relative; transition: color 160ms ease, padding-left 200ms ease; }
+  .toc ol li a.active { color: var(--brand); font-weight: 600; padding-left: 6px; }
+  .toc ol li a.active::before { content: ""; position: absolute; left: -14px; top: 50%; transform: translateY(-50%); width: 3px; height: 16px; background: var(--brand); border-radius: 2px; animation: tocSlide 200ms ease both; }
+  @keyframes tocSlide { from { height: 0; opacity: 0; } to { height: 16px; opacity: 1; } }
+
+  /* ── Chapter separator glow ── */
+  .chap { transition: border-color 280ms ease; }
+  .chap:hover { border-top-color: var(--brand-soft); }
+
+  /* ── Summary card hover ── */
+  .summary-card { transition: border-color 280ms ease, box-shadow 280ms ease; }
+  .summary-card:hover { border-left-color: var(--brand-bright); box-shadow: 0 0 0 1px var(--brand-soft), 0 8px 24px rgba(15,122,90,0.08); }
+
+  /* ── Risk cell hover ── */
+  .risk-cell { transition: transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease; }
+  .risk-cell:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); border-color: transparent; }
+
+  /* ── Team card glow ── */
+  .wp-member { transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease; }
+
+  /* ── Callout hover ── */
+  .callout { transition: box-shadow 280ms ease; }
+  .callout:hover { box-shadow: 0 4px 16px rgba(41,35,59,0.06); }
+
+  /* ── Table row hover ── */
+  table.t tbody tr { transition: background 160ms ease; }
+  table.t tbody tr:hover td { background: rgba(15,122,90,0.04); }
+
+  /* ── Title block particles ── */
+  .title-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .title-particles span { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--brand); opacity: 0.12; animation: wpParticle 14s ease-in-out infinite; }
+  .title-particles span:nth-child(2) { width: 5px; height: 5px; background: #8656ef; opacity: 0.08; animation-delay: -4s; animation-duration: 18s; }
+  .title-particles span:nth-child(3) { width: 3px; height: 3px; opacity: 0.1; animation-delay: -8s; animation-duration: 16s; }
+  .title-particles span:nth-child(4) { width: 4px; height: 4px; background: #0073c3; opacity: 0.06; animation-delay: -2s; animation-duration: 20s; }
+  @keyframes wpParticle { 0%,100% { transform: translate(0,0); opacity: 0; } 10% { opacity: 0.12; } 50% { transform: translate(30px,-50px) scale(1.4); opacity: 0.18; } 90% { opacity: 0.12; } }
+
+  /* ── Diagram hover ── */
+  .diagram { transition: box-shadow 280ms ease, border-color 280ms ease; }
+  .diagram:hover { box-shadow: 0 4px 16px rgba(6,17,43,0.08), 0 16px 40px rgba(6,17,43,0.06); border-color: var(--brand-soft); }
+
   @media print {
     :root { --bg: #fff; --bg-elevated: #f7f7f4; --bg-card: #fff; --bg-code: #1c2330; --border: #ddd; --fg: #111; --fg-strong: #000; --fg-muted: #555; --fg-subtle: #777; }
     body { font-size: 11pt; }
@@ -241,10 +292,14 @@
     .chap { page-break-inside: avoid; }
     h1, h2 { page-break-after: avoid; }
     a { color: #000; border-bottom: 0; }
+    .read-progress, .back-to-top, .title-particles { display: none; }
   }
 </style>
 </head>
 <body>
+
+<div class="read-progress" id="readProgress" aria-hidden="true"></div>
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg></button>
 
 <header class="bar">
   <div class="bar-inner">
@@ -270,6 +325,7 @@
 </header>
 
 <section class="title-block">
+  <div class="title-particles" aria-hidden="true"><span style="top:20%;left:15%"></span><span style="top:50%;left:75%"></span><span style="top:70%;left:30%"></span><span style="top:30%;left:85%"></span></div>
   <div class="title-inner">
     <span class="eyebrow" data-i18n="wp.title.eb">Technical &amp; product whitepaper · v0.9</span>
     <h1 data-i18n="wp.title.h">The Telegram-native <em>wallet</em>,<br>payment rail, and ecosystem.</h1>
@@ -734,6 +790,28 @@
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  })();
+
+  // Reading progress bar
+  (function(){
+    const bar = document.getElementById('readProgress');
+    if (!bar) return;
+    const update = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // Back-to-top FAB
+  (function(){
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+    const check = () => btn.classList.toggle('visible', window.scrollY > 500);
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   })();
 </script>
 
