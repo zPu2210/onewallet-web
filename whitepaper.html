@@ -423,7 +423,6 @@
       </figure>
       <h3 data-i18n="wp.c4.h1">Trust boundaries</h3>
       <ul>
-        <li data-i18n="wp.c4.li1">Client never holds the full private key.</li>
         <li data-i18n="wp.c4.li2">Edge services see signing requests but never the complete key material.</li>
         <li data-i18n="wp.c4.li3">Custody stores only one MPC share and cannot sign unilaterally.</li>
         <li data-i18n="wp.c4.li4">Settlement broadcasts only after a valid threshold signature returns.</li>
@@ -456,7 +455,7 @@
           <rect x="20" y="20" width="840" height="280" rx="14" fill="#f4f6f9" stroke="#e5e8ed" stroke-dasharray="4 4"/>
           <text style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:1.4px;fill:#54627a" x="40" y="44" data-i18n-svg="wp.c5.d.frame">MPC · 2-of-3 THRESHOLD</text>
           <g><rect class="node" x="60" y="78" width="200" height="50" rx="10"/><text class="node-lbl" x="160" y="108" text-anchor="middle" data-i18n-svg="wp.c5.d.n1">Device share</text></g>
-          <g><rect class="node" x="60" y="148" width="200" height="50" rx="10"/><text class="node-lbl" x="160" y="178" text-anchor="middle" data-i18n-svg="wp.c5.d.n2">Server share</text></g>
+          <g><rect class="node" x="60" y="148" width="200" height="50" rx="10"/><text class="node-lbl" x="160" y="178" text-anchor="middle" data-i18n-svg="wp.c5.d.n2">Telegram auth</text></g>
           <g><rect class="node alt" x="60" y="218" width="200" height="50" rx="10"/><text class="node-lbl alt" x="160" y="248" text-anchor="middle" data-i18n-svg="wp.c5.d.n3">Recovery share</text></g>
           <g><rect class="node" x="380" y="120" width="200" height="80" rx="12" fill="rgba(15,122,90,0.06)"/><text class="node-lbl" x="480" y="156" text-anchor="middle" data-i18n-svg="wp.c5.d.thr">threshold signing</text></g>
           <path class="edge" d="M 260 103 L 380 145" marker-end="url(#mp-arr)"/>
@@ -468,7 +467,7 @@
             <rect x="380" y="218" width="460" height="62" rx="10" fill="#f4f6f9" stroke="#e5e8ed"/>
             <text class="node-sub" x="396" y="240" style="fill:#06112b;font-size:12px" data-i18n-svg="wp.c5.d.r0">rules</text>
             <text class="node-sub" x="396" y="258" data-i18n-svg="wp.c5.d.r1">·  any 2 shares sign  ·  any 1 share insufficient</text>
-            <text class="node-sub" x="396" y="272" data-i18n-svg="wp.c5.d.r2">·  shares are rotatable  ·  no full key exists at any moment</text>
+            <text class="node-sub" x="396" y="272" data-i18n-svg="wp.c5.d.r2">·  shares are rotatable</text>
           </g>
         </svg>
         <figcaption data-i18n="wp.c5.fig">Figure 5.1 — 2-of-3 MPC topology</figcaption>
@@ -479,9 +478,7 @@
         <thead><tr><th scope="col" data-i18n="wp.c5.t.h1">Vector</th><th scope="col" data-i18n="wp.c5.t.h2">Impact</th><th scope="col" data-i18n="wp.c5.t.h3">Mitigation</th></tr></thead>
         <tbody>
           <tr><td data-i18n="wp.c5.t.1.1">Device theft</td><td data-i18n="wp.c5.t.1.2">Loss of one share</td><td data-i18n="wp.c5.t.1.3">Rotate device share via server + recovery cooperation.</td></tr>
-          <tr><td data-i18n="wp.c5.t.2.1">Server compromise</td><td data-i18n="wp.c5.t.2.2">Loss of one share</td><td data-i18n="wp.c5.t.2.3">Server share alone cannot sign.</td></tr>
-          <tr><td data-i18n="wp.c5.t.3.1">Telegram session hijack</td><td data-i18n="wp.c5.t.3.2">Account-level access</td><td data-i18n="wp.c5.t.3.3">Re-auth + cooldown.</td></tr>
-          <tr><td data-i18n="wp.c5.t.4.1">Phishing QR</td><td data-i18n="wp.c5.t.4.2">Misdirected payment</td><td data-i18n="wp.c5.t.4.3">Receiver preview, limits.</td></tr>
+          <tr><td data-i18n="wp.c5.t.2.1">Server compromise or Telegram session hijack</td><td data-i18n="wp.c5.t.2.2">Loss of one share or account-level access</td><td data-i18n="wp.c5.t.2.3">Server share alone cannot sign — the same protection applies if a Telegram session is hijacked. High-value transfers add re-auth + cooldown.</td></tr>
           <tr><td data-i18n="wp.c5.t.5.1">Recovery social engineering</td><td data-i18n="wp.c5.t.5.2">Coerced recovery share</td><td data-i18n="wp.c5.t.5.3">Time-locked recovery.</td></tr>
         </tbody>
       </table></div>
@@ -501,19 +498,6 @@
           <tr><td data-i18n="wp.c6.t1.3.1">Merchant incentives</td><td data-i18n="wp.c6.t1.3.2">$1 top-up lowers acceptance fees.</td><td data-i18n="wp.c6.t1.3.3">Designed</td></tr>
           <tr><td data-i18n="wp.c6.t1.4.1">Ecosystem access</td><td data-i18n="wp.c6.t1.4.2">Unlock premium mini-apps.</td><td data-i18n="wp.c6.t1.4.3">Planned</td></tr>
           <tr><td data-i18n="wp.c6.t1.5.1">Governance signal</td><td data-i18n="wp.c6.t1.5.2">Vote on rewards, fees.</td><td data-i18n="wp.c6.t1.5.3">Planned</td></tr>
-        </tbody>
-      </table></div>
-      <h3 data-i18n="wp.c6.h2">Indicative allocation</h3>
-      <p class="mono" style="color:var(--fg-subtle);font-size:13px;" data-i18n="wp.c6.note">Percentages are placeholder until token / legal review completes.</p>
-      <div class="t-wrap"><table class="t">
-        <thead><tr><th scope="col" data-i18n="wp.c6.t2.h1">Bucket</th><th scope="col" data-i18n="wp.c6.t2.h2">Share</th><th scope="col" data-i18n="wp.c6.t2.h3">Vesting</th></tr></thead>
-        <tbody>
-          <tr><td data-i18n="wp.c6.t2.1.1">Ecosystem &amp; rewards</td><td>40%</td><td data-i18n="wp.c6.t2.1.3">Released against verifiable on-chain activity</td></tr>
-          <tr><td data-i18n="wp.c6.t2.2.1">Team &amp; advisors</td><td>18%</td><td data-i18n="wp.c6.t2.2.3">4-year vest, 1-year cliff</td></tr>
-          <tr><td data-i18n="wp.c6.t2.3.1">Treasury</td><td>15%</td><td data-i18n="wp.c6.t2.3.3">DAO-controlled after governance live</td></tr>
-          <tr><td data-i18n="wp.c6.t2.4.1">Strategic partners</td><td>12%</td><td data-i18n="wp.c6.t2.4.3">Bespoke, milestone-locked</td></tr>
-          <tr><td data-i18n="wp.c6.t2.5.1">Liquidity</td><td>10%</td><td data-i18n="wp.c6.t2.5.3">Pool seeding and market depth</td></tr>
-          <tr><td data-i18n="wp.c6.t2.6.1">Public &amp; community</td><td>5%</td><td data-i18n="wp.c6.t2.6.3">Phased distribution</td></tr>
         </tbody>
       </table></div>
       <div class="callout c-risk"><b data-i18n="wp.c6.cal.t">Disclaimer</b><span data-i18n="wp.c6.cal.p">$1 is a utility token.</span></div>

@@ -370,7 +370,7 @@
   @media (max-width: 940px) { .team-wrap .member { flex-basis: calc(50% - 9px); } }
   @media (max-width: 600px) { .team-wrap .member { flex-basis: 100%; min-width: 0; } }
   .member { position: relative; background: linear-gradient(180deg, rgba(15,122,90,0.03), transparent 60%), var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px 28px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); overflow: hidden; }
-  .member .deco { position: absolute; top: -28px; right: -32px; width: 140px; height: 140px; pointer-events: none; opacity: 0.85; mask-image: radial-gradient(ellipse at top right, #000 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at top right, #000 30%, transparent 75%); transition: transform var(--t-slow), opacity var(--t-med); }
+  .member .deco { position: absolute; top: -48px; right: -56px; width: 220px; height: 220px; pointer-events: none; opacity: 0.92; mask-image: radial-gradient(ellipse at top right, #000 42%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse at top right, #000 42%, transparent 80%); transition: transform var(--t-slow), opacity var(--t-med); }
   .member .deco img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .member:hover .deco { transform: scale(1.08) rotate(-3deg); opacity: 1; }
   .member::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--brand), transparent); opacity: 0; transition: opacity var(--t-med); }
@@ -403,7 +403,7 @@
   .cta-banner::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 80% at 90% 50%, rgba(15,122,90,0.4), transparent 60%); pointer-events: none; }
   .cta-banner > * { position: relative; z-index: 1; }
   .cta-banner h3 { color: #ffffff; }
-  .cta-banner p { color: rgba(255,255,255,0.92); font-size: 15.5px; font-weight: 500; }
+  .cta-banner p { color: #ffffff; font-size: 16px; font-weight: 500; opacity: 1; }
   .cta-banner .btn-primary { background: #ffffff; color: var(--fg-strong); }
   .cta-banner .btn-primary:hover { background: var(--brand); color: #ffffff; }
   .cta-banner .btn-ghost { color: #ffffff; border-color: rgba(255,255,255,0.4); }
@@ -418,7 +418,9 @@
   html[lang="ko"] .foot-col h5, html[lang="ja"] .foot-col h5, html[lang="zh"] .foot-col h5 { font-family: inherit; letter-spacing: 0.04em; }
   .foot-col a { display: block; color: var(--fg-muted); font-size: 14px; padding: 4px 0; transition: color var(--t-fast); }
   .foot-col a:hover { color: var(--fg-strong); }
-  .foot-about p { color: var(--fg-muted); font-size: 13px; max-width: 36ch; margin-top: 12px; }
+  .foot-about .brand { gap: 12px; font-size: 17px; font-weight: 700; letter-spacing: -0.012em; }
+  .foot-about .brand img { width: 36px; height: 36px; }
+  .foot-about p { color: var(--fg-muted); font-size: 13.5px; max-width: 38ch; margin-top: 16px; line-height: 1.6; }
   .foot-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--fg-subtle); font-family: var(--mono); }
 
   /* Security model diagram */
@@ -761,13 +763,13 @@
         </g>
         <!-- Users -->
         <g>
-          <rect class="node" x="405" y="40" width="150" height="56" rx="10"/>
+          <rect class="node" x="370" y="40" width="220" height="60" rx="10"/>
           <text class="node-lbl" x="480" y="68" text-anchor="middle" data-i18n-svg="fly.users.h">Users</text>
-          <text class="node-sub" x="480" y="86" text-anchor="middle" data-i18n-svg="fly.users.s">Telegram-native onboarding</text>
+          <text class="node-sub" x="480" y="88" text-anchor="middle" data-i18n-svg="fly.users.s">Telegram-native onboarding</text>
         </g>
         <!-- Users → Wallet -->
-        <path class="edge" d="M 480 112 L 480 168" marker-end="url(#arrow)"/>
-        <text class="edge-lbl" x="492" y="144" data-i18n-svg="fly.edge.1">open + sign-up</text>
+        <path class="edge" d="M 480 116 L 480 168" marker-end="url(#arrow)"/>
+        <text class="edge-lbl" x="492" y="146" data-i18n-svg="fly.edge.1">open + sign-up</text>
         <!-- Wallet -->
         <g>
           <rect class="node" x="385" y="178" width="190" height="64" rx="10"/>
@@ -803,11 +805,11 @@
           <text class="node-lbl" x="480" y="512" text-anchor="middle" style="font-size:14px" data-i18n-svg="fly.util.h">$1 utility · ecosystem</text>
           <text class="node-sub" x="480" y="532" text-anchor="middle" data-i18n-svg="fly.util.s">fees · rewards · governance · access</text>
         </g>
-        <!-- Feedback loop: $1 utility back to Users, routed FAR LEFT, clear of all boxes -->
-        <path class="edge back" d="M 290 516 C 40 516, 40 68, 405 68" marker-end="url(#arrowDim)"/>
-        <!-- Feedback label positioned in clear far-left whitespace -->
-        <text class="edge-lbl" x="48" y="300" style="fill:#54627a" data-i18n-svg="fly.back">feeds back</text>
-        <text class="edge-lbl" x="48" y="316" style="fill:#54627a" data-i18n-svg="fly.back.sub">referrals · rewards</text>
+        <!-- Feedback loop: $1 utility back to Users — square right-angle routing with dashed segments, no curves. Routed FAR LEFT, well clear of all text labels. -->
+        <path class="edge back" d="M 290 516 L 30 516 L 30 70 L 370 70" stroke-dasharray="6 6" marker-end="url(#arrowDim)"/>
+        <!-- Feedback label in clear far-left whitespace, well away from path -->
+        <text class="edge-lbl" x="46" y="296" style="fill:#54627a" data-i18n-svg="fly.back">feeds back</text>
+        <text class="edge-lbl" x="46" y="312" style="fill:#54627a" data-i18n-svg="fly.back.sub">referrals · rewards</text>
         <!-- Compound loop footer -->
         <g transform="translate(60,610)">
           <rect width="840" height="80" rx="14" fill="#f4f6f9" stroke="#e5e8ed" stroke-width="1"/>
@@ -889,7 +891,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-col foot-about">
-        <a class="brand" href="/" aria-label="ONEWALLET home" data-i18n-attr="aria-label:common.aria.home"><img src="assets/logo.png" alt="" width="28" height="28" /><span class="wordmark">ONEWALLET</span></a>
+        <a class="brand" href="/" aria-label="ONEWALLET home" data-i18n-attr="aria-label:common.aria.home"><img src="assets/logo.png" alt="" width="36" height="36" /><span class="wordmark">ONEWALLET</span></a>
         <p data-i18n="foot.about">The Telegram-native Web3 wallet and payment rail for users, merchants, and the $1 ecosystem.</p>
       </div>
       <div class="foot-col"><h5 data-i18n="foot.col1.h">Product</h5><a href="#users" data-i18n="foot.col1.1">For users</a><a href="#partners" data-i18n="foot.col1.2">For merchants</a><a href="#security" data-i18n="foot.col1.3">Security</a><a href="whitepaper.html" data-i18n="foot.col1.4">Whitepaper</a></div>
