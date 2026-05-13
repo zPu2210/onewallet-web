@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>ONEWALLET — The Telegram-Native Web3 Wallet &amp; Payment Rail</title>
 <meta name="description" content="Open a keyless MPC wallet inside Telegram in a few taps. Pay, send, and earn across chains. Built for users, merchants, and the $1 ecosystem." />
-<meta name="theme-color" content="#0d1117" />
+<meta name="theme-color" content="#ffffff" />
 <link rel="canonical" href="https://onewallet.app/" />
 
 <meta property="og:type" content="website" />
@@ -43,20 +43,21 @@
 
 <style>
   :root {
-    --bg: #0d1117; --bg-elevated: #131922; --bg-card: #161d28; --bg-code: #1c2330;
-    --border: #1f2530; --border-strong: #2a3340;
-    --fg: #e6e8eb; --fg-strong: #ffffff; --fg-muted: #8b949e; --fg-subtle: #6b7480;
-    --brand: #2dd4a7; --brand-bright: #4cf0c0; --brand-dim: rgba(45,212,167,0.65); --brand-soft: rgba(45,212,167,0.12);
-    --teal: #5eead4; --warning: #f59e0b; --warning-bg: rgba(245,158,11,0.08); --danger: #f87171; --info: #6aa6ff;
+    /* Circle-inspired institutional light palette */
+    --bg: #ffffff; --bg-elevated: #f4f6f9; --bg-card: #ffffff; --bg-code: #f8fafc;
+    --border: #e5e8ed; --border-strong: #c8cfd9;
+    --fg: #1a2540; --fg-strong: #06112b; --fg-muted: #54627a; --fg-subtle: #8b96a8;
+    --brand: #0f7a5a; --brand-bright: #128a66; --brand-dim: rgba(15,122,90,0.55); --brand-soft: rgba(15,122,90,0.08);
+    --teal: #2dd4a7; --warning: #b45309; --warning-bg: rgba(180,83,9,0.07); --danger: #b91c1c; --info: #1d4ed8;
     --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px;
     --serif: "Playfair Display","Charter","Iowan Old Style",Cambria,Georgia,serif;
     --sans: "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     --mono: "JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
     --maxw: 1180px; --gutter: clamp(20px, 4vw, 44px);
-    --shadow-sm: 0 1px 0 rgba(255,255,255,0.03), 0 4px 12px rgba(0,0,0,0.25);
-    --shadow-md: 0 1px 0 rgba(255,255,255,0.04), 0 12px 32px rgba(0,0,0,0.4);
-    --shadow-lg: 0 1px 0 rgba(255,255,255,0.04), 0 24px 60px rgba(0,0,0,0.5);
-    --shadow-glow: 0 0 0 1px var(--brand-soft), 0 18px 40px rgba(45,212,167,0.18);
+    --shadow-sm: 0 1px 2px rgba(6,17,43,0.04), 0 2px 8px rgba(6,17,43,0.04);
+    --shadow-md: 0 2px 6px rgba(6,17,43,0.05), 0 12px 32px rgba(6,17,43,0.06);
+    --shadow-lg: 0 4px 12px rgba(6,17,43,0.06), 0 24px 60px rgba(6,17,43,0.08);
+    --shadow-glow: 0 0 0 1px var(--brand-soft), 0 14px 36px rgba(15,122,90,0.10);
     --t-fast: 160ms cubic-bezier(0.2,0.7,0.2,1);
     --t-med: 280ms cubic-bezier(0.2,0.7,0.2,1);
     --t-slow: 520ms cubic-bezier(0.2,0.7,0.2,1);
@@ -104,10 +105,10 @@
 
   :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
   .skip { position: absolute; left: -9999px; }
-  .skip:focus { position: absolute; left: 12px; top: 12px; background: var(--brand); color: #052119; padding: 8px 12px; border-radius: 6px; z-index: 100; }
+  .skip:focus { position: absolute; left: 12px; top: 12px; background: var(--brand); color: #ffffff; padding: 8px 12px; border-radius: 6px; z-index: 100; }
 
-  header.nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(13,17,23,0.82); border-bottom: 1px solid var(--border); transition: border-color var(--t-fast), background var(--t-fast); }
-  header.nav.scrolled { background: rgba(13,17,23,0.95); }
+  header.nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); background: rgba(255,255,255,0.82); border-bottom: 1px solid var(--border); transition: border-color var(--t-fast), background var(--t-fast); }
+  header.nav.scrolled { background: rgba(255,255,255,0.96); box-shadow: 0 1px 0 rgba(6,17,43,0.04); }
   .nav-inner { display: flex; align-items: center; gap: 16px; height: 60px; }
   .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: 0.02em; color: var(--fg-strong); font-size: 15px; transition: opacity var(--t-fast); }
   .brand:hover { opacity: 0.85; }
@@ -146,13 +147,13 @@
   html[lang="ko"] .mobile-sheet a, html[lang="ja"] .mobile-sheet a, html[lang="zh"] .mobile-sheet a { font-family: inherit; }
   .mobile-sheet .lang-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
   .mobile-sheet .lang-row button { font-family: var(--mono); font-size: 11px; color: var(--fg); background: transparent; border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
-  .mobile-sheet .lang-row button[aria-checked="true"] { background: var(--brand); color: #052119; border-color: var(--brand); }
+  .mobile-sheet .lang-row button[aria-checked="true"] { background: var(--brand); color: #ffffff; border-color: var(--brand); }
 
   .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; padding: 11px 18px; border-radius: 999px; transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast), border-color var(--t-fast); cursor: pointer; border: 1px solid transparent; font-family: inherit; white-space: nowrap; }
   .btn:active { transform: translateY(1px) scale(0.99); }
-  .btn-primary { background: var(--brand); color: #052119; box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 4px 12px rgba(45,212,167,0.15); }
-  .btn-primary:hover { background: var(--brand-bright); transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 10px 28px rgba(45,212,167,0.32); }
-  .btn-ghost { background: transparent; color: var(--fg-strong); border-color: var(--border-strong); }
+  .btn-primary { background: var(--brand); color: #ffffff; box-shadow: 0 1px 2px rgba(6,17,43,0.10), 0 6px 18px rgba(15,122,90,0.18); }
+  .btn-primary:hover { background: var(--brand-bright); transform: translateY(-1px); box-shadow: 0 1px 2px rgba(6,17,43,0.10), 0 12px 28px rgba(15,122,90,0.24); }
+  .btn-ghost { background: #ffffff; color: var(--fg-strong); border-color: var(--border-strong); }
   .btn-ghost:hover { border-color: var(--fg-muted); background: var(--bg-elevated); }
   .btn-sm { padding: 8px 14px; font-size: 13px; }
   .btn .arrow { transition: transform var(--t-fast); }
@@ -181,13 +182,13 @@
   .chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--fg-muted); border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; background: var(--bg-elevated); transition: border-color var(--t-fast), color var(--t-fast); }
   html[lang="ko"] .chip, html[lang="ja"] .chip, html[lang="zh"] .chip { font-family: inherit; }
   .chip:hover { color: var(--fg-strong); border-color: var(--border-strong); }
-  .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 8px rgba(45,212,167,0.6); animation: chipPulse 2.6s ease-in-out infinite; }
-  @keyframes chipPulse { 0%, 100% { box-shadow: 0 0 6px rgba(45,212,167,0.4); } 50% { box-shadow: 0 0 14px rgba(45,212,167,0.85); } }
+  .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 6px rgba(15,122,90,0.35); animation: chipPulse 2.6s ease-in-out infinite; }
+  @keyframes chipPulse { 0%, 100% { box-shadow: 0 0 4px rgba(15,122,90,0.25); } 50% { box-shadow: 0 0 10px rgba(15,122,90,0.55); } }
 
-  .hero-visual { position: relative; aspect-ratio: 1/1.05; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: radial-gradient(60% 60% at 30% 20%, rgba(45,212,167,0.18), transparent 70%), linear-gradient(160deg, #131922, #0a0e14); box-shadow: var(--shadow-lg); }
-  .hero-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.95; transition: transform var(--t-slow); }
+  .hero-visual { position: relative; aspect-ratio: 1/1.05; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: radial-gradient(60% 60% at 30% 20%, rgba(15,122,90,0.08), transparent 70%), linear-gradient(160deg, #f4f6f9, #eef2f7); box-shadow: var(--shadow-lg); }
+  .hero-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 1; transition: transform var(--t-slow); }
   .hero-visual:hover img { transform: scale(1.02); }
-  .hero-grid-overlay { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 80%); }
+  .hero-grid-overlay { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(6,17,43,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(6,17,43,0.04) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 80%); }
   .hero-meta { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 10px; color: var(--fg-subtle); letter-spacing: 0.1em; text-transform: uppercase; }
   .hero-meta b { color: var(--fg-muted); font-weight: 500; }
 
@@ -200,7 +201,7 @@
   .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
   @media (max-width: 820px) { .audience-grid { grid-template-columns: 1fr; } }
   .audience-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 30px 26px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); display: flex; flex-direction: column; min-height: 260px; position: relative; overflow: hidden; }
-  .audience-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(80% 60% at 50% 0%, rgba(45,212,167,0.10), transparent 70%); opacity: 0; transition: opacity var(--t-med); pointer-events: none; }
+  .audience-card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(80% 60% at 50% 0%, rgba(15,122,90,0.06), transparent 70%); opacity: 0; transition: opacity var(--t-med); pointer-events: none; }
   .audience-card:hover { border-color: var(--brand); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
   .audience-card:hover::before { opacity: 1; }
   .audience-card .tag { font-family: var(--mono); font-size: 10px; color: var(--brand); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 14px; }
@@ -300,11 +301,11 @@
   .team-wrap .member { flex: 0 1 calc(33.333% - 12px); max-width: 340px; min-width: 280px; }
   @media (max-width: 940px) { .team-wrap .member { flex-basis: calc(50% - 9px); } }
   @media (max-width: 600px) { .team-wrap .member { flex-basis: 100%; min-width: 0; } }
-  .member { position: relative; background: linear-gradient(180deg, rgba(45,212,167,0.04), transparent 60%), var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px 26px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); overflow: hidden; }
+  .member { position: relative; background: linear-gradient(180deg, rgba(15,122,90,0.03), transparent 60%), var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px 26px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); overflow: hidden; }
   .member::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--brand), transparent); opacity: 0; transition: opacity var(--t-med); }
   .member:hover { border-color: var(--brand-dim); transform: translateY(-3px); box-shadow: var(--shadow-glow); }
   .member:hover::after { opacity: 1; }
-  .member .photo { width: 88px; height: 88px; border-radius: 16px; overflow: hidden; background: var(--bg-elevated); border: 1px solid var(--border); margin-bottom: 22px; box-shadow: 0 6px 18px rgba(0,0,0,0.35); transition: transform var(--t-med); }
+  .member .photo { width: 88px; height: 88px; border-radius: 16px; overflow: hidden; background: var(--bg-elevated); border: 1px solid var(--border); margin-bottom: 22px; box-shadow: 0 6px 18px rgba(6,17,43,0.10); transition: transform var(--t-med); }
   .member:hover .photo { transform: scale(1.04); }
   .member .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .member .role { font-family: var(--mono); font-size: 11px; color: var(--brand); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; }
@@ -326,7 +327,7 @@
   .faq details[open] summary::after { content: "−"; color: var(--brand); }
   .faq details p { color: var(--fg-muted); font-size: 14px; margin: 12px 0 0; padding-right: 36px; line-height: 1.65; }
 
-  .cta-banner { margin-top: 80px; padding: clamp(36px, 6vw, 64px); background: radial-gradient(60% 80% at 80% 50%, rgba(45,212,167,0.18), transparent 60%), var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); display: flex; gap: 24px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+  .cta-banner { margin-top: 80px; padding: clamp(36px, 6vw, 64px); background: radial-gradient(60% 80% at 80% 50%, rgba(15,122,90,0.10), transparent 60%), var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg); display: flex; gap: 24px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
   .cta-banner h3 { font-size: clamp(22px, 2.6vw, 30px); margin: 0 0 8px; font-family: var(--serif); font-weight: 500; }
   html[lang="ko"] .cta-banner h3, html[lang="ja"] .cta-banner h3, html[lang="zh"] .cta-banner h3 { font-family: inherit; font-weight: 700; }
   .cta-banner p { color: var(--fg-muted); margin: 0; max-width: 48ch; font-size: 15px; }
@@ -512,13 +513,13 @@
           </div>
           <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" role="img">
             <defs>
-              <marker id="sec-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/></marker>
-              <marker id="sec-arr-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/></marker>
+              <marker id="sec-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a5a"/></marker>
+              <marker id="sec-arr-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b45309"/></marker>
             </defs>
             <g><rect class="node" x="20" y="30" width="150" height="44" rx="10"/><text class="node-lbl" x="95" y="58" text-anchor="middle" data-i18n-svg="wp.c5.d.n1">Device share</text></g>
             <g><rect class="node" x="20" y="118" width="150" height="44" rx="10"/><text class="node-lbl" x="95" y="146" text-anchor="middle" data-i18n-svg="wp.c5.d.n2">Server share</text></g>
             <g><rect class="node alt" x="20" y="206" width="150" height="44" rx="10"/><text class="node-lbl alt" x="95" y="234" text-anchor="middle" data-i18n-svg="wp.c5.d.n3">Recovery share</text></g>
-            <g><rect class="node" x="270" y="100" width="170" height="80" rx="12" fill="#0f1a17"/><text class="node-lbl" x="355" y="138" text-anchor="middle" data-i18n-svg="wp.c5.d.thr">threshold signing</text></g>
+            <g><rect class="node" x="270" y="100" width="170" height="80" rx="12" fill="rgba(15,122,90,0.06)"/><text class="node-lbl" x="355" y="138" text-anchor="middle" data-i18n-svg="wp.c5.d.thr">threshold signing</text></g>
             <path class="edge" d="M 170 52 L 270 130" marker-end="url(#sec-arr)"/>
             <path class="edge" d="M 170 140 L 270 145" marker-end="url(#sec-arr)"/>
             <path class="edge alt" d="M 170 228 L 270 160" marker-end="url(#sec-arr-w)"/>
@@ -620,14 +621,14 @@
       </div>
       <svg class="fly-svg" viewBox="0 0 880 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ecosystem flywheel" data-i18n-attr="aria-label:fly.title">
         <defs>
-          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/></marker>
-          <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/></marker>
-          <marker id="arrowDim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="rgba(45,212,167,0.65)"/></marker>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a5a"/></marker>
+          <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b45309"/></marker>
+          <marker id="arrowDim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="rgba(15,122,90,0.55)"/></marker>
         </defs>
         <g>
-          <rect x="60" y="20" width="760" height="92" rx="14" fill="#10161f" stroke="#2a3340" stroke-width="1" stroke-dasharray="4 4"/>
+          <rect x="60" y="20" width="760" height="92" rx="14" fill="#f4f6f9" stroke="#c8cfd9" stroke-width="1" stroke-dasharray="4 4"/>
           <text class="frame-lbl" x="80" y="46" data-i18n-svg="fly.layer">LAYER · TELEGRAM RUNTIME</text>
-          <text class="frame-lbl" x="80" y="62" style="fill:#6b7480" data-i18n-svg="fly.layer.sub">distribution · onboarding · session</text>
+          <text class="frame-lbl" x="80" y="62" style="fill:#54627a" data-i18n-svg="fly.layer.sub">distribution · onboarding · session</text>
         </g>
         <g>
           <rect class="node" x="365" y="40" width="150" height="56" rx="10"/>
@@ -644,7 +645,7 @@
         <path class="edge" d="M 440 232 L 440 270 L 240 270 L 240 308" marker-end="url(#arrow)"/>
         <path class="edge sec" d="M 440 232 L 440 270 L 640 270 L 640 308" marker-end="url(#arrowAmber)"/>
         <text class="edge-lbl" x="290" y="262" data-i18n-svg="fly.edge.2">primary · pay</text>
-        <text class="edge-lbl" x="560" y="262" style="fill:#f59e0b" data-i18n-svg="fly.edge.3">branch · discover</text>
+        <text class="edge-lbl" x="560" y="262" style="fill:#b45309" data-i18n-svg="fly.edge.3">branch · discover</text>
         <g>
           <rect class="node" x="140" y="318" width="200" height="64" rx="10"/>
           <text class="node-lbl" x="240" y="346" text-anchor="middle" data-i18n-svg="fly.merch.h">Merchants</text>
@@ -656,21 +657,21 @@
           <text class="node-sub" x="640" y="366" text-anchor="middle" data-i18n-svg="fly.mini.s">partner integrations</text>
         </g>
         <path class="edge" d="M 340 350 L 540 350" stroke-dasharray="2 4" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
-        <text class="edge-lbl" x="440" y="342" text-anchor="middle" style="fill:#6b7480" data-i18n-svg="fly.edge.4">cross-link</text>
+        <text class="edge-lbl" x="440" y="342" text-anchor="middle" style="fill:#54627a" data-i18n-svg="fly.edge.4">cross-link</text>
         <path class="edge" d="M 240 382 L 240 432 L 360 432" marker-end="url(#arrow)"/>
         <path class="edge sec" d="M 640 382 L 640 432 L 520 432" marker-end="url(#arrowAmber)"/>
         <g>
-          <rect class="node" x="270" y="420" width="340" height="72" rx="12" fill="#0f1a17"/>
+          <rect class="node" x="270" y="420" width="340" height="72" rx="12" fill="rgba(15,122,90,0.06)"/>
           <text class="node-lbl" x="440" y="452" text-anchor="middle" style="font-size:14px" data-i18n-svg="fly.util.h">$1 utility · ecosystem</text>
           <text class="node-sub" x="440" y="472" text-anchor="middle" data-i18n-svg="fly.util.s">fees · rewards · governance · access</text>
         </g>
         <path class="edge back" d="M 270 456 C 80 456, 80 68, 365 68" marker-end="url(#arrowDim)"/>
-        <text class="edge-lbl" x="90" y="270" style="fill:#6b7480" data-i18n-svg="fly.back">feeds back · referrals · rewards</text>
+        <text class="edge-lbl" x="90" y="270" style="fill:#54627a" data-i18n-svg="fly.back">feeds back · referrals · rewards</text>
         <g transform="translate(60,540)">
-          <rect width="760" height="80" rx="14" fill="#10161f" stroke="#1f2530" stroke-width="1"/>
+          <rect width="760" height="80" rx="14" fill="#f4f6f9" stroke="#e5e8ed" stroke-width="1"/>
           <text class="frame-lbl" x="20" y="26" data-i18n-svg="fly.compound.h">COMPOUND LOOP</text>
-          <text class="node-sub" x="20" y="46" style="font-size:12px;fill:#8b949e" data-i18n-svg="fly.compound.p1">Each layer increases volume in the next. The loop reinforces:</text>
-          <text class="node-sub" x="20" y="64" style="font-size:12px;fill:#e6e8eb" data-i18n-svg="fly.compound.p2">more users → more wallets → more merchant volume → more $1 utility → more user rewards.</text>
+          <text class="node-sub" x="20" y="46" style="font-size:12px;fill:#54627a" data-i18n-svg="fly.compound.p1">Each layer increases volume in the next. The loop reinforces:</text>
+          <text class="node-sub" x="20" y="64" style="font-size:12px;fill:#06112b" data-i18n-svg="fly.compound.p2">more users → more wallets → more merchant volume → more $1 utility → more user rewards.</text>
         </g>
       </svg>
     </figure>

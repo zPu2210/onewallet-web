@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>ONEWALLET Whitepaper v0.9 — Technical &amp; Product Reference</title>
 <meta name="description" content="Technical and product whitepaper for ONEWALLET — a Telegram-native Web3 wallet, payment rail, and $1 token economy. MPC custody, threat model, growth and business model, risks." />
-<meta name="theme-color" content="#0d1117" />
+<meta name="theme-color" content="#ffffff" />
 <link rel="canonical" href="https://onewallet.app/whitepaper.html" />
 
 <meta property="og:type" content="article" />
@@ -35,17 +35,18 @@
 
 <style>
   :root {
-    --bg: #0d1117; --bg-elevated: #131922; --bg-card: #161d28; --bg-code: #1c2330;
-    --border: #1f2530; --border-strong: #2a3340;
-    --fg: #d8dde2; --fg-strong: #ffffff; --fg-muted: #8b949e; --fg-subtle: #6b7480;
-    --brand: #2dd4a7; --brand-bright: #4cf0c0; --brand-dim: rgba(45,212,167,0.65); --brand-soft: rgba(45,212,167,0.10);
-    --teal: #5eead4; --info: #6aa6ff; --warning: #f59e0b; --warning-bg: rgba(245,158,11,0.08); --danger: #f87171;
+    /* Circle-inspired institutional light palette */
+    --bg: #ffffff; --bg-elevated: #f4f6f9; --bg-card: #ffffff; --bg-code: #f8fafc;
+    --border: #e5e8ed; --border-strong: #c8cfd9;
+    --fg: #1a2540; --fg-strong: #06112b; --fg-muted: #54627a; --fg-subtle: #8b96a8;
+    --brand: #0f7a5a; --brand-bright: #128a66; --brand-dim: rgba(15,122,90,0.55); --brand-soft: rgba(15,122,90,0.08);
+    --teal: #2dd4a7; --info: #1d4ed8; --warning: #b45309; --warning-bg: rgba(180,83,9,0.07); --danger: #b91c1c;
     --serif: "Playfair Display","Charter","Iowan Old Style",Cambria,Georgia,serif;
     --sans: "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     --mono: "JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
     --maxw: 1180px; --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px;
-    --shadow-md: 0 1px 0 rgba(255,255,255,0.04), 0 12px 32px rgba(0,0,0,0.4);
-    --shadow-glow: 0 0 0 1px var(--brand-soft), 0 18px 40px rgba(45,212,167,0.18);
+    --shadow-md: 0 2px 6px rgba(6,17,43,0.05), 0 12px 32px rgba(6,17,43,0.06);
+    --shadow-glow: 0 0 0 1px var(--brand-soft), 0 14px 36px rgba(15,122,90,0.10);
     --t-fast: 160ms cubic-bezier(0.2,0.7,0.2,1); --t-med: 280ms cubic-bezier(0.2,0.7,0.2,1);
   }
   *,*::before,*::after { box-sizing: border-box; }
@@ -77,7 +78,7 @@
 
   :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
 
-  header.bar { background: rgba(13,17,23,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+  header.bar { background: rgba(255,255,255,0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
   .bar-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 16px; height: 58px; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--fg-strong); text-decoration: none; font-size: 15px; transition: opacity var(--t-fast); }
   .brand:hover { border: 0; opacity: 0.85; }
@@ -101,13 +102,13 @@
   .lang-menu button[aria-checked="true"] { background: var(--brand-soft); color: var(--brand); }
   .lang-menu button .code { font-family: var(--mono); font-size: 11px; color: var(--fg-subtle); }
 
-  .bar .btn { font-family: inherit; font-size: 13px; padding: 8px 14px; border-radius: 999px; background: var(--brand); color: #052119; text-decoration: none; font-weight: 500; border: 0; transition: background var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast); }
-  .bar .btn:hover { background: var(--brand-bright); border: 0; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(45,212,167,0.28); }
+  .bar .btn { font-family: inherit; font-size: 13px; padding: 8px 14px; border-radius: 999px; background: var(--brand); color: #ffffff; text-decoration: none; font-weight: 500; border: 0; transition: background var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast); }
+  .bar .btn:hover { background: var(--brand-bright); border: 0; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(15,122,90,0.22); }
   @media (max-width: 720px) { .doc-meta { display: none; } }
   @media (max-width: 480px) { .brand .wordmark { display: none; } .bar .btn { font-size: 12px; padding: 7px 12px; } .lang-trigger { padding: 5px 10px; } }
 
-  .title-block { padding: 70px 0 84px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); background: radial-gradient(80% 60% at 50% 30%, rgba(45,212,167,0.08), transparent 70%), var(--bg); }
-  .title-block::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(80% 60% at 50% 50%, #000 30%, transparent 80%); pointer-events: none; }
+  .title-block { padding: 70px 0 84px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); background: radial-gradient(80% 60% at 50% 30%, rgba(15,122,90,0.05), transparent 70%), var(--bg); }
+  .title-block::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(6,17,43,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(6,17,43,0.04) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(80% 60% at 50% 50%, #000 30%, transparent 80%); pointer-events: none; }
   .title-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
   .title-block .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--brand); text-transform: uppercase; margin-bottom: 18px; display: inline-flex; gap: 10px; align-items: center; }
   html[lang="ko"] .title-block .eyebrow, html[lang="ja"] .title-block .eyebrow, html[lang="zh"] .title-block .eyebrow { font-family: inherit; letter-spacing: 0.06em; }
@@ -163,7 +164,7 @@
   html[lang="ko"] table.t th, html[lang="ja"] table.t th, html[lang="zh"] table.t th { font-family: inherit; letter-spacing: 0.04em; }
   table.t tr:nth-child(even) td { background: rgba(94,234,212,0.025); }
 
-  .diagram { background: var(--bg-code); border: 1px solid var(--border); border-radius: var(--radius-md); padding: clamp(18px, 3vw, 30px); margin: 24px 0; box-shadow: 0 1px 0 rgba(255,255,255,0.03), 0 12px 32px rgba(0,0,0,0.3); }
+  .diagram { background: var(--bg-code); border: 1px solid var(--border); border-radius: var(--radius-md); padding: clamp(18px, 3vw, 30px); margin: 24px 0; box-shadow: 0 2px 6px rgba(6,17,43,0.04), 0 12px 32px rgba(6,17,43,0.05); }
   .diagram-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed var(--border-strong); }
   .diagram-title { font-family: var(--mono); font-size: 12.5px; color: var(--fg-strong); letter-spacing: 0.04em; }
   .diagram-sub { font-family: var(--mono); font-size: 11px; color: var(--fg-subtle); }
@@ -193,7 +194,7 @@
   /* Team cards inside whitepaper (mirrors homepage style) */
   .wp-team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px auto; max-width: 100%; }
   @media (max-width: 720px) { .wp-team { grid-template-columns: 1fr; } }
-  .wp-member { position: relative; background: linear-gradient(180deg, rgba(45,212,167,0.04), transparent 60%), var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); overflow: hidden; }
+  .wp-member { position: relative; background: linear-gradient(180deg, rgba(15,122,90,0.03), transparent 60%), var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px; transition: transform var(--t-med), border-color var(--t-med), box-shadow var(--t-med); overflow: hidden; }
   .wp-member:hover { border-color: var(--brand-dim); transform: translateY(-2px); box-shadow: var(--shadow-glow); }
   .wp-member .top { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; }
   .wp-member .photo { width: 64px; height: 64px; border-radius: 14px; overflow: hidden; background: var(--bg-elevated); border: 1px solid var(--border); flex-shrink: 0; }
@@ -354,16 +355,16 @@
           </div>
         </div>
         <svg viewBox="0 0 880 240" xmlns="http://www.w3.org/2000/svg" role="img">
-          <defs><marker id="ob-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/></marker></defs>
+          <defs><marker id="ob-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a5a"/></marker></defs>
           <g><rect class="node" x="20" y="60" width="180" height="64" rx="10"/><text class="node-lbl" x="110" y="90" text-anchor="middle" data-i18n-svg="wp.c3.d.n1">Telegram</text><text class="node-sub" x="110" y="108" text-anchor="middle" data-i18n-svg="wp.c3.d.n1s">chat runtime</text></g>
           <g><rect class="node" x="240" y="60" width="180" height="64" rx="10"/><text class="node-lbl" x="330" y="90" text-anchor="middle" data-i18n-svg="wp.c3.d.n2">Open Mini App</text><text class="node-sub" x="330" y="108" text-anchor="middle" data-i18n-svg="wp.c3.d.n2s">launch in-app</text></g>
           <g><rect class="node" x="460" y="60" width="180" height="64" rx="10"/><text class="node-lbl" x="550" y="90" text-anchor="middle" data-i18n-svg="wp.c3.d.n3">Device check</text><text class="node-sub" x="550" y="108" text-anchor="middle" data-i18n-svg="wp.c3.d.n3s">session · device share</text></g>
-          <g><rect class="node" x="680" y="60" width="180" height="64" rx="10" fill="#0f1a17"/><text class="node-lbl" x="770" y="90" text-anchor="middle" data-i18n-svg="wp.c3.d.n4">Create wallet</text><text class="node-sub" x="770" y="108" text-anchor="middle" data-i18n-svg="wp.c3.d.n4s">MPC shares split</text></g>
+          <g><rect class="node" x="680" y="60" width="180" height="64" rx="10" fill="rgba(15,122,90,0.06)"/><text class="node-lbl" x="770" y="90" text-anchor="middle" data-i18n-svg="wp.c3.d.n4">Create wallet</text><text class="node-sub" x="770" y="108" text-anchor="middle" data-i18n-svg="wp.c3.d.n4s">MPC shares split</text></g>
           <path class="edge" d="M 200 92 L 240 92" marker-end="url(#ob-arr)"/>
           <path class="edge" d="M 420 92 L 460 92" marker-end="url(#ob-arr)"/>
           <path class="edge" d="M 640 92 L 680 92" marker-end="url(#ob-arr)"/>
           <g>
-            <line x1="20" y1="170" x2="860" y2="170" stroke="#1f2530" stroke-dasharray="3 4"/>
+            <line x1="20" y1="170" x2="860" y2="170" stroke="#e5e8ed" stroke-dasharray="3 4"/>
             <text class="node-sub" x="110" y="194" text-anchor="middle" data-i18n-svg="wp.c3.d.b1">no app store</text>
             <text class="node-sub" x="330" y="194" text-anchor="middle" data-i18n-svg="wp.c3.d.b2">no download</text>
             <text class="node-sub" x="550" y="194" text-anchor="middle" data-i18n-svg="wp.c3.d.b3">no seed phrase</text>
@@ -390,13 +391,13 @@
       <figure class="svg-fig">
         <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img">
           <style>
-            .lbl { font: 600 13px Inter, sans-serif; fill: #e6e8eb; }
-            .sub { font: 12px Inter, sans-serif; fill: #8b949e; }
-            .tag { font: 500 10px "JetBrains Mono", monospace; fill: #2dd4a7; letter-spacing: 1.4px; }
-            .lane { fill: #161d28; stroke: #2a3340; }
-            .arr { stroke: #8b949e; stroke-width: 1.4; fill: none; marker-end: url(#aa); }
+            .lbl { font: 600 13px Inter, sans-serif; fill: #06112b; }
+            .sub { font: 12px Inter, sans-serif; fill: #54627a; }
+            .tag { font: 500 10px "JetBrains Mono", monospace; fill: #0f7a5a; letter-spacing: 1.4px; }
+            .lane { fill: #f8fafc; stroke: #e5e8ed; }
+            .arr { stroke: #54627a; stroke-width: 1.4; fill: none; marker-end: url(#aa); }
           </style>
-          <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/></marker>
+          <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#54627a"/></marker>
           <rect class="lane" x="20" y="20" width="760" height="62" rx="10"/>
           <text class="tag" x="36" y="40" data-i18n-svg="wp.c4.l1.t">LAYER 01 · CLIENT</text>
           <text class="lbl" x="36" y="62" data-i18n-svg="wp.c4.l1.h">Telegram Mini App · React + TMA SDK</text>
@@ -448,23 +449,23 @@
         </div>
         <svg viewBox="0 0 880 380" xmlns="http://www.w3.org/2000/svg" role="img">
           <defs>
-            <marker id="mp-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/></marker>
-            <marker id="mp-arr-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/></marker>
+            <marker id="mp-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a5a"/></marker>
+            <marker id="mp-arr-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b45309"/></marker>
           </defs>
-          <rect x="20" y="20" width="840" height="280" rx="14" fill="#10161f" stroke="#1f2530" stroke-dasharray="4 4"/>
-          <text style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:1.4px;fill:#6b7480" x="40" y="44" data-i18n-svg="wp.c5.d.frame">MPC · 2-of-3 THRESHOLD</text>
+          <rect x="20" y="20" width="840" height="280" rx="14" fill="#f4f6f9" stroke="#e5e8ed" stroke-dasharray="4 4"/>
+          <text style="font:500 10px 'JetBrains Mono',monospace;letter-spacing:1.4px;fill:#54627a" x="40" y="44" data-i18n-svg="wp.c5.d.frame">MPC · 2-of-3 THRESHOLD</text>
           <g><rect class="node" x="60" y="78" width="200" height="50" rx="10"/><text class="node-lbl" x="160" y="108" text-anchor="middle" data-i18n-svg="wp.c5.d.n1">Device share</text></g>
           <g><rect class="node" x="60" y="148" width="200" height="50" rx="10"/><text class="node-lbl" x="160" y="178" text-anchor="middle" data-i18n-svg="wp.c5.d.n2">Server share</text></g>
           <g><rect class="node alt" x="60" y="218" width="200" height="50" rx="10"/><text class="node-lbl alt" x="160" y="248" text-anchor="middle" data-i18n-svg="wp.c5.d.n3">Recovery share</text></g>
-          <g><rect class="node" x="380" y="120" width="200" height="80" rx="12" fill="#0f1a17"/><text class="node-lbl" x="480" y="156" text-anchor="middle" data-i18n-svg="wp.c5.d.thr">threshold signing</text></g>
+          <g><rect class="node" x="380" y="120" width="200" height="80" rx="12" fill="rgba(15,122,90,0.06)"/><text class="node-lbl" x="480" y="156" text-anchor="middle" data-i18n-svg="wp.c5.d.thr">threshold signing</text></g>
           <path class="edge" d="M 260 103 L 380 145" marker-end="url(#mp-arr)"/>
           <path class="edge" d="M 260 173 L 380 165" marker-end="url(#mp-arr)"/>
           <path class="edge alt" d="M 260 243 L 380 185" marker-end="url(#mp-arr-w)"/>
           <g><rect class="node" x="660" y="138" width="180" height="46" rx="10"/><text class="node-lbl" x="750" y="166" text-anchor="middle" data-i18n-svg="wp.c5.d.out">signed tx</text></g>
           <path class="edge" d="M 580 160 L 660 160" marker-end="url(#mp-arr)"/>
           <g>
-            <rect x="380" y="218" width="460" height="62" rx="10" fill="#10161f" stroke="#1f2530"/>
-            <text class="node-sub" x="396" y="240" style="fill:#e6e8eb;font-size:12px" data-i18n-svg="wp.c5.d.r0">rules</text>
+            <rect x="380" y="218" width="460" height="62" rx="10" fill="#f4f6f9" stroke="#e5e8ed"/>
+            <text class="node-sub" x="396" y="240" style="fill:#06112b;font-size:12px" data-i18n-svg="wp.c5.d.r0">rules</text>
             <text class="node-sub" x="396" y="258" data-i18n-svg="wp.c5.d.r1">·  any 2 shares sign  ·  any 1 share insufficient</text>
             <text class="node-sub" x="396" y="272" data-i18n-svg="wp.c5.d.r2">·  shares are rotatable  ·  no full key exists at any moment</text>
           </g>
@@ -535,13 +536,13 @@
         </div>
         <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" role="img">
           <defs>
-            <marker id="gl-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2dd4a7"/></marker>
-            <marker id="gl-arr-dim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="rgba(45,212,167,0.65)"/></marker>
+            <marker id="gl-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f7a5a"/></marker>
+            <marker id="gl-arr-dim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="rgba(15,122,90,0.55)"/></marker>
           </defs>
           <g><rect class="node" x="40" y="120" width="160" height="64" rx="10"/><text class="node-lbl" x="120" y="150" text-anchor="middle" data-i18n-svg="wp.c7.d.n1">Users</text><text class="node-sub" x="120" y="168" text-anchor="middle" data-i18n-svg="wp.c7.d.n1s">Telegram audience</text></g>
           <g><rect class="node" x="260" y="120" width="160" height="64" rx="10"/><text class="node-lbl" x="340" y="150" text-anchor="middle" data-i18n-svg="wp.c7.d.n2">Wallet</text><text class="node-sub" x="340" y="168" text-anchor="middle" data-i18n-svg="wp.c7.d.n2s">open · pay</text></g>
           <g><rect class="node" x="480" y="120" width="160" height="64" rx="10"/><text class="node-lbl" x="560" y="150" text-anchor="middle" data-i18n-svg="wp.c7.d.n3">Merchants</text><text class="node-sub" x="560" y="168" text-anchor="middle" data-i18n-svg="wp.c7.d.n3s">QR · settlement</text></g>
-          <g><rect class="node" x="700" y="120" width="160" height="64" rx="10" fill="#0f1a17"/><text class="node-lbl" x="780" y="150" text-anchor="middle" data-i18n-svg="wp.c7.d.n4">$1 rewards</text><text class="node-sub" x="780" y="168" text-anchor="middle" data-i18n-svg="wp.c7.d.n4s">activity-linked</text></g>
+          <g><rect class="node" x="700" y="120" width="160" height="64" rx="10" fill="rgba(15,122,90,0.06)"/><text class="node-lbl" x="780" y="150" text-anchor="middle" data-i18n-svg="wp.c7.d.n4">$1 rewards</text><text class="node-sub" x="780" y="168" text-anchor="middle" data-i18n-svg="wp.c7.d.n4s">activity-linked</text></g>
           <path class="edge" d="M 200 152 L 260 152" marker-end="url(#gl-arr)"/>
           <path class="edge" d="M 420 152 L 480 152" marker-end="url(#gl-arr)"/>
           <path class="edge" d="M 640 152 L 700 152" marker-end="url(#gl-arr)"/>
@@ -549,7 +550,7 @@
           <text class="edge-lbl" x="450" y="142" text-anchor="middle" data-i18n-svg="wp.c7.d.e2">pay</text>
           <text class="edge-lbl" x="670" y="142" text-anchor="middle" data-i18n-svg="wp.c7.d.e3">earn</text>
           <path class="edge dim" d="M 780 184 C 780 280, 120 280, 120 184" marker-end="url(#gl-arr-dim)"/>
-          <text class="edge-lbl" x="440" y="270" text-anchor="middle" style="fill:#6b7480" data-i18n-svg="wp.c7.d.fb">referrals · re-engagement</text>
+          <text class="edge-lbl" x="440" y="270" text-anchor="middle" style="fill:#54627a" data-i18n-svg="wp.c7.d.fb">referrals · re-engagement</text>
         </svg>
         <figcaption data-i18n="wp.c7.fig">Figure 7.1 — Growth loop</figcaption>
       </figure>
