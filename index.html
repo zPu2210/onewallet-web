@@ -624,33 +624,91 @@
 
   /* ── Mobile-first responsive polish ── */
   @media (max-width: 600px) {
-    h1 { font-size: clamp(36px, 9vw, 52px); letter-spacing: -0.028em; }
-    h2 { font-size: clamp(28px, 7vw, 40px); letter-spacing: -0.02em; }
+    h1 { font-size: clamp(32px, 8.5vw, 44px); letter-spacing: -0.028em; line-height: 1.06; }
+    h2 { font-size: clamp(26px, 6.5vw, 36px); letter-spacing: -0.02em; }
     section { padding: clamp(48px, 10vw, 72px) 0; }
     section + section { padding-top: clamp(36px, 8vw, 56px); }
     .sect-head p { font-size: 15px; }
-    .hero-grid { gap: 36px; }
-    .hero .lede { font-size: 16px; margin: 18px 0 24px; }
-    .hero-ctas { gap: 10px; }
-    .hero-ctas .btn { width: 100%; justify-content: center; padding: 14px 20px; font-size: 15px; }
+
+    /* Hero: image on top, text below, fit-in-one-viewport */
+    .hero { padding-top: 16px; padding-bottom: 32px; }
+    .hero-grid { gap: 20px; display: flex; flex-direction: column; }
+    .hero-grid > div:first-child { order: 2; }
+    .hero-grid > div.hero-visual { order: 1; max-width: 78vw; max-height: 38vh; aspect-ratio: 1/1; margin: 0 auto; }
+    .hero .eyebrow { margin-bottom: 12px; }
+    .hero .lede { font-size: 15px; margin: 12px 0 18px; }
+    .hero-ctas { gap: 10px; margin-bottom: 16px; }
+    .hero-ctas .btn { flex: 1 1 calc(50% - 5px); justify-content: center; padding: 12px 14px; font-size: 14px; min-width: 0; }
     .proof-chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; margin: 0 calc(-1 * var(--gutter)); padding: 0 0 4px; justify-content: flex-start; }
     .proof-chips::before, .proof-chips::after { content: ""; flex-shrink: 0; width: var(--gutter); }
+    .proof-chips::-webkit-scrollbar { display: none; }
+
     .cta-banner { flex-direction: column; text-align: center; align-items: stretch; gap: 20px; padding: 36px 28px; }
     .cta-banner > div:last-child { display: flex; flex-direction: column; gap: 10px; }
     .cta-banner > div:last-child .btn { justify-content: center; width: 100%; padding: 14px 20px; }
     .faq summary { font-size: 15px; padding: 4px 0; }
     .faq details { padding: 16px 0; }
     .faq details p { padding-right: 0; font-size: 14px; }
-    .member { padding: 24px 20px; }
     .member .photo { width: 72px; height: 72px; border-radius: 14px; margin-bottom: 18px; }
     .member .deco { width: 180px; height: 180px; top: -40px; right: -46px; }
-    .plat-card { padding: 24px; min-height: 240px; }
     .trust-grid { gap: 16px; }
     .trust-item { padding: 16px 14px; }
     .foot-grid { grid-template-columns: 1fr; gap: 24px; }
     .foot-bottom { flex-direction: column; gap: 8px; }
     footer { padding: 48px 0 32px; margin-top: 64px; }
+
+    /* ── Mobile carousels — Circle pattern: horizontal scroll-snap with peek ── */
+    .platform-grid,
+    .token-grid,
+    .roadmap,
+    .team-wrap {
+      display: flex !important;
+      flex-direction: row !important;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 14px !important;
+      grid-template-columns: none !important;
+      margin: 28px calc(-1 * var(--gutter)) 0 !important;
+      padding: 4px var(--gutter) 12px !important;
+      scroll-padding-left: var(--gutter);
+    }
+    .platform-grid::-webkit-scrollbar,
+    .token-grid::-webkit-scrollbar,
+    .roadmap::-webkit-scrollbar,
+    .team-wrap::-webkit-scrollbar { display: none; }
+
+    /* Each card: 84% viewport, scroll-snap-start */
+    .platform-grid > .plat-card,
+    .token-grid > .token-card,
+    .roadmap > .milestone,
+    .team-wrap > .member {
+      flex: 0 0 84vw !important;
+      max-width: 84vw !important;
+      min-width: 0 !important;
+      grid-column: auto !important;
+      scroll-snap-align: start;
+    }
+    /* Compact card padding inside carousel */
+    .plat-card { padding: 24px; min-height: 280px; }
+    .token-card { padding: 24px 22px; }
+    .milestone { padding: 24px 22px; }
+    .member { padding: 28px 24px; }
+
+    /* Subtle scroll-hint indicator below each carousel */
+    .platform-grid + .scroll-hint,
+    .token-grid + .scroll-hint,
+    .roadmap + .scroll-hint,
+    .team-wrap + .scroll-hint { display: flex; }
+    .scroll-hint { display: none; justify-content: center; gap: 10px; margin-top: 14px; font-family: var(--mono); font-size: 11px; color: var(--fg-subtle); letter-spacing: 0.14em; text-transform: uppercase; }
+    html[lang="ko"] .scroll-hint, html[lang="ja"] .scroll-hint, html[lang="zh"] .scroll-hint { font-family: inherit; letter-spacing: 0.04em; }
+    .scroll-hint::before { content: "←"; opacity: 0.5; }
+    .scroll-hint::after { content: "→"; opacity: 0.5; }
   }
+  /* Scroll-hint hidden on desktop */
+  .scroll-hint { display: none; }
 
   /* ── Tablet tweaks ── */
   @media (max-width: 820px) and (min-width: 601px) {
@@ -814,6 +872,7 @@
         <div class="plat-vis plat-vis-dark" aria-hidden="true"><img src="assets/platform/ecosystem.webp" alt="" loading="lazy" decoding="async" /></div>
       </a>
     </div>
+    <div class="scroll-hint" aria-hidden="true"><span data-i18n="common.swipe">Swipe</span></div>
   </div>
 </section>
 
@@ -958,6 +1017,7 @@
       <div class="token-card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><path d="M5 21v-1a4 4 0 014-4h6a4 4 0 014 4v1"/><path d="M9 11l-2 4M15 11l2 4"/></svg></div><h4 data-i18n="tok.5.h">Governance signals</h4><p data-i18n="tok.5.p">Vote on rewards, fee curves, and ecosystem listings.</p></div>
       <div class="token-card"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 8l7-5 7 5"/><rect x="5" y="13" width="14" height="8" rx="1"/><path d="M9 17h6"/></svg></div><h4 data-i18n="tok.6.h">Supply discipline</h4><p data-i18n="tok.6.p">Capped supply, transparent vesting, and a milestone-locked ecosystem reserve.</p></div>
     </div>
+    <div class="scroll-hint" aria-hidden="true"><span data-i18n="common.swipe">Swipe</span></div>
     <p class="legal-note reveal"><b data-i18n="tok.disc.t">Disclaimer</b><span data-i18n="tok.disc.p">$1 is a utility token. ONEWALLET makes no promises of price appreciation, returns, or exchange listings. Final tokenomics are subject to legal review.</span></p>
   </div>
 </section>
@@ -1070,6 +1130,7 @@
       <div class="milestone"><span class="ms-status ms-plan" data-i18n="road.s.plan">PLANNED</span><span class="q" data-i18n="road.3.q">Phase 3</span><h4 data-i18n="road.3.h">$1 utility</h4><ul><li data-i18n="road.3.li1">Fee discount layer</li><li data-i18n="road.3.li2">Reward engine</li><li data-i18n="road.3.li3">Governance signal</li></ul></div>
       <div class="milestone"><span class="ms-status ms-plan" data-i18n="road.s.plan">PLANNED</span><span class="q" data-i18n="road.4.q">Phase 4</span><h4 data-i18n="road.4.h">Ecosystem</h4><ul><li data-i18n="road.4.li1">Mini-app store</li><li data-i18n="road.4.li2">Partner program</li><li data-i18n="road.4.li3">Localized launches</li></ul></div>
     </div>
+    <div class="scroll-hint" aria-hidden="true"><span data-i18n="common.swipe">Swipe</span></div>
   </div>
 </section>
 
@@ -1082,6 +1143,7 @@
       <p data-i18n="team.p">Operators with shipping history across consumer fintech, exchange infrastructure, and Web3 product. We list responsibilities, not slogans.</p>
     </div>
     <div class="team-wrap reveal-stagger" id="teamGrid"></div>
+    <div class="scroll-hint" aria-hidden="true"><span data-i18n="common.swipe">Swipe</span></div>
   </div>
 </section>
 
