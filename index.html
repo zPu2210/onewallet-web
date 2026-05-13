@@ -148,7 +148,7 @@
   .menu-btn:hover { border-color: var(--border-strong); }
   .menu-btn svg { width: 18px; height: 18px; }
   @media (max-width: 880px) { nav.links { display: none; } .lang-switch { display: none; } .menu-btn { display: inline-flex; } }
-  @media (max-width: 480px) { .brand .wordmark { display: none; } .nav-cta .btn { padding: 8px 14px; font-size: 12px; } }
+  @media (max-width: 600px) { .nav-cta > .btn { display: none; } }
   /* Mobile menu — full-screen sheet below nav, no transform animation
      (display:none → flex doesn't transition cleanly), no backdrop-filter
      (mobile Safari quirks cause partial-render). Solid white. */
@@ -535,11 +535,103 @@
   .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--brand), var(--violet-ref)); z-index: 100; width: 0%; transition: none; pointer-events: none; }
 
   /* ── Back-to-top FAB ── */
-  .back-to-top { position: fixed; bottom: 32px; right: 32px; z-index: 60; width: 44px; height: 44px; border-radius: 50%; background: var(--fg-strong); color: #fff; border: none; cursor: pointer; display: grid; place-items: center; box-shadow: var(--shadow-md); opacity: 0; transform: translateY(12px) scale(0.9); transition: opacity var(--t-med), transform var(--t-med), background var(--t-fast); pointer-events: none; }
+  .back-to-top { position: fixed; bottom: 96px; right: 32px; z-index: 60; width: 44px; height: 44px; border-radius: 50%; background: var(--fg-strong); color: #fff; border: none; cursor: pointer; display: grid; place-items: center; box-shadow: var(--shadow-md); opacity: 0; transform: translateY(12px) scale(0.9); transition: opacity var(--t-med), transform var(--t-med), background var(--t-fast); pointer-events: none; }
   .back-to-top.visible { opacity: 1; transform: none; pointer-events: auto; }
   .back-to-top:hover { background: var(--brand); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
   .back-to-top svg { width: 18px; height: 18px; }
-  @media (max-width: 600px) { .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; } }
+  @media (max-width: 600px) { .back-to-top { bottom: 88px; right: 16px; width: 40px; height: 40px; } }
+
+  /* ── Assistant: nav icon ── */
+  .ow-nav-ai { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card); color: var(--fg-muted); cursor: pointer; transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast), transform var(--t-fast); }
+  .ow-nav-ai:hover { border-color: var(--border-strong); color: var(--fg-strong); background: var(--bg-elevated); }
+  .ow-nav-ai svg { width: 18px; height: 18px; }
+
+  /* ── Assistant: bottom-center liquid-glass pill ── */
+  .ow-ask-pill { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 88; display: inline-flex; align-items: center; gap: 14px; width: clamp(380px, 36vw, 480px); padding: 10px 14px 10px 22px; min-height: 56px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.55); background: rgba(255,255,255,0.62); -webkit-backdrop-filter: blur(22px) saturate(180%); backdrop-filter: blur(22px) saturate(180%); box-shadow: 0 18px 50px rgba(41,35,59,0.16), 0 1px 0 rgba(255,255,255,0.6) inset; font: 600 15px/1 var(--sans); color: var(--fg-strong); cursor: pointer; transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast); }
+  .ow-ask-pill:hover { transform: translateX(-50%) translateY(-2px); background: rgba(255,255,255,0.78); box-shadow: 0 22px 60px rgba(41,35,59,0.22), 0 1px 0 rgba(255,255,255,0.7) inset; }
+  .ow-ask-pill .ow-pill-text { flex: 1; text-align: left; letter-spacing: -0.005em; color: var(--fg-muted); font-weight: 500; }
+  .ow-ask-pill .ow-pill-key { font: 600 11px/1 var(--mono); color: var(--fg-muted); background: rgba(41,35,59,0.06); border: 1px solid rgba(41,35,59,0.10); border-radius: 6px; padding: 4px 6px; flex: 0 0 auto; }
+  .ow-ask-pill .ow-pill-go { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: var(--fg-strong); color: #fff; flex: 0 0 auto; }
+  .ow-ask-pill .ow-pill-go svg { width: 16px; height: 16px; }
+  @media (max-width: 600px) {
+    .ow-ask-pill { left: 50%; right: auto; transform: translateX(-50%); width: min(320px, calc(100vw - 32px)); min-height: 52px; padding: 8px 10px 8px 18px; gap: 10px; }
+    .ow-ask-pill:hover { transform: translateX(-50%) translateY(-2px); }
+    .ow-ask-pill .ow-pill-text { font-size: 14px; }
+    .ow-ask-pill .ow-pill-key { display: none; }
+    .ow-ask-pill .ow-pill-go { width: 34px; height: 34px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ow-ask-pill, .ow-ask-pill:hover { transition: none; transform: translateX(-50%); }
+  }
+
+  /* ── Assistant: centered modal ── */
+  html.ow-modal-locked, html.ow-modal-locked body { overflow: hidden; }
+  .ow-modal-root { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: clamp(16px, 4vw, 40px); }
+  .ow-modal-root[hidden] { display: none; }
+  .ow-backdrop { position: absolute; inset: 0; background: rgba(20,18,32,0.42); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); animation: owFade 180ms ease; }
+  .ow-modal { position: relative; width: min(720px, 100%); max-height: min(86dvh, 760px); background: var(--bg-card); border: 1px solid var(--border); border-radius: 28px; box-shadow: 0 40px 100px rgba(20,18,32,0.32); overflow: hidden; display: grid; grid-template-rows: auto minmax(280px, 1fr) auto; animation: owPop 220ms cubic-bezier(0.2,0.7,0.2,1); }
+  .ow-modal-head { display: flex; align-items: center; gap: 14px; padding: 22px 26px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.9); }
+  .ow-modal-icon { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 14px; background: var(--brand-soft); color: var(--brand); }
+  .ow-modal-icon svg { width: 22px; height: 22px; }
+  .ow-modal-titles { min-width: 0; }
+  .ow-modal-titles h2 { font-size: 22px; line-height: 1.15; margin: 0; font-weight: 600; letter-spacing: -0.01em; color: var(--fg-strong); }
+  .ow-modal-sub { margin: 4px 0 0; color: var(--fg-muted); font-size: 13px; line-height: 1.4; }
+  .ow-modal-head .ow-back { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 0; color: var(--fg-muted); font: 500 13px/1 var(--sans); cursor: pointer; padding: 8px 10px; border-radius: 8px; }
+  .ow-modal-head .ow-back:hover { background: var(--bg-elevated); color: var(--fg-strong); }
+  .ow-modal-head .ow-back svg { width: 16px; height: 16px; }
+  .ow-modal-head .ow-back[hidden] { display: none; }
+  .ow-modal-head .ow-back ~ .ow-modal-icon { margin-left: 0; }
+  .ow-close { margin-left: auto; display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card); color: var(--fg-muted); cursor: pointer; transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast); }
+  .ow-close:hover { color: var(--fg-strong); background: var(--bg-elevated); border-color: var(--border-strong); }
+  .ow-close svg { width: 16px; height: 16px; }
+  .ow-modal-body { overflow-y: auto; padding: 26px 30px; outline: none; }
+  .ow-intro { display: flex; flex-direction: column; gap: 18px; min-height: 240px; justify-content: flex-end; }
+  .ow-intro-text { color: var(--fg-muted); font-size: 14px; line-height: 1.5; margin: 0; }
+  .ow-suggest-label { font: 600 11px/1 var(--mono); color: var(--fg-subtle); letter-spacing: 0.12em; text-transform: uppercase; margin: 8px 0 -2px; }
+  html[lang="ko"] .ow-suggest-label, html[lang="ja"] .ow-suggest-label, html[lang="zh"] .ow-suggest-label { font-family: inherit; letter-spacing: 0.04em; text-transform: none; }
+  .ow-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .ow-chip { display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; text-align: left; border: 1px solid var(--border); background: var(--bg-card); color: var(--fg); border-radius: 14px; padding: 14px 14px; font: 500 14px/1.35 var(--sans); cursor: pointer; transition: border-color var(--t-fast), background var(--t-fast), color var(--t-fast), transform var(--t-fast); }
+  .ow-chip:hover { border-color: var(--brand); background: var(--brand-soft); color: var(--fg-strong); transform: translateY(-1px); }
+  .ow-chip svg { width: 14px; height: 14px; color: var(--fg-subtle); flex: 0 0 auto; }
+  .ow-chip:hover svg { color: var(--brand); }
+  .ow-thread { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .ow-msg { max-width: 88%; border-radius: 18px; padding: 12px 16px; font-size: 15px; line-height: 1.55; }
+  .ow-msg-user { align-self: flex-end; background: var(--fg-strong); color: #fff; border-bottom-right-radius: 6px; }
+  .ow-msg-bot { align-self: flex-start; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--fg); border-bottom-left-radius: 6px; }
+  .ow-msg-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; color: var(--brand); font-weight: 700; border-bottom: 1px solid currentColor; }
+  .ow-msg-link svg { width: 14px; height: 14px; }
+  .ow-modal-form { padding: 14px 26px 20px; border-top: 1px solid var(--border); background: var(--bg-card); display: flex; flex-direction: column; gap: 10px; }
+  .ow-form-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+  .ow-form-row input { min-width: 0; border: 1.5px solid var(--border-strong); border-radius: 999px; padding: 14px 18px; font: 500 16px/1.2 var(--sans); color: var(--fg); outline: 0; background: var(--bg-card); transition: border-color var(--t-fast), box-shadow var(--t-fast); }
+  .ow-form-row input:focus { border-color: var(--brand); box-shadow: 0 0 0 4px var(--brand-soft); }
+  .ow-form-row button[type="submit"] { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 999px; border: 0; background: var(--fg-strong); color: #fff; cursor: pointer; transition: background var(--t-fast), transform var(--t-fast); }
+  .ow-form-row button[type="submit"]:hover { background: var(--brand); transform: translateY(-1px); }
+  .ow-form-row button[type="submit"] svg { width: 18px; height: 18px; }
+  .ow-disclosure-link { align-self: center; background: transparent; border: 0; color: var(--fg-muted); font: 500 12px/1.4 var(--sans); cursor: pointer; padding: 4px 8px; border-radius: 6px; }
+  .ow-disclosure-link:hover { color: var(--fg-strong); background: var(--bg-elevated); }
+  .ow-disclosure { display: flex; flex-direction: column; gap: 14px; color: var(--fg); font-size: 15px; line-height: 1.6; }
+  .ow-disclosure p { margin: 0; }
+  .ow-disclosure-links { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .ow-disclosure-links a { display: inline-flex; align-items: center; gap: 8px; color: var(--brand); font-weight: 600; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .ow-disclosure-links a svg { width: 14px; height: 14px; }
+  @keyframes owFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes owPop { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .ow-backdrop, .ow-modal { animation: none; }
+  }
+  @media (max-width: 640px) {
+    .ow-modal-root { padding: 0; align-items: flex-end; }
+    .ow-modal { width: 100%; max-height: 92dvh; border-radius: 24px 24px 0 0; grid-template-rows: auto minmax(240px, 1fr) auto; }
+    .ow-modal-head { padding: 18px 20px; }
+    .ow-modal-titles h2 { font-size: 19px; }
+    .ow-modal-body { padding: 20px 22px; }
+    .ow-chips { grid-template-columns: 1fr; }
+    .ow-modal-form { padding: 12px 20px calc(18px + env(safe-area-inset-bottom, 0px)); }
+    .ow-msg { max-width: 94%; font-size: 14px; }
+  }
+  @media print {
+    .ow-nav-ai, .ow-ask-pill, .ow-modal-root { display: none !important; }
+  }
 
   /* ── Nav active link via scroll-spy ── */
   nav.links a.active { color: var(--brand); }
@@ -1202,6 +1294,8 @@
 </footer>
 
 <script src="assets/i18n.js"></script>
+<script src="assets/assistant-knowledge.js"></script>
+<script src="assets/assistant.js" defer></script>
 <script>
   /* ============ i18n apply ============ */
   (function(){
@@ -1264,6 +1358,7 @@
       // Render team grid in selected language
       renderTeam(lang);
       setStored(lang);
+      window.dispatchEvent(new CustomEvent('onewallet:lang', { detail: { lang } }));
     }
 
     // Init
