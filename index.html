@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="ONEWALLET" />
 <meta property="og:title" content="ONEWALLET — The Telegram-Native Web3 Wallet &amp; Payment Rail" />
 <meta property="og:description" content="Keyless MPC custody, Telegram onboarding, and real-world Web3 payments." />
-<meta property="og:image" content="https://onewallet.app/assets/hero-mockup.webp" />
+<meta property="og:image" content="https://onewallet.app/assets/hero-circle-grade.webp" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="1260" />
 <meta property="og:url" content="https://onewallet.app/" />
@@ -24,14 +24,14 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="ONEWALLET — Web3 finance, opened like a Telegram chat." />
 <meta name="twitter:description" content="Keyless MPC custody, Telegram onboarding, and real-world Web3 payments." />
-<meta name="twitter:image" content="https://onewallet.app/assets/hero-mockup.webp" />
+<meta name="twitter:image" content="https://onewallet.app/assets/hero-circle-grade.webp" />
 
 <link rel="icon" type="image/png" href="assets/logo.png" />
 <link rel="apple-touch-icon" href="assets/logo.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Noto+Sans+KR:wght@500;600;700&family=Noto+Sans+JP:wght@500;600;700&family=Noto+Sans+SC:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+KR:wght@500;600;700;800&family=Noto+Sans+JP:wght@500;600;700;800&family=Noto+Sans+SC:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -43,20 +43,23 @@
 
 <style>
   :root {
-    /* Circle-inspired institutional light palette */
-    --bg: #ffffff; --bg-elevated: #f4f6f9; --bg-card: #ffffff; --bg-code: #f8fafc;
-    --border: #e5e8ed; --border-strong: #c8cfd9;
-    --fg: #1a2540; --fg-strong: #06112b; --fg-muted: #54627a; --fg-subtle: #8b96a8;
-    --brand: #0f7a5a; --brand-bright: #128a66; --brand-dim: rgba(15,122,90,0.55); --brand-soft: rgba(15,122,90,0.08);
-    --teal: #2dd4a7; --warning: #b45309; --warning-bg: rgba(180,83,9,0.07); --danger: #b91c1c; --info: #1d4ed8;
-    --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px;
-    --serif: "Playfair Display","Charter","Iowan Old Style",Cambria,Georgia,serif;
+    /* Circle-grade institutional light system */
+    --bg: #ffffff; --bg-elevated: #f7f8fb; --bg-card: #ffffff; --bg-code: #f8fafc;
+    --bg-hero: #f4fff9; --bg-soft-blue: #f1f8ff; --bg-lavender: #f6f2ff;
+    --border: #e8eaf0; --border-strong: #d1d5dd;
+    --fg: #29233b; --fg-strong: #1a162a; --fg-muted: #4e4763; --fg-subtle: #6f6a82;
+    --brand: #0f7a5a; --brand-bright: #0b5f47; --brand-dim: rgba(15,122,90,0.55); --brand-soft: #e7f8f1;
+    --info: #0073c3; --violet-ref: #8656ef;
+    --warning: #b45309; --warning-bg: rgba(180,83,9,0.07); --danger: #b91c1c;
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-pill: 999px;
     --sans: "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --serif: var(--sans); /* legacy alias, no serif used */
     --mono: "JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
-    --maxw: 1180px; --gutter: clamp(20px, 4vw, 44px);
-    --shadow-sm: 0 1px 2px rgba(6,17,43,0.04), 0 2px 8px rgba(6,17,43,0.04);
-    --shadow-md: 0 2px 6px rgba(6,17,43,0.05), 0 12px 32px rgba(6,17,43,0.06);
-    --shadow-lg: 0 4px 12px rgba(6,17,43,0.06), 0 24px 60px rgba(6,17,43,0.08);
+    --maxw: 1150px; --gutter: clamp(20px, 4vw, 40px);
+    --shadow-sm: 0 1px 2px rgba(41,35,59,0.04), 0 2px 8px rgba(41,35,59,0.04);
+    --shadow-md: 0 2px 6px rgba(41,35,59,0.05), 0 12px 32px rgba(41,35,59,0.06);
+    --shadow-lg: 0 4px 12px rgba(41,35,59,0.06), 0 24px 60px rgba(41,35,59,0.08);
+    --shadow-soft: 0 16px 50px rgba(41,35,59,0.08);
     --shadow-glow: 0 0 0 1px var(--brand-soft), 0 14px 36px rgba(15,122,90,0.10);
     --t-fast: 160ms cubic-bezier(0.2,0.7,0.2,1);
     --t-med: 280ms cubic-bezier(0.2,0.7,0.2,1);
@@ -69,7 +72,7 @@
   body > *, main > *, .wrap > *, .hero-grid > *, .security-grid > *, .pay-grid > *, .audience-grid > *, .team-wrap > *, .token-grid > *, .roadmap > *, .flow-steps > *, .trust-grid > *, .foot-grid > * { min-width: 0; }
 
   /* CJK wrapping rules + font cascade for non-Latin scripts */
-  html[lang="ko"] body { font-family: "Inter","Noto Sans KR",-apple-system,sans-serif; }
+  html[lang="ko"] body { font-family: "Inter","Noto Sans KR",-apple-system,sans-serif; font-feature-settings: "ss01","cv11"; }
   html[lang="ja"] body { font-family: "Inter","Noto Sans JP",-apple-system,sans-serif; }
   html[lang="zh"] body { font-family: "Inter","Noto Sans SC",-apple-system,sans-serif; }
   html[lang="ko"], html[lang="ja"], html[lang="zh"] {
@@ -78,16 +81,16 @@
   html[lang="ko"] h1, html[lang="ja"] h1, html[lang="zh"] h1,
   html[lang="ko"] h2, html[lang="ja"] h2, html[lang="zh"] h2,
   html[lang="ko"] h3, html[lang="ja"] h3, html[lang="zh"] h3 {
-    font-family: inherit; font-weight: 700; letter-spacing: -0.01em;
+    font-family: inherit; font-weight: 800; letter-spacing: -0.018em;
   }
   /* :lang() pseudo-class covers inherited language across descendants */
   :lang(ko), :lang(ja), :lang(zh) { word-break: keep-all; overflow-wrap: break-word; line-break: strict; }
 
-  h1,h2,h3 { font-family: var(--serif); font-weight: 500; color: var(--fg-strong); margin: 0 0 0.5em; letter-spacing: -0.02em; }
-  h1 { font-size: clamp(30px, 6vw, 68px); line-height: 1.06; letter-spacing: -0.03em; }
-  h2 { font-size: clamp(26px, 3.4vw, 40px); line-height: 1.14; }
-  h3 { font-size: clamp(18px, 2vw, 22px); line-height: 1.28; font-weight: 600; }
-  h4 { font-size: 15px; font-family: var(--sans); font-weight: 600; color: var(--fg-strong); margin: 0 0 6px; letter-spacing: -0.005em; }
+  h1,h2,h3,h4 { font-family: var(--sans); color: var(--fg-strong); margin: 0 0 0.5em; }
+  h1 { font-size: clamp(44px, 7vw, 80px); line-height: 1.04; letter-spacing: -0.032em; font-weight: 500; }
+  h2 { font-size: clamp(32px, 4vw, 52px); line-height: 1.08; letter-spacing: -0.024em; font-weight: 500; }
+  h3 { font-size: clamp(20px, 2vw, 26px); line-height: 1.22; letter-spacing: -0.012em; font-weight: 600; }
+  h4 { font-size: 16px; font-weight: 600; letter-spacing: -0.005em; margin: 0 0 6px; }
   p { margin: 0 0 1em; color: var(--fg); }
   a { color: inherit; text-decoration: none; }
   .mono { font-family: var(--mono); }
@@ -143,19 +146,18 @@
   .mobile-sheet { display: none; position: fixed; inset: 60px 0 0; background: var(--bg); border-top: 1px solid var(--border); z-index: 49; padding: 24px var(--gutter); flex-direction: column; gap: 14px; transform: translateY(-12px); opacity: 0; transition: opacity var(--t-fast), transform var(--t-fast); }
   .mobile-sheet[hidden] { display: none !important; }
   .mobile-sheet[data-open="true"] { display: flex; transform: none; opacity: 1; }
-  .mobile-sheet a { color: var(--fg); font-size: 18px; padding: 10px 0; border-bottom: 1px solid var(--border); font-family: var(--serif); }
-  html[lang="ko"] .mobile-sheet a, html[lang="ja"] .mobile-sheet a, html[lang="zh"] .mobile-sheet a { font-family: inherit; }
+  .mobile-sheet a { color: var(--fg-strong); font-size: 18px; padding: 10px 0; border-bottom: 1px solid var(--border); font-family: var(--sans); font-weight: 500; letter-spacing: -0.012em; }
   .mobile-sheet .lang-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
   .mobile-sheet .lang-row button { font-family: var(--mono); font-size: 11px; color: var(--fg); background: transparent; border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
   .mobile-sheet .lang-row button[aria-checked="true"] { background: var(--brand); color: #ffffff; border-color: var(--brand); }
 
-  .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; padding: 11px 18px; border-radius: 999px; transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast), border-color var(--t-fast); cursor: pointer; border: 1px solid transparent; font-family: inherit; white-space: nowrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; padding: 12px 20px; border-radius: var(--radius-sm); transition: transform var(--t-fast), box-shadow var(--t-fast), background var(--t-fast), border-color var(--t-fast), color var(--t-fast); cursor: pointer; border: 1.5px solid transparent; font-family: inherit; white-space: nowrap; letter-spacing: -0.005em; }
   .btn:active { transform: translateY(1px) scale(0.99); }
-  .btn-primary { background: var(--brand); color: #ffffff; box-shadow: 0 1px 2px rgba(6,17,43,0.10), 0 6px 18px rgba(15,122,90,0.18); }
-  .btn-primary:hover { background: var(--brand-bright); transform: translateY(-1px); box-shadow: 0 1px 2px rgba(6,17,43,0.10), 0 12px 28px rgba(15,122,90,0.24); }
-  .btn-ghost { background: #ffffff; color: var(--fg-strong); border-color: var(--border-strong); }
-  .btn-ghost:hover { border-color: var(--fg-muted); background: var(--bg-elevated); }
-  .btn-sm { padding: 8px 14px; font-size: 13px; }
+  .btn-primary { background: var(--fg-strong); color: #ffffff; }
+  .btn-primary:hover { background: var(--brand); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(15,122,90,0.22); }
+  .btn-ghost { background: transparent; color: var(--fg-strong); border-color: var(--fg-strong); }
+  .btn-ghost:hover { background: var(--fg-strong); color: #ffffff; }
+  .btn-sm { padding: 9px 16px; font-size: 13px; }
   .btn .arrow { transition: transform var(--t-fast); }
   .btn:hover .arrow { transform: translateX(3px); }
 
@@ -171,32 +173,65 @@
   .reveal-stagger.in > *:nth-child(6) { transition-delay: 390ms; }
   @media (prefers-reduced-motion: reduce) { .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; } *,*::before,*::after { transition: none !important; animation: none !important; } }
 
-  .hero { padding-top: clamp(48px, 7vw, 90px); padding-bottom: clamp(36px, 5vw, 70px); }
-  .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(28px, 6vw, 80px); align-items: center; }
-  @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: 36px; } }
-  .hero h1 em { color: var(--brand); font-style: italic; font-weight: 500; }
-  html[lang="ko"] .hero h1 em, html[lang="ja"] .hero h1 em, html[lang="zh"] .hero h1 em { font-style: normal; }
-  .hero .lede { margin: 22px 0 30px; font-size: clamp(16px, 1.5vw, 19px); color: var(--fg); max-width: 52ch; line-height: 1.55; }
-  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 30px; }
+  .hero { position: relative; padding-top: clamp(56px, 8vw, 110px); padding-bottom: clamp(48px, 7vw, 90px); background: linear-gradient(315deg, #ffffff 0%, var(--bg-hero) 55%, var(--bg-lavender) 100%); overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: -10% -10% auto auto; width: 60%; aspect-ratio: 1/1; background: radial-gradient(circle at 70% 30%, rgba(15,122,90,0.08), transparent 60%); pointer-events: none; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(28px, 5vw, 64px); align-items: center; position: relative; z-index: 1; }
+  @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: 32px; } }
+  .hero h1 em { color: var(--brand); font-style: normal; font-weight: 600; }
+  .hero .lede { margin: 24px 0 32px; font-size: clamp(17px, 1.55vw, 20px); color: var(--fg-muted); max-width: 54ch; line-height: 1.55; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
   .proof-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-  .chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--fg-muted); border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; background: var(--bg-elevated); transition: border-color var(--t-fast), color var(--t-fast); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--fg-muted); border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 6px 12px; background: rgba(255,255,255,0.72); backdrop-filter: blur(8px); transition: border-color var(--t-fast), color var(--t-fast); }
   html[lang="ko"] .chip, html[lang="ja"] .chip, html[lang="zh"] .chip { font-family: inherit; }
   .chip:hover { color: var(--fg-strong); border-color: var(--border-strong); }
-  .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 6px rgba(15,122,90,0.35); animation: chipPulse 2.6s ease-in-out infinite; }
-  @keyframes chipPulse { 0%, 100% { box-shadow: 0 0 4px rgba(15,122,90,0.25); } 50% { box-shadow: 0 0 10px rgba(15,122,90,0.55); } }
+  .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
 
-  .hero-visual { position: relative; aspect-ratio: 1/1.05; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: radial-gradient(60% 60% at 30% 20%, rgba(15,122,90,0.08), transparent 70%), linear-gradient(160deg, #f4f6f9, #eef2f7); box-shadow: var(--shadow-lg); }
-  .hero-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 1; transition: transform var(--t-slow); }
-  .hero-visual:hover img { transform: scale(1.02); }
-  .hero-grid-overlay { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(6,17,43,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(6,17,43,0.04) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(70% 70% at 50% 50%, #000 30%, transparent 80%); }
-  .hero-meta { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 10px; color: var(--fg-subtle); letter-spacing: 0.1em; text-transform: uppercase; }
-  .hero-meta b { color: var(--fg-muted); font-weight: 500; }
+  /* SVG-composed hero visual: floating discs + phone outlines */
+  .hero-visual { position: relative; aspect-ratio: 1/1; max-width: 560px; margin-left: auto; }
+  .hero-visual svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 24px 60px rgba(41,35,59,0.10)); }
+  .hero-visual .disc-anim { transform-origin: center; animation: discFloat 7s ease-in-out infinite; }
+  .hero-visual .disc-anim.d2 { animation-duration: 9s; animation-delay: -2s; }
+  .hero-visual .disc-anim.d3 { animation-duration: 11s; animation-delay: -4s; }
+  @keyframes discFloat { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-14px) } }
+  @media (prefers-reduced-motion: reduce) { .hero-visual .disc-anim { animation: none; } }
 
-  .trust { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 36px 0; background: var(--bg-elevated); }
+  .trust { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 48px 0; background: #ffffff; }
+  .trust-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--fg-subtle); letter-spacing: 0.14em; text-transform: uppercase; text-align: center; margin-bottom: 24px; }
+  html[lang="ko"] .trust-eyebrow, html[lang="ja"] .trust-eyebrow, html[lang="zh"] .trust-eyebrow { font-family: inherit; letter-spacing: 0.04em; }
   .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
   @media (max-width: 820px) { .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; } }
-  .trust-num { font-family: var(--mono); font-size: 11px; color: var(--brand); letter-spacing: 0.14em; margin-bottom: 8px; display: block; }
-  .trust-item p { color: var(--fg-muted); font-size: 13px; margin: 0; }
+  .trust-item { padding: 8px 0; border-left: 2px solid var(--brand-soft); padding-left: 16px; }
+  .trust-num { font-family: var(--mono); font-size: 11px; color: var(--brand); letter-spacing: 0.14em; margin-bottom: 6px; display: block; }
+  .trust-item h4 { font-size: 15px; margin-bottom: 4px; }
+  .trust-item p { color: var(--fg-muted); font-size: 13.5px; margin: 0; line-height: 1.55; }
+
+  /* Platform grid — Circle-style varied panels */
+  .platform-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 48px; }
+  @media (max-width: 940px) { .platform-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .platform-grid { grid-template-columns: 1fr; } }
+  .plat-card { display: flex; flex-direction: column; padding: 32px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-lg); transition: transform var(--t-med), box-shadow var(--t-med), border-color var(--t-med); position: relative; overflow: hidden; min-height: 260px; }
+  .plat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); border-color: transparent; }
+  .plat-card .plat-tag { font-family: var(--mono); font-size: 11px; color: var(--brand); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; }
+  html[lang="ko"] .plat-card .plat-tag, html[lang="ja"] .plat-card .plat-tag, html[lang="zh"] .plat-card .plat-tag { font-family: inherit; letter-spacing: 0.04em; }
+  .plat-card h3 { font-size: clamp(20px, 1.8vw, 24px); line-height: 1.22; margin-bottom: 10px; color: var(--fg-strong); }
+  .plat-card p { color: var(--fg-muted); font-size: 14.5px; margin: 0; flex: 1; line-height: 1.55; }
+  .plat-card .plat-vis { margin-top: 20px; }
+  .plat-card .plat-vis svg { width: 100%; height: auto; display: block; }
+  .plat-lead { grid-column: span 4; background: linear-gradient(135deg, #ffffff 0%, var(--bg-hero) 100%); }
+  .plat-blue { grid-column: span 2; background: var(--bg-soft-blue); }
+  .plat-mint { grid-column: span 2; background: var(--brand-soft); }
+  .plat-lavender { grid-column: span 2; background: var(--bg-lavender); }
+  .plat-wide { grid-column: span 2; background: linear-gradient(135deg, var(--fg-strong) 0%, #0b5f47 100%); color: #ffffff; }
+  .plat-wide h3, .plat-wide p { color: #ffffff; }
+  .plat-wide .plat-tag { color: #e7f8f1; }
+  .plat-wide p { color: rgba(255,255,255,0.78); }
+  @media (max-width: 940px) {
+    .plat-lead, .plat-blue, .plat-mint, .plat-lavender, .plat-wide { grid-column: span 1; }
+    .plat-lead { grid-column: span 2; }
+  }
+  @media (max-width: 560px) {
+    .plat-lead { grid-column: span 1; }
+  }
 
   .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
   @media (max-width: 820px) { .audience-grid { grid-template-columns: 1fr; } }
@@ -208,7 +243,7 @@
   html[lang="ko"] .audience-card .tag, html[lang="ja"] .audience-card .tag, html[lang="zh"] .audience-card .tag { font-family: inherit; letter-spacing: 0.06em; }
   .audience-card h3 { margin-bottom: 10px; position: relative; }
   .audience-card p { color: var(--fg-muted); font-size: 14px; flex: 1; position: relative; }
-  .audience-card .more { font-family: var(--mono); font-size: 12px; color: var(--brand); display: inline-flex; gap: 6px; margin-top: 16px; transition: gap var(--t-fast); }
+  .audience-card .more { font-family: var(--mono); font-size: 12px; color: var(--brand); display: inline-flex; gap: 6px; margin-top: 16px; transition: gap var(--t-fast); font-weight: 700; }
   html[lang="ko"] .audience-card .more, html[lang="ja"] .audience-card .more, html[lang="zh"] .audience-card .more { font-family: inherit; }
   .audience-card:hover .more { gap: 10px; }
 
@@ -310,7 +345,7 @@
   .member .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .member .role { font-family: var(--mono); font-size: 11px; color: var(--brand); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; }
   html[lang="ko"] .member .role, html[lang="ja"] .member .role, html[lang="zh"] .member .role { font-family: inherit; letter-spacing: 0.06em; }
-  .member .name { color: var(--fg-strong); font-size: 18px; font-weight: 600; margin-bottom: 14px; font-family: var(--sans); letter-spacing: -0.01em; line-height: 1.3; }
+  .member .name { color: var(--fg-strong); font-size: 18px; font-weight: 700; margin-bottom: 14px; font-family: var(--sans); letter-spacing: -0.01em; line-height: 1.3; }
   html[lang="ko"] .member .name, html[lang="ja"] .member .name, html[lang="zh"] .member .name { font-family: inherit; }
   .member .name .kr { color: var(--fg); font-weight: 600; margin-right: 8px; opacity: 0.92; }
   .member ul { list-style: none; padding: 0; margin: 0; color: var(--fg-muted); font-size: 13.5px; line-height: 1.75; }
@@ -328,8 +363,7 @@
   .faq details p { color: var(--fg-muted); font-size: 14px; margin: 12px 0 0; padding-right: 36px; line-height: 1.65; }
 
   .cta-banner { margin-top: 80px; padding: clamp(36px, 6vw, 64px); background: radial-gradient(60% 80% at 80% 50%, rgba(15,122,90,0.10), transparent 60%), var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg); display: flex; gap: 24px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-  .cta-banner h3 { font-size: clamp(22px, 2.6vw, 30px); margin: 0 0 8px; font-family: var(--serif); font-weight: 500; }
-  html[lang="ko"] .cta-banner h3, html[lang="ja"] .cta-banner h3, html[lang="zh"] .cta-banner h3 { font-family: inherit; font-weight: 700; }
+  .cta-banner h3 { font-size: clamp(24px, 2.8vw, 34px); margin: 0 0 8px; font-family: var(--sans); font-weight: 600; letter-spacing: -0.018em; }
   .cta-banner p { color: var(--fg-muted); margin: 0; max-width: 48ch; font-size: 15px; }
 
   footer { border-top: 1px solid var(--border); padding: 56px 0 36px; margin-top: 80px; background: var(--bg-elevated); }
@@ -421,40 +455,192 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="reveal">
-        <span class="eyebrow" data-i18n="hero.eb">Web3 finance · simplified</span>
-        <h1 data-i18n="hero.h">Web3 finance,<br>opened like a <em>Telegram chat</em>.</h1>
-        <p class="lede" data-i18n="hero.p">ONEWALLET turns Telegram into a keyless wallet, a QR payment rail, and a $1 token economy. No app to install. No seed phrase to lose. Just a chat away.</p>
+        <span class="eyebrow" data-i18n="hero.eb">A Telegram-native financial layer</span>
+        <h1 data-i18n="hero.h">Telegram-native finance,<br>built for the <em>$1 ecosystem</em>.</h1>
+        <p class="lede" data-i18n="hero.p">ONEWALLET brings keyless MPC wallets, QR payments, and token utility into Telegram — so users can open, pay, and participate without leaving the conversation.</p>
         <div class="hero-ctas">
           <a href="https://t.me/onedollar_wallet_bot/app" target="_blank" rel="noopener" class="btn btn-primary"><span data-i18n="common.openInTelegram">Open in Telegram</span> <span class="arrow" aria-hidden="true">→</span></a>
           <a href="whitepaper.html" class="btn btn-ghost" data-i18n="common.readWhitepaper">Read the whitepaper</a>
         </div>
         <div class="proof-chips reveal-stagger">
           <span class="chip" data-i18n="hero.chip1">Telegram-native</span>
-          <span class="chip" data-i18n="hero.chip2">2-of-3 MPC</span>
+          <span class="chip" data-i18n="hero.chip2">2-of-3 MPC · target</span>
           <span class="chip" data-i18n="hero.chip3">QR payments</span>
           <span class="chip" data-i18n="hero.chip4">Multi-chain</span>
         </div>
       </div>
       <div class="hero-visual reveal" aria-hidden="true">
-        <img src="assets/hero-mockup.webp" alt="" width="720" height="756" loading="eager" decoding="async" fetchpriority="high" />
-        <div class="hero-grid-overlay"></div>
-        <div class="hero-meta">
-          <span><b>v0.9</b> · prototype</span>
-          <span>build · <b>0x9a4f…2c1e</b></span>
-        </div>
+        <svg viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+          <defs>
+            <radialGradient id="discA" cx="35%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="60%" stop-color="#e7f8f1" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#0f7a5a" stop-opacity="0.10"/>
+            </radialGradient>
+            <radialGradient id="discB" cx="30%" cy="25%" r="80%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
+              <stop offset="55%" stop-color="#f6f2ff" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#8656ef" stop-opacity="0.10"/>
+            </radialGradient>
+            <radialGradient id="discC" cx="35%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+              <stop offset="60%" stop-color="#f1f8ff" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#0073c3" stop-opacity="0.10"/>
+            </radialGradient>
+            <linearGradient id="coinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0f7a5a"/>
+              <stop offset="100%" stop-color="#0b5f47"/>
+            </linearGradient>
+            <linearGradient id="phoneScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#f4fff9"/>
+            </linearGradient>
+          </defs>
+          <!-- Floating discs -->
+          <g class="disc-anim">
+            <circle cx="160" cy="140" r="92" fill="url(#discA)" stroke="#0f7a5a" stroke-opacity="0.22" stroke-width="1.2"/>
+          </g>
+          <g class="disc-anim d2">
+            <circle cx="430" cy="180" r="68" fill="url(#discB)" stroke="#29233b" stroke-opacity="0.18" stroke-width="1.2"/>
+          </g>
+          <g class="disc-anim d3">
+            <circle cx="400" cy="420" r="84" fill="url(#discC)" stroke="#0073c3" stroke-opacity="0.20" stroke-width="1.2"/>
+          </g>
+          <!-- $1 token coin -->
+          <g class="disc-anim" transform="translate(120,400)">
+            <circle cx="0" cy="0" r="52" fill="url(#coinGrad)"/>
+            <circle cx="0" cy="0" r="52" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="2"/>
+            <text x="0" y="8" text-anchor="middle" fill="#ffffff" font-family="Inter,sans-serif" font-size="28" font-weight="700" letter-spacing="-1">$1</text>
+          </g>
+          <!-- Phone outline 1 -->
+          <g transform="translate(220,180)">
+            <rect x="0" y="0" width="160" height="280" rx="28" fill="#ffffff" stroke="#29233b" stroke-opacity="0.18" stroke-width="1.4"/>
+            <rect x="10" y="14" width="140" height="252" rx="20" fill="url(#phoneScreen)"/>
+            <!-- screen content placeholders (no readable text) -->
+            <rect x="22" y="34" width="60" height="6" rx="3" fill="#29233b" fill-opacity="0.18"/>
+            <rect x="22" y="48" width="36" height="4" rx="2" fill="#29233b" fill-opacity="0.10"/>
+            <rect x="22" y="74" width="116" height="56" rx="12" fill="#e7f8f1" stroke="#0f7a5a" stroke-opacity="0.20"/>
+            <rect x="32" y="88" width="44" height="6" rx="3" fill="#0f7a5a" fill-opacity="0.55"/>
+            <rect x="32" y="102" width="80" height="10" rx="3" fill="#29233b" fill-opacity="0.55"/>
+            <rect x="22" y="146" width="54" height="42" rx="10" fill="#f1f8ff" stroke="#0073c3" stroke-opacity="0.18"/>
+            <rect x="82" y="146" width="54" height="42" rx="10" fill="#f6f2ff" stroke="#8656ef" stroke-opacity="0.18"/>
+            <rect x="22" y="202" width="116" height="6" rx="3" fill="#29233b" fill-opacity="0.10"/>
+            <rect x="22" y="214" width="86" height="6" rx="3" fill="#29233b" fill-opacity="0.10"/>
+            <rect x="22" y="226" width="100" height="6" rx="3" fill="#29233b" fill-opacity="0.10"/>
+            <!-- bottom CTA pill -->
+            <rect x="22" y="246" width="116" height="14" rx="7" fill="#29233b"/>
+            <!-- notch -->
+            <rect x="70" y="6" width="20" height="4" rx="2" fill="#29233b" fill-opacity="0.20"/>
+          </g>
+          <!-- Phone outline 2 (smaller, tucked) -->
+          <g transform="translate(70,260) rotate(-8)">
+            <rect x="0" y="0" width="120" height="210" rx="22" fill="#ffffff" stroke="#29233b" stroke-opacity="0.14" stroke-width="1.2"/>
+            <rect x="8" y="10" width="104" height="190" rx="16" fill="url(#phoneScreen)"/>
+            <!-- QR placeholder -->
+            <rect x="22" y="40" width="76" height="76" rx="8" fill="#ffffff" stroke="#29233b" stroke-opacity="0.30"/>
+            <g fill="#29233b">
+              <rect x="28" y="46" width="14" height="14"/>
+              <rect x="78" y="46" width="14" height="14"/>
+              <rect x="28" y="96" width="14" height="14"/>
+              <rect x="48" y="56" width="6" height="6"/>
+              <rect x="58" y="66" width="6" height="6"/>
+              <rect x="68" y="56" width="6" height="6"/>
+              <rect x="48" y="76" width="6" height="6"/>
+              <rect x="68" y="86" width="6" height="6"/>
+              <rect x="58" y="96" width="6" height="6"/>
+            </g>
+            <rect x="22" y="128" width="76" height="6" rx="3" fill="#29233b" fill-opacity="0.18"/>
+            <rect x="22" y="140" width="60" height="4" rx="2" fill="#29233b" fill-opacity="0.10"/>
+            <rect x="22" y="162" width="76" height="22" rx="6" fill="#0f7a5a"/>
+          </g>
+          <!-- subtle connector arcs -->
+          <path d="M 120 400 Q 200 320 220 250" stroke="#0f7a5a" stroke-opacity="0.30" stroke-width="1.4" fill="none" stroke-dasharray="3 5"/>
+          <path d="M 400 420 Q 350 380 300 360" stroke="#29233b" stroke-opacity="0.18" stroke-width="1.2" fill="none" stroke-dasharray="3 5"/>
+        </svg>
       </div>
     </div>
   </div>
 </section>
 
 <!-- TRUST -->
-<section class="trust" style="padding-top:32px;padding-bottom:32px;">
+<section class="trust">
   <div class="wrap">
+    <div class="trust-eyebrow" data-i18n="trust.eb">Prototype scope · target architecture · subject to review</div>
     <div class="trust-grid reveal-stagger">
-      <div class="trust-item"><span class="trust-num">01</span><h4 data-i18n="trust.1.h">Keyless by design</h4><p data-i18n="trust.1.p">2-of-3 MPC custody. Keys are split across device, server, and recovery — never reconstructed in full.</p></div>
-      <div class="trust-item"><span class="trust-num">02</span><h4 data-i18n="trust.2.h">Opens in Telegram</h4><p data-i18n="trust.2.p">Launches as a Mini App. No download, no app store gate, no fresh password ceremony.</p></div>
-      <div class="trust-item"><span class="trust-num">03</span><h4 data-i18n="trust.3.h">Built for daily payments</h4><p data-i18n="trust.3.p">Scan, send, settle. A QR rail designed for real merchant volume, not just holding.</p></div>
-      <div class="trust-item"><span class="trust-num">04</span><h4 data-i18n="trust.4.h">Ecosystem-ready</h4><p data-i18n="trust.4.p">$1 token utility, merchant tools, and mini-app distribution — connected from day one.</p></div>
+      <div class="trust-item"><span class="trust-num">01</span><h4 data-i18n="trust.1.h">Keyless by design</h4><p data-i18n="trust.1.p">Target 2-of-3 MPC custody. Keys split across device, server, and recovery — never reconstructed in full.</p></div>
+      <div class="trust-item"><span class="trust-num">02</span><h4 data-i18n="trust.2.h">Opens in Telegram</h4><p data-i18n="trust.2.p">Launches as a Mini App. No download, no app store gate, no password ceremony.</p></div>
+      <div class="trust-item"><span class="trust-num">03</span><h4 data-i18n="trust.3.h">Designed for payments</h4><p data-i18n="trust.3.p">Scan, send, settle. A QR rail designed for real merchant volume, not just holding.</p></div>
+      <div class="trust-item"><span class="trust-num">04</span><h4 data-i18n="trust.4.h">Ecosystem-ready</h4><p data-i18n="trust.4.p">$1 token utility, merchant tools, and mini-app distribution — designed from day one.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM (Circle-style varied cards) -->
+<section id="platform">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <span class="eyebrow" data-i18n="plat.eb">The platform</span>
+      <h2 data-i18n="plat.h">A complete stack for Telegram-native money.</h2>
+      <p data-i18n="plat.p">Five connected layers — wallet, payments, security, merchant tools, and token utility — designed to operate as one product.</p>
+    </div>
+    <div class="platform-grid reveal-stagger">
+      <a class="plat-card plat-lead" href="#product-flow">
+        <div class="plat-tag" data-i18n="plat.1.t">Wallet</div>
+        <h3 data-i18n="plat.1.h">Open a wallet inside a chat.</h3>
+        <p data-i18n="plat.1.p">Keyless onboarding via Telegram. No app store. No seed phrase. Multi-chain by default.</p>
+        <div class="plat-vis" aria-hidden="true">
+          <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="20" width="280" height="140" rx="14" fill="#ffffff" stroke="#e8eaf0"/>
+            <circle cx="48" cy="48" r="14" fill="#e7f8f1" stroke="#0f7a5a" stroke-opacity="0.3"/>
+            <rect x="70" y="40" width="80" height="6" rx="3" fill="#29233b" fill-opacity="0.6"/>
+            <rect x="70" y="52" width="50" height="4" rx="2" fill="#29233b" fill-opacity="0.25"/>
+            <rect x="40" y="80" width="240" height="56" rx="10" fill="#f4fff9"/>
+            <rect x="52" y="92" width="60" height="6" rx="3" fill="#0f7a5a" fill-opacity="0.6"/>
+            <rect x="52" y="106" width="120" height="14" rx="3" fill="#29233b"/>
+            <rect x="200" y="100" width="64" height="22" rx="6" fill="#0f7a5a"/>
+          </svg>
+        </div>
+      </a>
+      <a class="plat-card plat-blue" href="#payments">
+        <div class="plat-tag" data-i18n="plat.2.t">Payments</div>
+        <h3 data-i18n="plat.2.h">QR rail, not a portfolio app.</h3>
+        <p data-i18n="plat.2.p">Scan, sign, settle. Stablecoin settlement and signed webhooks for POS reconciliation.</p>
+        <div class="plat-vis" aria-hidden="true">
+          <svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="160" height="120" rx="14" fill="#ffffff" stroke="#e8eaf0"/>
+            <g fill="#29233b" transform="translate(70,40)">
+              <rect width="20" height="20"/><rect x="80" width="20" height="20"/>
+              <rect y="80" width="20" height="20"/>
+              <rect x="30" y="6" width="6" height="6"/><rect x="40" y="14" width="6" height="6"/>
+              <rect x="50" y="6" width="6" height="6"/><rect x="60" y="22" width="6" height="6"/>
+              <rect x="30" y="30" width="6" height="6"/><rect x="50" y="40" width="6" height="6"/>
+              <rect x="30" y="50" width="6" height="6"/><rect x="40" y="60" width="6" height="6"/>
+              <rect x="50" y="70" width="6" height="6"/><rect x="60" y="50" width="6" height="6"/>
+              <rect x="80" y="40" width="6" height="20"/><rect x="80" y="70" width="6" height="14"/>
+              <rect x="40" y="80" width="6" height="6"/><rect x="60" y="80" width="6" height="6"/>
+            </g>
+            <rect x="38" y="18" width="20" height="20" fill="none" stroke="#0f7a5a" stroke-width="2"/>
+            <rect x="182" y="18" width="20" height="20" fill="none" stroke="#0f7a5a" stroke-width="2"/>
+            <rect x="38" y="122" width="20" height="20" fill="none" stroke="#0f7a5a" stroke-width="2"/>
+            <rect x="182" y="122" width="20" height="20" fill="none" stroke="#0f7a5a" stroke-width="2"/>
+          </svg>
+        </div>
+      </a>
+      <a class="plat-card plat-mint" href="#security">
+        <div class="plat-tag" data-i18n="plat.3.t">Security</div>
+        <h3 data-i18n="plat.3.h">2-of-3 MPC.<br>No single point of failure.</h3>
+        <p data-i18n="plat.3.p">Threshold signing across device, server, and recovery. Server share alone never moves funds.</p>
+      </a>
+      <a class="plat-card plat-lavender" href="#payments">
+        <div class="plat-tag" data-i18n="plat.4.t">Merchant tools</div>
+        <h3 data-i18n="plat.4.h">Web3 acceptance, Web2 ergonomics.</h3>
+        <p data-i18n="plat.4.p">REST + webhooks, stablecoin payout, refunds first-class. Built for stores, not whitepapers.</p>
+      </a>
+      <a class="plat-card plat-wide" href="#token">
+        <div class="plat-tag" data-i18n="plat.5.t">Ecosystem utility</div>
+        <h3 data-i18n="plat.5.h">$1 powers the working layer.</h3>
+        <p data-i18n="plat.5.p">Fees, rewards, merchant incentives, and access — designed as a utility token, not a price story.</p>
+      </a>
     </div>
   </div>
 </section>
