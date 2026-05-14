@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "generated": "2026-05-13",
+    "generated": "2026-05-14",
     "locales": [
       "en",
       "ko",
@@ -949,7 +949,7 @@
         "onboarding",
         "daily actions"
       ],
-      "text": "Onboarding opens ONEWALLET as a Telegram Mini App: no app store, no download, no seed phrase, no email. Daily actions: Send (pick from Telegram contacts or paste address), Pay (scan merchant QR; chain, amount, FX resolved), Receive (chat-native deep link or QR), Swap (in-app, with route preview), Earn ($1 rewards for active payment and referral behavior)."
+      "text": "Onboarding opens ONEWALLET as a Telegram Mini App: no app store, no download, no seed phrase, no email. Daily actions: Send (pick from Address book or paste address), Pay (scan merchant QR; chain, amount, FX resolved), Receive (chat-native deep link or QR), Swap (in-app, with route preview), Earn ($1 rewards for active payment and referral behavior)."
     },
     {
       "id": "wp-ch4",

@@ -244,6 +244,7 @@
           '<div class="ow-modal-titles">' +
             '<h2 id="owModalTitle">' + t.title + '</h2>' +
             '<p class="ow-modal-sub">' + t.subtitle + '</p>' +
+            (t.trustChip ? '<span class="ow-trust-chip" aria-label="' + t.trustChip + '">' + t.trustChip + '</span>' : '') +
           '</div>' +
           '<button type="button" class="ow-close" data-close="1" aria-label="' + t.close + '">' + iconClose() + '</button>' +
         '</header>' +
@@ -314,6 +315,11 @@
     // Update header copy (language switch)
     head.querySelector('#owModalTitle').textContent = (view === 'disclosure') ? t.disclosureTitle : t.title;
     head.querySelector('.ow-modal-sub').textContent = t.subtitle;
+    const chip = head.querySelector('.ow-trust-chip');
+    if (chip) {
+      if (t.trustChip && view !== 'disclosure') { chip.textContent = t.trustChip; chip.hidden = false; }
+      else { chip.hidden = true; }
+    }
     head.querySelector('.ow-back').hidden = (view !== 'disclosure');
     head.querySelector('.ow-back').querySelector('span').textContent = t.back;
     head.querySelector('.ow-close').setAttribute('aria-label', t.close);

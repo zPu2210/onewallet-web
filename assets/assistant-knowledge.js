@@ -6,12 +6,13 @@
 window.ONEWALLET_ASSISTANT = (function () {
   const STR = {
     en: {
-      navLabel: 'Ask ONEWALLET',
-      pillText: 'Ask us anything',
+      navLabel: 'Ask ONEWALLET AI',
+      pillText: 'Ask ONEWALLET AI',
       pillKey: '⌘K',
       pillKeyAlt: 'Ctrl K',
-      title: 'Ask ONEWALLET',
-      subtitle: 'Static prototype · approved public copy only',
+      title: 'ONEWALLET AI Assistant',
+      subtitle: 'Grounded in the website and whitepaper',
+      trustChip: 'AI-powered · source-grounded',
       close: 'Close',
       back: 'Back',
       send: 'Ask',
@@ -20,7 +21,7 @@ window.ONEWALLET_ASSISTANT = (function () {
       readDisclosure: 'Read disclosure',
       disclosureTitle: 'About this assistant',
       disclosure: [
-        'This assistant is a static prototype. It only returns answers drafted from the current public ONEWALLET website and whitepaper draft. It is not a live AI agent and it does not have access to your account.',
+        'This assistant draws on the public ONEWALLET website and whitepaper through a grounded AI layer. Answers can still be wrong. It does not access your account, private wallet data, or execute wallet actions on your behalf.',
         'Nothing here is financial, legal, tax, or investment advice. No price, return, exchange-listing, audit, regulatory, or vendor-architecture guarantees are made. Forward-looking statements ("target", "planned", "draft") remain subject to final product, security, and legal review.',
         'For account-specific issues, launch dates, or anything not in the public copy, please contact us on Telegram.'
       ],
@@ -48,12 +49,13 @@ window.ONEWALLET_ASSISTANT = (function () {
       ]
     },
     ko: {
-      navLabel: 'ONEWALLET 문의',
-      pillText: '무엇이든 물어보세요',
+      navLabel: 'ONEWALLET AI에 질문',
+      pillText: 'ONEWALLET AI에 질문하기',
       pillKey: '⌘K',
       pillKeyAlt: 'Ctrl K',
-      title: 'ONEWALLET 문의',
-      subtitle: '정적 프로토타입 · 승인된 공개 문구만 사용',
+      title: 'ONEWALLET AI 어시스턴트',
+      subtitle: '웹사이트와 백서를 근거로 답변',
+      trustChip: 'AI 기반 · 출처 근거',
       close: '닫기',
       back: '뒤로',
       send: '질문',
@@ -62,7 +64,7 @@ window.ONEWALLET_ASSISTANT = (function () {
       readDisclosure: '고지사항 보기',
       disclosureTitle: '도우미 안내',
       disclosure: [
-        '이 도우미는 정적 프로토타입입니다. 현재 공개된 ONEWALLET 웹사이트와 백서 초안 기반의 답변만 제공합니다. 실시간 AI 에이전트가 아니며 사용자의 계정에 접근하지 않습니다.',
+        '이 도우미는 공개된 ONEWALLET 웹사이트와 백서 자료를 근거로 동작하는 AI 레이어입니다. 답변이 틀릴 수 있습니다. 사용자의 계정이나 개인 지갑 데이터에 접근하지 않으며, 지갑 작업을 대신 실행하지 않습니다.',
         '본 응답은 금융·법률·세무·투자 자문이 아닙니다. 가격, 수익, 거래소 상장, 감사, 규제, 벤더 아키텍처에 대해 보증하지 않습니다. "목표", "계획", "초안" 등 미래 표현은 최종 제품·보안·법무 검토를 거쳐 변경될 수 있습니다.',
         '계정별 문의나 출시 일정 등 공개 문구에 없는 사안은 Telegram을 통해 문의해 주세요.'
       ],
@@ -90,12 +92,13 @@ window.ONEWALLET_ASSISTANT = (function () {
       ]
     },
     ja: {
-      navLabel: 'ONEWALLET に質問',
-      pillText: '何でも聞いてください',
+      navLabel: 'ONEWALLET AI に質問',
+      pillText: 'ONEWALLET AI に質問',
       pillKey: '⌘K',
       pillKeyAlt: 'Ctrl K',
-      title: 'ONEWALLET に質問',
-      subtitle: '静的プロトタイプ · 承認済み公開コピーのみ',
+      title: 'ONEWALLET AI アシスタント',
+      subtitle: 'ウェブサイトとホワイトペーパーを根拠に回答',
+      trustChip: 'AI 駆動 · ソース根拠',
       close: '閉じる',
       back: '戻る',
       send: '質問',
@@ -104,7 +107,7 @@ window.ONEWALLET_ASSISTANT = (function () {
       readDisclosure: '注意事項を見る',
       disclosureTitle: 'アシスタントについて',
       disclosure: [
-        'このアシスタントは静的プロトタイプです。現在公開されている ONEWALLET ウェブサイトとホワイトペーパー草案から作成された回答のみを返します。ライブ AI エージェントではなく、ユーザーのアカウントにはアクセスしません。',
+        'このアシスタントは、公開されている ONEWALLET ウェブサイトとホワイトペーパーを根拠に動作する AI レイヤーを使用します。回答が誤る場合があります。ユーザーのアカウントや個人のウォレットデータにはアクセスせず、ウォレット操作を代理で実行しません。',
         'これは金融、法律、税務、投資の助言ではありません。価格、収益、取引所上場、監査、規制、ベンダーアーキテクチャの保証は行いません。「目標」「計画」「草案」などの将来表現は、最終的な製品・セキュリティ・法務レビューによって変更される可能性があります。',
         'アカウント固有の問題、ローンチ日、その他公開コピーにない事項は Telegram でお問い合わせください。'
       ],
@@ -132,12 +135,13 @@ window.ONEWALLET_ASSISTANT = (function () {
       ]
     },
     zh: {
-      navLabel: '询问 ONEWALLET',
-      pillText: '随便问点什么',
+      navLabel: '询问 ONEWALLET AI',
+      pillText: '询问 ONEWALLET AI',
       pillKey: '⌘K',
       pillKeyAlt: 'Ctrl K',
-      title: '询问 ONEWALLET',
-      subtitle: '静态原型 · 仅使用已批准公开文案',
+      title: 'ONEWALLET AI 助手',
+      subtitle: '基于网站和白皮书内容作答',
+      trustChip: 'AI 驱动 · 来源支撑',
       close: '关闭',
       back: '返回',
       send: '提问',
@@ -146,7 +150,7 @@ window.ONEWALLET_ASSISTANT = (function () {
       readDisclosure: '查看声明',
       disclosureTitle: '关于此助手',
       disclosure: [
-        '此助手为静态原型，仅基于当前公开的 ONEWALLET 网站和白皮书草稿生成答复。它不是实时 AI 代理，也不会访问您的账户。',
+        '此助手基于公开的 ONEWALLET 网站与白皮书内容，通过有依据的 AI 层作答。答复仍可能出错。它不会访问您的账户或私人钱包数据，也不会代您执行任何钱包操作。',
         '此处内容不构成任何金融、法律、税务或投资建议。我们不对价格、收益、交易所上线、审计、监管或供应商架构作出保证。"目标"、"计划"、"草稿"等前瞻性表述仍需最终产品、安全及法律审查。',
         '关于账户问题、上线日期或公开文案未涵盖的事项，请通过 Telegram 联系我们。'
       ],
