@@ -75,7 +75,7 @@ window.I18N = (function () {
     'plat.2.t': 'Payments', 'plat.2.h': 'QR rail, not a portfolio app.', 'plat.2.p': 'Scan, sign, settle. Stablecoin settlement and signed webhooks for POS reconciliation.',
     'plat.3.t': 'Security', 'plat.3.h': '2-of-3 MPC.<br>No single point of failure.', 'plat.3.p': 'Threshold signing across device, server, and recovery. Server share alone never moves funds.',
     'plat.4.t': 'Merchant tools', 'plat.4.h': 'Web3 acceptance, Web2 ergonomics.', 'plat.4.p': 'REST + webhooks, stablecoin payout, refunds first-class. Built for stores, not whitepapers.',
-    'plat.5.t': 'Ecosystem utility', 'plat.5.h': '$1 powers the working layer.', 'plat.5.p': 'Fees, rewards, merchant incentives, and access — designed as a utility token, not a price story.',
+    'plat.5.t': 'Ecosystem utility', 'plat.5.h': '$1 powers the working layer.', 'plat.5.p': 'Fees, rewards, merchant incentives, and access — designed as a utility token, not a price story.', 'plat.5.alt': '3D $1 utility token orbiting BTC, ETH, SOL, USDT, TON, and TRX ecosystem coins',
 
     'aud.eb': 'Three paths',
     'aud.h': 'One product. Three reasons to care.',
@@ -412,7 +412,7 @@ window.I18N = (function () {
     'plat.2.t': '결제', 'plat.2.h': '포트폴리오가 아닌 QR 레일.', 'plat.2.p': '스캔, 서명, 정산. 스테이블코인 정산과 서명된 웹훅으로 POS 정합성을 보장합니다.',
     'plat.3.t': '보안', 'plat.3.h': '2-of-3 MPC.<br>단일 장애점 없음.', 'plat.3.p': '기기, 서버, 복구를 가로지르는 임계 서명. 서버 지분 단독으로는 자금이 이동하지 않습니다.',
     'plat.4.t': '가맹점 도구', 'plat.4.h': 'Web3 수용, Web2 사용성.', 'plat.4.p': 'REST + 웹훅, 스테이블코인 정산, 환불 우선 설계. 백서가 아닌 매장을 위해 만들어졌습니다.',
-    'plat.5.t': '에코시스템 유틸리티', 'plat.5.h': '$1이 작동 레이어를 움직입니다.', 'plat.5.p': '수수료, 보상, 가맹점 인센티브, 접근 — 가격 서사가 아닌 유틸리티 토큰으로 설계됩니다.',
+    'plat.5.t': '에코시스템 유틸리티', 'plat.5.h': '$1이 작동 레이어를 움직입니다.', 'plat.5.p': '수수료, 보상, 가맹점 인센티브, 접근 — 가격 서사가 아닌 유틸리티 토큰으로 설계됩니다.', 'plat.5.alt': 'BTC, ETH, SOL, USDT, TON, TRX 에코시스템 코인과 함께 궤도를 이루는 3D $1 유틸리티 토큰',
 
     'aud.eb': '세 가지 경로',
     'aud.h': '하나의 제품. 세 가지 가치 제안.',
@@ -733,7 +733,7 @@ window.I18N = (function () {
     'plat.2.t': '決済', 'plat.2.h': 'ポートフォリオではなくQRレール。', 'plat.2.p': 'スキャン、署名、決済。ステーブルコイン決済と署名付きウェブフックでPOSと整合します。',
     'plat.3.t': 'セキュリティ', 'plat.3.h': '2-of-3 MPC.<br>単一障害点なし。', 'plat.3.p': 'デバイス・サーバー・リカバリーを跨ぐ閾値署名。サーバー単独では資金は動きません。',
     'plat.4.t': '加盟店ツール', 'plat.4.h': 'Web3の受け入れ、Web2の使いやすさ。', 'plat.4.p': 'REST + ウェブフック、ステーブルコイン精算、返金を第一級に。ホワイトペーパーではなく店舗のために。',
-    'plat.5.t': 'エコシステム・ユーティリティ', 'plat.5.h': '$1が稼働レイヤーを動かす。', 'plat.5.p': '手数料、報酬、加盟店インセンティブ、アクセス — 価格ストーリーではなく実用トークンとして設計。',
+    'plat.5.t': 'エコシステム・ユーティリティ', 'plat.5.h': '$1が稼働レイヤーを動かす。', 'plat.5.p': '手数料、報酬、加盟店インセンティブ、アクセス — 価格ストーリーではなく実用トークンとして設計。', 'plat.5.alt': 'BTC、ETH、SOL、USDT、TON、TRX のエコシステムコインと軌道を描く3D $1 ユーティリティトークン',
 
     'aud.eb': '3つの経路',
     'aud.h': '1つのプロダクト。3つの理由。',
@@ -1054,7 +1054,7 @@ window.I18N = (function () {
     'plat.2.t': '支付', 'plat.2.h': 'QR 通道,而非行情应用。', 'plat.2.p': '扫描、签名、结算。稳定币结算与签名 webhook,适配 POS 对账。',
     'plat.3.t': '安全', 'plat.3.h': '2-of-3 MPC。<br>无单一故障点。', 'plat.3.p': '设备、服务器与备援之间的阈值签名。仅凭服务器份额永远无法转移资金。',
     'plat.4.t': '商户工具', 'plat.4.h': 'Web3 受理,Web2 体验。', 'plat.4.p': 'REST + webhook、稳定币结算、退款优先 — 为门店而建,不为白皮书。',
-    'plat.5.t': '生态效用', 'plat.5.h': '$1 驱动运作层。', 'plat.5.p': '手续费、奖励、商户激励与访问权 — 作为效用代币而设计,而非价格故事。',
+    'plat.5.t': '生态效用', 'plat.5.h': '$1 驱动运作层。', 'plat.5.p': '手续费、奖励、商户激励与访问权 — 作为效用代币而设计,而非价格故事。', 'plat.5.alt': '与 BTC、ETH、SOL、USDT、TON、TRX 生态币环绕呈现的 3D $1 效用代币',
 
     'aud.eb': '三条路径',
     'aud.h': '一个产品,三个理由。',
