@@ -1,8 +1,8 @@
 ONEWALLET — Full reference for LLMs
 ====================================
 
-Source: https://onewallet-web.vercel.app/
-Whitepaper: https://onewallet-web.vercel.app/whitepaper.html
+Source: https://onewallet.store/
+Whitepaper: https://onewallet.store/whitepaper.html
 Version: prototype draft v0.9 · 2026-05
 Disclaimer: Forward-looking statements remain subject to product, security, and legal review. Not financial, legal, tax, or investment advice.
 
@@ -126,6 +126,13 @@ Community and announcement channels are separate from the product link:
 The Telegram Mini App link is the product entry, not a social channel. Launch updates and community questions are handled on the Telegram community channel. Users must not share private wallet, account, or recovery data in any public channel; for account-specific issues, use private support paths only.
 
 
-SECTION 15 — Disclosure
+SECTION 15 — ONEWALLET AI Assistant
+------------------------------------
+The website includes the ONEWALLET AI Assistant. It is source-grounded on approved public website, whitepaper, and assistant-corpus material. It can answer questions about wallet setup, MPC security, recovery, payments, fees, $1 utility, roadmap, risks, team, and community channels.
+
+The assistant does not access user accounts, private wallet data, recovery data, or execute wallet actions. Answers can still be wrong and should not be treated as financial, legal, tax, investment, audit, regulatory, exchange-listing, or vendor-architecture advice. If context is unsupported or unsafe, the assistant should fall back to a safe refusal.
+
+
+SECTION 16 — Disclosure
 ------------------------
 This material is informational only. No financial, legal, tax, or investment advice. Digital assets involve risk. Answers from the on-site assistant are based on the current public ONEWALLET homepage and whitepaper draft. No guarantees are made about price, returns, exchange listings, audit completion, regulatory approval, or vendor architecture. Forward-looking terms ("target", "planned", "draft") indicate intent, not commitments.
