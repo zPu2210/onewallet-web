@@ -22,7 +22,6 @@ Trust boundaries:
 Threat model (selected):
 - Device theft → loss of one share → rotate device share via server + recovery cooperation.
 - Server compromise or Telegram session hijack → server share alone cannot sign; high-value transfers add re-auth and cooldown.
-- Recovery social engineering → coerced recovery share is mitigated by time-locked recovery.
 
 Custody isolation and hardware-protected key storage are described as target architecture, not a present-day guarantee. No custody model is unbreakable.
 
