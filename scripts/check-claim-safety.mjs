@@ -9,6 +9,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { BANNED, ALLOWED_NEGATIONS } from '../shared/banned-claims.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -21,31 +22,6 @@ const FILES = [
   'assets/assistant-knowledge.js',
   'assets/assistant-knowledge.json',
   'assets/i18n.js'
-];
-
-// Phrase → reason. Regex case-insensitive, multiline.
-// "Allowed context" lets us declare disclaimer/refusal wording that legitimately quotes the
-// banned phrase to deny it (e.g., "no audit completed" in disclosure copy).
-const BANNED = [
-  { re: /\bguaranteed (returns?|yield|profit|roi|listing)/i,             reason: 'guaranteed returns/listing promise' },
-  { re: /\b(roi|return on investment)\b[^.\n]{0,40}\b(of|will|guaranteed)/i, reason: 'ROI promise' },
-  { re: /\blisted on (binance|coinbase|okx|bybit|upbit|bithumb)\b/i,     reason: 'exchange-listing claim' },
-  { re: /\baudit (completed|passed|finalized|finished)\b/i,              reason: 'completed-audit claim' },
-  { re: /\bbank[- ]grade (security|custody|infrastructure)\b/i,          reason: 'bank-grade claim' },
-  { re: /\bhsm[- ]backed\b/i,                                            reason: 'HSM-backed vendor claim' },
-  { re: /\bisolated vpc\b/i,                                             reason: 'isolated-VPC vendor claim' },
-  { re: /\bregulator[- ]?approved\b/i,                                   reason: 'regulator-approved claim' },
-  { re: /\bfdic[- ]?insured\b/i,                                         reason: 'FDIC-insured claim' }
-];
-
-// Phrases that look risky but are explicitly allowed when they appear in negating context
-// (e.g., "audit-targeted, not audit-claimed"). Add literals here, lowercased.
-const ALLOWED_NEGATIONS = [
-  'audit-targeted, not audit-claimed',
-  'no audit is claimed',
-  'no exchange-listing promise',
-  'no exchange listing is promised',
-  'no audit completion is claimed'
 ];
 
 let failures = 0;

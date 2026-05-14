@@ -1,0 +1,18 @@
+name = "onewallet-assistant-api"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+# Workers AI binding. Available as env.AI inside the Worker.
+# Docs: https://developers.cloudflare.com/workers-ai/configuration/bindings/
+[ai]
+binding = "AI"
+
+# Runtime config. Override per-environment by passing different vars on deploy.
+[vars]
+ALLOWED_ORIGINS = "https://onewallet.store,https://www.onewallet.store,https://onewallet-web.vercel.app,http://localhost:4173,http://localhost:5173,http://127.0.0.1:4173"
+CORPUS_URL = "https://onewallet-web.vercel.app/assets/assistant-knowledge.json"
+MODEL_ID = "@cf/google/gemma-4-26b-a4b-it"
+
+# Optional observability — enable when ready.
+# [observability]
+# enabled = true

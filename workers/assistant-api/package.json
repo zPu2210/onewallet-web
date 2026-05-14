@@ -1,0 +1,15 @@
+{
+  "name": "onewallet-assistant-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cloudflare Worker that returns grounded ONEWALLET assistant answers via Workers AI. Frontend stays on Vercel.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

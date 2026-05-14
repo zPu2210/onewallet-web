@@ -60,6 +60,29 @@
     for (const [t, d] of df) idf.set(t, Math.log(1 + all / (1 + d)));
     return { idf, byLocale };
   }
+  // Optional grounded-answer upgrade via Cloudflare Worker. Disabled unless
+  // window.ONEWALLET_ASSISTANT_API_URL is set (build/deploy injects it).
+  // Returns { answer, sources } on success, null otherwise. Never throws to caller.
+  function askWorker(question) {
+    const url = (typeof window !== 'undefined') && window.ONEWALLET_ASSISTANT_API_URL;
+    if (!url) return Promise.resolve(null);
+    const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    const timer = ctrl ? setTimeout(() => ctrl.abort(), 12000) : null;
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ locale: lang(), question }),
+      signal: ctrl ? ctrl.signal : undefined
+    })
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (!data || data.ok !== true || typeof data.answer !== 'string') return null;
+        return { answer: data.answer, sources: data.sources || [] };
+      })
+      .catch(() => null)
+      .finally(() => { if (timer) clearTimeout(timer); });
+  }
+
   function loadCorpus() {
     // Resolve relative to site root so it works from index.html and whitepaper.html.
     const base = location.pathname.endsWith('whitepaper.html') ? '' : '';
@@ -256,11 +279,29 @@
       const t = S();
       const match = bestMatch(q, t.items);
       history.push({ role: 'user', text: q });
+      const botIdx = history.length;
       if (match) history.push({ role: 'bot', text: match.a, href: match.href, link: match.link });
       else history.push({ role: 'bot', text: t.fallback });
       view = 'answering';
       input.value = '';
       render();
+
+      // Optional Cloudflare Worker upgrade: replace static text with a grounded
+      // natural-language answer when API URL is configured. Falls back silently.
+      if (match) askWorker(q).then((reply) => {
+        if (!reply || !reply.answer) return;
+        if (!history[botIdx] || history[botIdx].role !== 'bot') return;
+        // Replace both the text AND provenance: a grounded answer must point to
+        // the Worker's top-ranked chunk, not the static fallback's link.
+        const top = Array.isArray(reply.sources) && reply.sources[0];
+        const next = { ...history[botIdx], text: reply.answer };
+        if (top && top.source) {
+          next.href = top.source;
+          next.link = top.title || history[botIdx].link;
+        }
+        history[botIdx] = next;
+        if (view === 'answering') render();
+      }).catch(() => { /* static answer stays */ });
     });
 
     render();
