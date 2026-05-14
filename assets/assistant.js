@@ -318,9 +318,18 @@
 
       // supportedProductQuestion (fall-through): try retrieval first.
       const match = bestMatch(q, t.items);
+      const workerUrl = (typeof window !== 'undefined') && window.ONEWALLET_ASSISTANT_API_URL;
+      const useWorker = !!(match && workerUrl);
+
       history.push({ role: 'user', text: q });
       const botIdx = history.length;
-      if (match) {
+
+      if (useWorker) {
+        // Pending bubble first — no static answer flashes before Worker reply.
+        // On Worker success: replace with grounded answer + Worker source.
+        // On Worker failure/timeout: reveal the static match.a as graceful fallback.
+        history.push({ role: 'bot', pending: true, text: (intentCopy.thinking || 'Searching sources') });
+      } else if (match) {
         history.push({ role: 'bot', text: match.a, href: match.href, link: match.link });
       } else {
         // Retrieval missed — give the off-topic classifier a turn to decide
@@ -333,22 +342,29 @@
       input.value = '';
       render();
 
-      // Optional Cloudflare Worker upgrade: replace static text with a grounded
-      // natural-language answer when API URL is configured. Falls back silently.
-      if (match) askWorker(q).then((reply) => {
-        if (!reply || !reply.answer) return;
+      // Worker upgrade path: fulfill the pending bubble with grounded answer,
+      // or fall back to static match.a if the Worker is unreachable/unsafe.
+      if (useWorker) askWorker(q).then((reply) => {
         if (!history[botIdx] || history[botIdx].role !== 'bot') return;
-        // Replace both the text AND provenance: a grounded answer must point to
-        // the Worker's top-ranked chunk, not the static fallback's link.
-        const top = Array.isArray(reply.sources) && reply.sources[0];
-        const next = { ...history[botIdx], text: reply.answer };
-        if (top && top.source) {
-          next.href = top.source;
-          next.link = top.title || history[botIdx].link;
+        if (reply && reply.answer) {
+          const top = Array.isArray(reply.sources) && reply.sources[0];
+          const next = { role: 'bot', text: reply.answer, href: match.href, link: match.link };
+          if (top && top.source) {
+            next.href = top.source;
+            next.link = top.title || match.link;
+          }
+          history[botIdx] = next;
+        } else {
+          // Worker null/failed → reveal static fallback in the same bubble.
+          history[botIdx] = { role: 'bot', text: match.a, href: match.href, link: match.link };
         }
-        history[botIdx] = next;
         if (view === 'answering') render();
-      }).catch(() => { /* static answer stays */ });
+      }).catch(() => {
+        if (history[botIdx] && history[botIdx].role === 'bot') {
+          history[botIdx] = { role: 'bot', text: match.a, href: match.href, link: match.link };
+          if (view === 'answering') render();
+        }
+      });
     });
 
     render();
@@ -427,6 +443,12 @@
       '<ul class="ow-thread">' +
         history.map((m) => {
           if (m.role === 'user') return '<li class="ow-msg ow-msg-user">' + escapeHtml(m.text) + '</li>';
+          if (m.pending) {
+            return '<li class="ow-msg ow-msg-bot ow-msg-pending" aria-live="polite">' +
+              '<span class="ow-pending-text">' + escapeHtml(m.text) + '</span>' +
+              '<span class="ow-pending-dots" aria-hidden="true"><i></i><i></i><i></i></span>' +
+            '</li>';
+          }
           const href = resolveHref(m.href || '');
           const ext = /^https?:/.test(href);
           const link = (href && m.link)
