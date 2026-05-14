@@ -32,6 +32,16 @@ window.ONEWALLET_ASSISTANT = (function () {
         { href: 'https://t.me/onedollar_project', label: 'Telegram community channel' }
       ],
       fallback: 'I can only answer from the current public homepage and whitepaper draft. Try asking about wallet setup, MPC security, recovery, payments, fees, $1 utility, roadmap, risks, or community channels.',
+      intents: {
+        greeting: "Hi — I'm the ONEWALLET AI Assistant. I can help with wallet setup, MPC security, payments, $1 utility, roadmap, risks, and community channels. What would you like to know?",
+        courtesy: 'Anytime. Ask another question whenever you are ready.',
+        capability: 'I answer questions grounded in the public ONEWALLET homepage and whitepaper. Best topics: wallet setup, MPC security and recovery, payments and fees, the $1 utility, roadmap, risks, and community channels.',
+        benignOfftopic: "I'm here to help with ONEWALLET. I'm best at wallet, payments, security, $1 utility, roadmap, and community questions — want to try one of those?",
+        unsupportedDomain: "That's outside what I can answer. I can help with ONEWALLET wallet, MPC security, payments, $1 utility, roadmap, risks, and community channels.",
+        unsafeFinancial: "I can't make price, return, listing, or guaranteed-yield claims about $1 or ONEWALLET. For anything investment-related please consult your own advisor. I can explain how the product works — security, payments, utility, roadmap.",
+        privateData: "Please don't share seed phrases, recovery phrases, or private keys here or anywhere. ONEWALLET will never ask for them. If you've already shared them, treat that wallet as compromised and move funds using a fresh wallet.",
+        privateDataUserRedacted: '[sensitive recovery data hidden]'
+      },
       items: [
         { id: 'what', featured: true, q: 'What does ONEWALLET do?', a: 'ONEWALLET is a Telegram-native Web3 wallet and payment rail. It bundles keyless MPC custody, QR payments, merchant tools, and $1 utility into a single Mini App flow.', href: 'whitepaper.html#ch1', link: 'Executive summary', k: 'what product wallet payment rail telegram mini app' },
         { id: 'open', q: 'How do I open a wallet?', a: 'You open ONEWALLET inside Telegram, verify the device, create the wallet, and then send, pay, or earn from the Mini App. The default flow avoids app-store downloads and a seed-phrase setup.', href: '#product-flow', link: 'Product flow', k: 'open wallet telegram mini app onboarding setup start device' },
@@ -77,6 +87,16 @@ window.ONEWALLET_ASSISTANT = (function () {
         { href: 'https://t.me/onedollar_project', label: 'Telegram 커뮤니티 채널' }
       ],
       fallback: '현재 공개 홈페이지와 백서 초안에 있는 내용만 답변할 수 있습니다. 지갑 개설, MPC 보안, 복구, 결제, 수수료, $1 유틸리티, 로드맵, 리스크 또는 커뮤니티 채널에 대해 물어보세요.',
+      intents: {
+        greeting: '안녕하세요. ONEWALLET AI 어시스턴트입니다. 지갑 개설, MPC 보안, 결제, $1 유틸리티, 로드맵, 리스크, 커뮤니티 채널에 대해 도와드릴 수 있어요. 무엇이 궁금하신가요?',
+        courtesy: '언제든지요. 다음 질문도 편하게 물어보세요.',
+        capability: 'ONEWALLET 공개 홈페이지와 백서 자료를 근거로 답변합니다. 지갑 개설, MPC 보안과 복구, 결제와 수수료, $1 유틸리티, 로드맵, 리스크, 커뮤니티 채널 질문에 가장 잘 답할 수 있어요.',
+        benignOfftopic: 'ONEWALLET 관련 질문을 도와드릴 수 있어요. 지갑, 결제, 보안, $1 유틸리티, 로드맵, 커뮤니티 주제로 물어봐 주세요.',
+        unsupportedDomain: '그 주제는 제가 답변드릴 수 있는 범위 밖이에요. ONEWALLET 지갑, MPC 보안, 결제, $1 유틸리티, 로드맵, 리스크, 커뮤니티 채널에 대해 도와드릴 수 있습니다.',
+        unsafeFinancial: '$1이나 ONEWALLET의 가격, 수익, 거래소 상장, 보장 수익률에 대해서는 답변드릴 수 없어요. 투자 관련 사항은 개인 자문가와 상담해 주세요. 제품의 보안, 결제, 유틸리티, 로드맵 동작 방식은 설명해 드릴 수 있어요.',
+        privateData: '시드 구문, 복구 구문, 개인 키는 이곳을 포함해 어떤 곳에도 공유하지 마세요. ONEWALLET은 절대 이를 요구하지 않습니다. 이미 공유하셨다면 해당 지갑은 노출된 것으로 간주하고, 새 지갑으로 자금을 옮기세요.',
+        privateDataUserRedacted: '[복구 정보는 표시하지 않았습니다]'
+      },
       items: [
         { id: 'what', featured: true, q: 'ONEWALLET은 무엇을 하나요?', a: 'ONEWALLET은 Telegram 안에서 작동하는 Web3 지갑이자 결제 레일입니다. 무시드 MPC 커스터디, QR 결제, 머천트 도구, $1 유틸리티를 하나의 Mini App 흐름으로 연결합니다.', href: 'whitepaper.html#ch1', link: '요약 읽기', k: '무엇 제품 지갑 결제 telegram mini app' },
         { id: 'open', q: '지갑은 어떻게 열 수 있나요?', a: 'Telegram에서 ONEWALLET을 열고, 기기를 확인한 뒤 지갑을 생성합니다. 이후 Mini App 안에서 전송, 결제, 보상 흐름을 사용할 수 있습니다. 공개 문구는 앱스토어 다운로드와 기본 시드 문구 설정을 피하는 방향입니다.', href: '#product-flow', link: '제품 흐름', k: '열기 지갑 telegram 온보딩 시작 기기' },
@@ -122,6 +142,16 @@ window.ONEWALLET_ASSISTANT = (function () {
         { href: 'https://t.me/onedollar_project', label: 'Telegram コミュニティチャンネル' }
       ],
       fallback: '現在の公開ホームページとホワイトペーパー草案にある内容だけ回答できます。ウォレット作成、MPC セキュリティ、復旧、決済、手数料、$1 ユーティリティ、ロードマップ、リスク、コミュニティチャンネルについて質問してください。',
+      intents: {
+        greeting: 'こんにちは。ONEWALLET AI アシスタントです。ウォレット作成、MPC セキュリティ、決済、$1 ユーティリティ、ロードマップ、リスク、コミュニティチャンネルについてお手伝いできます。何をお探しですか？',
+        courtesy: 'どういたしまして。次の質問もお気軽にどうぞ。',
+        capability: 'ONEWALLET の公開ホームページとホワイトペーパーを根拠に回答します。得意分野は、ウォレット作成、MPC セキュリティと復旧、決済と手数料、$1 ユーティリティ、ロードマップ、リスク、コミュニティチャンネルです。',
+        benignOfftopic: 'ONEWALLET についてのお手伝いができます。ウォレット、決済、セキュリティ、$1 ユーティリティ、ロードマップ、コミュニティのテーマでぜひお試しください。',
+        unsupportedDomain: 'そのテーマはお答えできる範囲外です。ONEWALLET のウォレット、MPC セキュリティ、決済、$1 ユーティリティ、ロードマップ、リスク、コミュニティチャンネルについてはお手伝いできます。',
+        unsafeFinancial: '$1 や ONEWALLET の価格、収益、取引所上場、保証された利回りについてはお答えできません。投資関連のご相談はご自身のアドバイザーにご確認ください。製品のセキュリティ、決済、ユーティリティ、ロードマップの仕組みはご説明できます。',
+        privateData: 'シードフレーズ、リカバリーフレーズ、秘密鍵は、ここを含めどこでも共有しないでください。ONEWALLET がそれらを尋ねることはありません。すでに共有してしまった場合は、そのウォレットを侵害されたものとみなし、新しいウォレットに資金を移してください。',
+        privateDataUserRedacted: '[リカバリー情報は表示していません]'
+      },
       items: [
         { id: 'what', featured: true, q: 'ONEWALLET は何をするものですか？', a: 'ONEWALLET は Telegram ネイティブの Web3 ウォレット兼決済レールです。キーレス MPC カストディ、QR 決済、加盟店ツール、$1 ユーティリティを Telegram の Mini App 内でつなぎます。', href: 'whitepaper.html#ch1', link: '概要を見る', k: 'what product wallet payment telegram mini app' },
         { id: 'open', q: 'ウォレットはどう開きますか？', a: 'Telegram から ONEWALLET を開き、デバイスを確認し、ウォレットを作成します。その後 Mini App 内で送金、支払い、報酬機能を使えます。公開コピーでは、アプリストアのダウンロードや標準のシードフレーズ設定を避ける流れです。', href: '#product-flow', link: 'プロダクトフロー', k: 'open wallet telegram onboarding setup device' },
@@ -167,6 +197,16 @@ window.ONEWALLET_ASSISTANT = (function () {
         { href: 'https://t.me/onedollar_project', label: 'Telegram 社区频道' }
       ],
       fallback: '我只能根据当前公开主页和白皮书草稿回答。可以询问钱包开通、MPC 安全、恢复、支付、费用、$1 效用、路线图、风险或社区频道。',
+      intents: {
+        greeting: '你好，我是 ONEWALLET AI 助手。可以帮你了解钱包开通、MPC 安全、支付、$1 效用、路线图、风险和社区频道。请问想了解什么？',
+        courtesy: '不客气，随时再问。',
+        capability: '我基于 ONEWALLET 公开主页和白皮书作答。擅长的主题：钱包开通、MPC 安全与恢复、支付与费用、$1 效用、路线图、风险和社区频道。',
+        benignOfftopic: '我专注于 ONEWALLET 相关问题。可以问问钱包、支付、安全、$1 效用、路线图或社区频道。',
+        unsupportedDomain: '这超出我能回答的范围。我可以帮你了解 ONEWALLET 钱包、MPC 安全、支付、$1 效用、路线图、风险和社区频道。',
+        unsafeFinancial: '关于 $1 或 ONEWALLET 的价格、收益、交易所上线、收益保证我无法作答。投资相关问题请咨询您的顾问。我可以解释产品的安全、支付、效用、路线图等运作方式。',
+        privateData: '请不要在这里或任何地方分享助记词、恢复短语或私钥。ONEWALLET 永远不会询问。如果已经分享，请将该钱包视为已暴露，并使用新钱包转移资金。',
+        privateDataUserRedacted: '[已隐藏恢复信息]'
+      },
       items: [
         { id: 'what', featured: true, q: 'ONEWALLET 是做什么的？', a: 'ONEWALLET 是原生于 Telegram 的 Web3 钱包和支付通道。它把无种子短语 MPC 托管、QR 支付、商户工具和 $1 效用整合到 Telegram Mini App 中。', href: 'whitepaper.html#ch1', link: '执行摘要', k: 'what product wallet payment telegram mini app' },
         { id: 'open', q: '如何打开钱包？', a: '从 Telegram 打开 ONEWALLET，验证设备，创建钱包，然后在 Mini App 中转账、支付或获得奖励。公开文案避免把应用商店下载和默认助记词设置作为主流程。', href: '#product-flow', link: '产品流程', k: 'open wallet telegram onboarding setup device' },

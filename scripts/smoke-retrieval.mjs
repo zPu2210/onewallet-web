@@ -151,5 +151,55 @@ for (const c of fallbackCases) {
   ok ? pass++ : fail++;
 }
 
+// ── Intent classifier coverage (shared/assistant-intents.js) ──
+import { classifyIntent, classifyOfftopic } from '../shared/assistant-intents.js';
+
+const intentCases = [
+  { q: 'hello',                              locale: 'en', expect: 'greeting' },
+  { q: 'hi',                                 locale: 'en', expect: 'greeting' },
+  { q: 'hey there',                          locale: 'en', expect: 'greeting' },
+  { q: '안녕',                                locale: 'ko', expect: 'greeting' },
+  { q: 'こんにちは',                          locale: 'ja', expect: 'greeting' },
+  { q: '你好',                                locale: 'zh', expect: 'greeting' },
+  { q: 'thanks',                             locale: 'en', expect: 'courtesy' },
+  { q: '감사합니다',                          locale: 'ko', expect: 'courtesy' },
+  { q: 'ありがとう',                          locale: 'ja', expect: 'courtesy' },
+  { q: '谢谢',                                locale: 'zh', expect: 'courtesy' },
+  { q: 'what can you do?',                   locale: 'en', expect: 'capability' },
+  { q: 'help',                               locale: 'en', expect: 'capability' },
+  { q: 'tell me about ONEWALLET',            locale: 'en', expect: 'supportedProductQuestion' },
+  { q: 'how does MPC recovery work?',        locale: 'en', expect: 'supportedProductQuestion' },
+  { q: 'do I need a seed phrase?',           locale: 'en', expect: 'supportedProductQuestion' }, // question form — curated MPC answer handles this
+  { q: 'here is my seed phrase abandon abandon abandon', locale: 'en', expect: 'privateData' },
+  { q: 'abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about', locale: 'en', expect: 'privateData' }, // bare BIP39-style paste
+  { q: '제 시드 구문 공유합니다',              locale: 'ko', expect: 'privateData' },
+  { q: 'what is the price of $1 next month?',locale: 'en', expect: 'unsafeFinancial' },
+  { q: 'will $1 list on Binance?',           locale: 'en', expect: 'unsafeFinancial' },
+  { q: 'BTC 가격 알려줘',                     locale: 'ko', expect: 'unsafeFinancial' },
+  { q: 'guaranteed yield from $1',           locale: 'en', expect: 'unsafeFinancial' },
+  { q: 'are you HSM-backed?',                locale: 'en', expect: 'unsafeFinancial' },
+  { q: 'does the server share live in an isolated VPC?', locale: 'en', expect: 'unsafeFinancial' },
+  { q: 'how does mpc recovery work without seed phrase please', locale: 'en', expect: 'supportedProductQuestion' },
+  { q: 'weather in seoul?',                  locale: 'en', expectOfftopic: 'unsupportedDomain' },
+  { q: 'tell me a joke',                     locale: 'en', expectOfftopic: 'benignOfftopic' },
+  { q: 'how are you?',                       locale: 'en', expectOfftopic: 'benignOfftopic' }
+];
+
+console.log('\n--- intent classifier ---');
+for (const c of intentCases) {
+  const got = classifyIntent(c.q, c.locale);
+  let ok;
+  if (c.expectOfftopic) {
+    // Off-topic helper is invoked by frontend only after retrieval miss.
+    ok = got === 'supportedProductQuestion' && classifyOfftopic(c.q, c.locale) === c.expectOfftopic;
+  } else {
+    ok = got === c.expect;
+  }
+  const detail = c.expectOfftopic ? `${got} + offtopic=${classifyOfftopic(c.q, c.locale)}` : got;
+  console.log(`${ok ? '✓' : '✗'}  [${c.locale}] "${c.q}"  →  ${detail}`);
+  ok ? pass++ : fail++;
+}
+
 console.log(`\n${pass}/${pass + fail} passed`);
+if (fail > 0) process.exit(1);
 process.exit(fail ? 1 : 0);

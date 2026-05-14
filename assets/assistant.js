@@ -278,11 +278,57 @@
       const q = input.value.trim();
       if (!q) return;
       const t = S();
+
+      // Intent router runs BEFORE history.push so privateData input is never
+      // echoed back to the DOM. Shim at assets/assistant-intents.js attaches
+      // the classifier to window.ONEWALLET_INTENTS. If absent (offline / load
+      // failure), every query falls through to supportedProductQuestion and
+      // the existing retrieval path is preserved.
+      const intents = (window.ONEWALLET_INTENTS && window.ONEWALLET_INTENTS.classifyIntent)
+        ? window.ONEWALLET_INTENTS
+        : { classifyIntent: () => 'supportedProductQuestion', classifyOfftopic: () => 'supportedProductQuestion' };
+      const intent = intents.classifyIntent(q, lang());
+      const intentCopy = (t.intents || {});
+
+      // privateData: redact the user bubble before pushing. Raw q is dropped.
+      if (intent === 'privateData') {
+        history.push({ role: 'user', text: intentCopy.privateDataUserRedacted || '[hidden]' });
+        history.push({ role: 'bot', text: intentCopy.privateData || t.fallback });
+        view = 'answering';
+        input.value = '';
+        render();
+        return;
+      }
+
+      // Other canned-reply intents: push raw user message + canned bot copy. No Worker call.
+      const cannedKey = {
+        greeting: 'greeting',
+        courtesy: 'courtesy',
+        capability: 'capability',
+        unsafeFinancial: 'unsafeFinancial'
+      }[intent];
+      if (cannedKey) {
+        history.push({ role: 'user', text: q });
+        history.push({ role: 'bot', text: intentCopy[cannedKey] || t.fallback });
+        view = 'answering';
+        input.value = '';
+        render();
+        return;
+      }
+
+      // supportedProductQuestion (fall-through): try retrieval first.
       const match = bestMatch(q, t.items);
       history.push({ role: 'user', text: q });
       const botIdx = history.length;
-      if (match) history.push({ role: 'bot', text: match.a, href: match.href, link: match.link });
-      else history.push({ role: 'bot', text: t.fallback });
+      if (match) {
+        history.push({ role: 'bot', text: match.a, href: match.href, link: match.link });
+      } else {
+        // Retrieval missed — give the off-topic classifier a turn to decide
+        // between unsupportedDomain, benignOfftopic, or a final t.fallback.
+        const offtopic = intents.classifyOfftopic(q, lang());
+        const offKey = { unsupportedDomain: 'unsupportedDomain', benignOfftopic: 'benignOfftopic' }[offtopic];
+        history.push({ role: 'bot', text: (offKey && intentCopy[offKey]) || t.fallback });
+      }
       view = 'answering';
       input.value = '';
       render();
