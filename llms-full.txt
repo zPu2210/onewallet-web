@@ -6,11 +6,9 @@ Whitepaper: https://onewallet.store/whitepaper.html
 Version: prototype draft v0.9 · 2026-05
 Disclaimer: Forward-looking statements remain subject to product, security, and legal review. Not financial, legal, tax, or investment advice.
 
-
 SECTION 1 — What ONEWALLET is
 ------------------------------
 ONEWALLET is a Telegram-native Web3 wallet and payment rail. It bundles keyless MPC custody, QR payments, merchant tools, and $1 utility into a single Telegram Mini App flow. Users open ONEWALLET inside Telegram, verify the device, create the wallet, and then send, pay, or earn from the Mini App. The default flow avoids app-store downloads and seed-phrase setup.
-
 
 SECTION 2 — Custody and security model
 ---------------------------------------
@@ -28,21 +26,17 @@ Threat model (selected):
 
 Custody isolation and hardware-protected key storage are described as target architecture, not a present-day guarantee. No custody model is unbreakable.
 
-
 SECTION 3 — Recovery and seed phrases
 --------------------------------------
 ONEWALLET uses MPC, so there is no single seed phrase a normal user must hold. If a user loses their device or Telegram account, recovery is designed around issuing a fresh device share and validating it through the recovery share. Losing a device or Telegram session does not give the server enough authority to move funds alone. Advanced backup or export behavior remains subject to product and security approval.
-
 
 SECTION 4 — Networks
 ---------------------
 The public draft targets TON, Ethereum, BNB Chain, TRON, and major stablecoins (USDT, USDC, etc.). The final supported network list will be confirmed before public launch.
 
-
 SECTION 5 — Merchant payments
 ------------------------------
 Merchant flow: a merchant generates a QR invoice; the user scans it inside Telegram; ONEWALLET previews receiver, fees, and FX; MPC signs the transaction; a settlement webhook supports POS reconciliation. Merchant tooling includes QR invoicing, stablecoin settlement, webhooks, and ecosystem rewards.
-
 
 SECTION 6 — Fees and $1 utility
 --------------------------------
@@ -57,7 +51,6 @@ $1 token utility (positioning, not promises):
 
 ONEWALLET makes no price, return, or exchange-listing promises. $1 is positioned as a utility token.
 
-
 SECTION 7 — Roadmap
 --------------------
 - Phase 1 — Core wallet (MPC custody, TMA, multi-chain): completed.
@@ -66,7 +59,6 @@ SECTION 7 — Roadmap
 - Phase 4 — Ecosystem (mini-app store, partner program): planned.
 
 Dates are intentionally omitted until owners approve public commitments.
-
 
 SECTION 8 — Risks (disclosed)
 ------------------------------
@@ -77,7 +69,6 @@ SECTION 8 — Risks (disclosed)
 - Token utility drift (low) — utility decoupling dilutes demand; mitigation via activity-linked rewards.
 - Localization quality (low) — weak translations damage trust; mitigation via native review pipeline.
 
-
 SECTION 9 — Architecture (four layers)
 ---------------------------------------
 - Layer 01 — Client: Telegram Mini App, React + TMA SDK; UI, session, device share, UX state.
@@ -85,11 +76,9 @@ SECTION 9 — Architecture (four layers)
 - Layer 03 — Custody (target architecture): MPC server share, signer service, recovery share registry; isolated environment; hardware-protected key storage (planned); cannot sign alone.
 - Layer 04 — Settlement: chain adapters, payment processor, indexer, merchant API; TON, EVM, stablecoin rails; idempotent settlement.
 
-
 SECTION 10 — Growth model
 --------------------------
 Loops, not campaigns. Referral loop: every active user can refer inside chat with one tap. Merchant loop: accepting ONEWALLET introduces customers to the wallet. Mini-app loop: partner mini-apps require a wallet, driving new sign-ups.
-
 
 SECTION 11 — Business model
 ----------------------------
@@ -98,11 +87,9 @@ SECTION 11 — Business model
 - Mini-app revenue share — take rate on premium mini-app transactions. (Planned)
 - Merchant SaaS — subscription for analytics, refunds, multi-store. (Planned)
 
-
 SECTION 12 — Team and governance
 ---------------------------------
 The team section names the founders, engineering, and operating partners listed in the current public copy. For governance or partnership questions outside that list, contact the team on Telegram.
-
 
 SECTION 13 — Glossary
 ----------------------
@@ -111,7 +98,6 @@ SECTION 13 — Glossary
 - TMA — Telegram Mini App.
 - Settlement webhook — a signed HTTP callback used for merchant reconciliation.
 - Recovery share — a non-online MPC share used in recovery flows.
-
 
 SECTION 14 — Support and community channels
 --------------------------------------------
@@ -125,13 +111,11 @@ Community and announcement channels are separate from the product link:
 
 The Telegram Mini App link is the product entry, not a social channel. Launch updates and community questions are handled on the Telegram community channel. Users must not share private wallet, account, or recovery data in any public channel; for account-specific issues, use private support paths only.
 
-
 SECTION 15 — ONEWALLET AI Assistant
 ------------------------------------
 The website includes the ONEWALLET AI Assistant. It is source-grounded on approved public website, whitepaper, and assistant-corpus material. It can answer questions about wallet setup, MPC security, recovery, payments, fees, $1 utility, roadmap, risks, team, and community channels.
 
 The assistant does not access user accounts, private wallet data, recovery data, or execute wallet actions. Answers can still be wrong and should not be treated as financial, legal, tax, investment, audit, regulatory, exchange-listing, or vendor-architecture advice. If context is unsupported or unsafe, the assistant should fall back to a safe refusal.
-
 
 SECTION 16 — Disclosure
 ------------------------

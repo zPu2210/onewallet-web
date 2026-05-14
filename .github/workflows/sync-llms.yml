@@ -1,0 +1,74 @@
+name: sync-llms
+
+# Pulls llms.txt and llms-full.txt from Google Docs editorial sources, runs the
+# claim-safety guard, and opens a PR when content changed. Manual dispatch +
+# 30-min schedule. Never auto-merges — public claim content requires review.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync from Google Docs
+        id: sync
+        env:
+          GOOGLE_SA_KEY: ${{ secrets.GOOGLE_SA_KEY }}
+        run: |
+          set -euo pipefail
+          node scripts/sync-llms-from-docs.mjs > /tmp/sync-summary.json
+          cat /tmp/sync-summary.json
+          {
+            echo "summary<<EOF"
+            cat /tmp/sync-summary.json
+            echo "EOF"
+            echo "changed=$(jq -r '.changed' /tmp/sync-summary.json)"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Claim-safety guard
+        if: steps.sync.outputs.changed == 'true'
+        run: node scripts/check-claim-safety.mjs
+
+      - name: Open PR
+        if: steps.sync.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: content/llms-sync
+          base: main
+          commit-message: 'chore(llms): sync from Google Docs sources'
+          title: 'chore(llms): sync llms.txt / llms-full.txt from Google Docs'
+          body: |
+            Automated sync from Google Docs editorial sources.
+
+            Editor: edits go in Docs. This PR re-publishes the rendered plain-text artifacts served at `/llms.txt` and `/llms-full.txt`.
+
+            **Sync summary**
+            ```json
+            ${{ steps.sync.outputs.summary }}
+            ```
+
+            Gates passed before this PR opened:
+            - `scripts/sync-llms-from-docs.mjs` — fetch, normalise, shrink-guard
+            - `scripts/check-claim-safety.mjs` — banned-claim scan
+
+            Reviewer checklist:
+            - [ ] Diff matches Doc intent
+            - [ ] No banned claims slipped through (CI re-runs the guard)
+            - [ ] Size delta reasonable
+          labels: |
+            content
+            llms-sync
+          delete-branch: true

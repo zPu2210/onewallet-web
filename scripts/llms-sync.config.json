@@ -1,0 +1,15 @@
+{
+  "$schema_note": "Google Docs source mapping for /llms.txt and /llms-full.txt. Doc IDs are not secrets.",
+  "docs": [
+    {
+      "docId": "15i7ifUxtkg0yfCsdcb0pebynZXPsaDpYDR6Mx0oTlGs",
+      "out": "llms.txt",
+      "label": "ONEWALLET - llms.txt source"
+    },
+    {
+      "docId": "1PkLhE8fSJWTL_t1f6aYHocCiOX_ZB7WyNbmcPBXS-zI",
+      "out": "llms-full.txt",
+      "label": "ONEWALLET - llms-full.txt source"
+    }
+  ]
+}
