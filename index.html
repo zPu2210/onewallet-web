@@ -35,7 +35,7 @@
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-  {"@type":"Organization","name":"ONEWALLET","url":"https://onewallet.app/","logo":"https://onewallet.app/assets/logo.png","description":"Telegram-native Web3 wallet, payment rail, and $1 token ecosystem.","sameAs":["https://t.me/onedollar_wallet_bot"]},
+  {"@type":"Organization","name":"ONEWALLET","url":"https://onewallet.app/","logo":"https://onewallet.app/assets/logo.png","description":"Telegram-native Web3 wallet, payment rail, and $1 token ecosystem.","sameAs":["https://t.me/onedollar_project","https://x.com/one_wallet_","https://www.youtube.com/@One_Wallet_Official","https://www.facebook.com/profile.php?id=61589009140069"]},
   {"@type":"WebSite","name":"ONEWALLET","url":"https://onewallet.app/","inLanguage":["en","ko","ja","zh"]},
   {"@type":"SoftwareApplication","name":"ONEWALLET","applicationCategory":"FinanceApplication","operatingSystem":"Telegram Mini App","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 ]}
@@ -512,6 +512,14 @@
   .foot-about .brand img { width: 36px; height: 36px; }
   .foot-about p { color: var(--fg-muted); font-size: 13.5px; max-width: 38ch; margin-top: 16px; line-height: 1.6; }
   .foot-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--fg-subtle); font-family: var(--mono); }
+  .foot-social { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 0 0 22px; }
+  .foot-social .lbl { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--fg-subtle); margin-right: 6px; }
+  html[lang="ko"] .foot-social .lbl, html[lang="ja"] .foot-social .lbl, html[lang="zh"] .foot-social .lbl { font-family: inherit; letter-spacing: 0.04em; }
+  .foot-social a.sns { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: var(--radius-pill); color: var(--fg-muted); background: var(--bg); transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast), transform var(--t-fast); }
+  .foot-social a.sns:hover { color: var(--brand); border-color: var(--brand-dim); background: var(--brand-soft); transform: translateY(-1px); }
+  .foot-social a.sns:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  .foot-social a.sns svg { width: 16px; height: 16px; display: block; }
+  .foot-social a.sns::after { content: none; }
 
   /* Security model diagram */
   .sec-diag { background: var(--bg-code); border: 1px solid var(--border); border-radius: var(--radius-md); padding: clamp(18px,3vw,28px); box-shadow: var(--shadow-sm); }
@@ -1284,7 +1292,7 @@
 
 </main>
 
-<footer>
+<footer id="footer">
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-col foot-about">
@@ -1292,8 +1300,23 @@
         <p data-i18n="foot.about">The Telegram-native Web3 wallet and payment rail for users, merchants, and the $1 ecosystem.</p>
       </div>
       <div class="foot-col"><h5 data-i18n="foot.col1.h">Product</h5><a href="#users" data-i18n="foot.col1.1">For users</a><a href="#partners" data-i18n="foot.col1.2">For merchants</a><a href="#security" data-i18n="foot.col1.3">Security</a><a href="whitepaper.html" data-i18n="foot.col1.4">Whitepaper</a></div>
-      <div class="foot-col"><h5 data-i18n="foot.col2.h">Company</h5><a href="#team" data-i18n="foot.col2.1">Team</a><a href="#roadmap" data-i18n="foot.col2.2">Roadmap</a><a href="https://t.me/onedollar_wallet_bot" target="_blank" rel="noopener" data-i18n="foot.col2.3">Telegram</a></div>
+      <div class="foot-col"><h5 data-i18n="foot.col2.h">Company</h5><a href="#team" data-i18n="foot.col2.1">Team</a><a href="#roadmap" data-i18n="foot.col2.2">Roadmap</a><a href="https://t.me/onedollar_project" target="_blank" rel="noopener noreferrer" data-i18n="foot.col2.3">Community</a></div>
       <div class="foot-col"><h5 data-i18n="foot.col3.h">Legal</h5><a href="whitepaper.html#ch11" data-i18n="foot.col3.1">Risk notice</a><a href="whitepaper.html#ch12" data-i18n="foot.col3.2">Disclosures</a></div>
+    </div>
+    <div class="foot-social" aria-label="ONEWALLET community channels" data-i18n-attr="aria-label:foot.social.aria">
+      <span class="lbl" data-i18n="foot.social.h">Community</span>
+      <a class="sns" href="https://t.me/onedollar_project" target="_blank" rel="noopener noreferrer" aria-label="ONEWALLET on Telegram" data-i18n-attr="aria-label:foot.social.tg">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.94 4.42 18.6 20.18c-.25 1.12-.92 1.39-1.87.86l-5.17-3.82-2.49 2.4c-.28.28-.51.51-1.04.51l.37-5.26 9.55-8.63c.41-.37-.09-.58-.65-.21L5.5 13.05.43 11.46c-1.1-.34-1.13-1.1.23-1.62L20.51 3c.92-.34 1.72.22 1.43 1.42z"/></svg>
+      </a>
+      <a class="sns" href="https://x.com/one_wallet_" target="_blank" rel="noopener noreferrer" aria-label="ONEWALLET on X" data-i18n-attr="aria-label:foot.social.x">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2H21.5l-7.523 8.59L22.5 22h-6.828l-5.345-6.99L4.2 22H.94l8.045-9.19L1.5 2h6.97l4.83 6.39L18.244 2zm-2.39 18h1.86L7.23 4H5.27l10.584 16z"/></svg>
+      </a>
+      <a class="sns" href="https://www.youtube.com/@One_Wallet_Official" target="_blank" rel="noopener noreferrer" aria-label="ONEWALLET on YouTube" data-i18n-attr="aria-label:foot.social.yt">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.12-2.12C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.58A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.12 2.12C4.5 20.5 12 20.5 12 20.5s7.5 0 9.38-.58a3 3 0 0 0 2.12-2.12A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+      </a>
+      <a class="sns" href="https://www.facebook.com/profile.php?id=61589009140069" target="_blank" rel="noopener noreferrer" aria-label="ONEWALLET on Facebook" data-i18n-attr="aria-label:foot.social.fb">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8.5h2.86l.43-3.33H13.5V8.04c0-.96.27-1.62 1.65-1.62h1.76V3.44A23.6 23.6 0 0 0 14.34 3.3c-2.55 0-4.3 1.56-4.3 4.42v2.45H7.17v3.33h2.87V22h3.46z"/></svg>
+      </a>
     </div>
     <div class="foot-bottom">
       <span data-i18n="foot.copy">© 2026 ONEWALLET · v0.9 prototype</span>

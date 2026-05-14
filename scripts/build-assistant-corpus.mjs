@@ -87,7 +87,9 @@ const homepageSections = [
   { id: 'hp-token', title: 'Token — utility first, allocation second', src: 'index.html#token', tags: ['token','utility','allocation'],
     text: 'Utility first. Allocation second. $1 is described as the working-layer token for fees, rewards, merchant incentives, ecosystem access, and governance signals.' },
   { id: 'hp-cta', title: 'How to try ONEWALLET', src: 'https://t.me/onedollar_wallet_bot/app', tags: ['cta','support','telegram','contact'],
-    text: 'Open a wallet in a few taps via the Telegram Mini App at https://t.me/onedollar_wallet_bot/app . Account-specific or launch-related questions are handled on Telegram.' }
+    text: 'Open a wallet in a few taps via the Telegram Mini App at https://t.me/onedollar_wallet_bot/app . Launch-related and community questions are handled on the Telegram community channel; never share private wallet, account, or recovery data in any public channel.' },
+  { id: 'hp-community', title: 'Community channels — Telegram, X, YouTube, Facebook', src: 'index.html#footer', tags: ['community','social','sns','telegram','x','twitter','youtube','facebook','channel','privacy'],
+    text: 'Official ONEWALLET community channels: Telegram community https://t.me/onedollar_project for launch updates and questions; X https://x.com/one_wallet_ for short updates; YouTube https://www.youtube.com/@One_Wallet_Official for product clips; Facebook https://www.facebook.com/profile.php?id=61589009140069 for broader reach. The Telegram Mini App at https://t.me/onedollar_wallet_bot/app remains the product entry point and is distinct from the community channel. Do not share private wallet, account, or recovery data in any public channel.' }
 ];
 
 for (const c of wpChapters)        chunks.push({ id: c.id, locale: 'en', title: c.title, source: c.src, tags: c.tags, text: c.text });

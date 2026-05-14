@@ -176,9 +176,11 @@ window.I18N = (function () {
 
     'foot.about': 'The Telegram-native Web3 wallet and payment rail for users, merchants, and the $1 ecosystem.',
     'foot.col1.h': 'Product', 'foot.col1.1': 'For users', 'foot.col1.2': 'For merchants', 'foot.col1.3': 'Security', 'foot.col1.4': 'Whitepaper',
-    'foot.col2.h': 'Company', 'foot.col2.1': 'Team', 'foot.col2.2': 'Roadmap', 'foot.col2.3': 'Telegram',
+    'foot.col2.h': 'Company', 'foot.col2.1': 'Team', 'foot.col2.2': 'Roadmap', 'foot.col2.3': 'Community',
     'foot.col3.h': 'Legal', 'foot.col3.1': 'Risk notice', 'foot.col3.2': 'Disclosures',
     'foot.copy': '© 2026 ONEWALLET · v0.9 prototype',
+    'foot.social.h': 'Community', 'foot.social.aria': 'ONEWALLET community channels',
+    'foot.social.tg': 'ONEWALLET on Telegram', 'foot.social.x': 'ONEWALLET on X', 'foot.social.yt': 'ONEWALLET on YouTube', 'foot.social.fb': 'ONEWALLET on Facebook',
 
     /* === Whitepaper === */
     'wp.bar.wpv': 'Whitepaper · v0.9 draft',
@@ -513,9 +515,11 @@ window.I18N = (function () {
 
     'foot.about': '사용자, 가맹점, 그리고 $1 에코시스템을 위한 텔레그램 네이티브 Web3 지갑 및 결제 레일.',
     'foot.col1.h': '제품', 'foot.col1.1': '사용자', 'foot.col1.2': '가맹점', 'foot.col1.3': '보안', 'foot.col1.4': '백서',
-    'foot.col2.h': '회사', 'foot.col2.1': '팀', 'foot.col2.2': '로드맵', 'foot.col2.3': '텔레그램',
+    'foot.col2.h': '회사', 'foot.col2.1': '팀', 'foot.col2.2': '로드맵', 'foot.col2.3': '커뮤니티',
     'foot.col3.h': '법무', 'foot.col3.1': '위험 고지', 'foot.col3.2': '공시',
     'foot.copy': '© 2026 ONEWALLET · v0.9 프로토타입',
+    'foot.social.h': '커뮤니티', 'foot.social.aria': 'ONEWALLET 커뮤니티 채널',
+    'foot.social.tg': 'Telegram의 ONEWALLET', 'foot.social.x': 'X의 ONEWALLET', 'foot.social.yt': 'YouTube의 ONEWALLET', 'foot.social.fb': 'Facebook의 ONEWALLET',
 
     /* Whitepaper KO */
     'wp.bar.wpv': '백서 · v0.9 초안',
@@ -834,9 +838,11 @@ window.I18N = (function () {
 
     'foot.about': 'ユーザー、加盟店、$1エコシステムのためのTelegramネイティブWeb3ウォレットおよび決済レール。',
     'foot.col1.h': 'プロダクト', 'foot.col1.1': '個人', 'foot.col1.2': '加盟店', 'foot.col1.3': 'セキュリティ', 'foot.col1.4': 'ホワイトペーパー',
-    'foot.col2.h': '会社', 'foot.col2.1': 'チーム', 'foot.col2.2': 'ロードマップ', 'foot.col2.3': 'Telegram',
+    'foot.col2.h': '会社', 'foot.col2.1': 'チーム', 'foot.col2.2': 'ロードマップ', 'foot.col2.3': 'コミュニティ',
     'foot.col3.h': '法務', 'foot.col3.1': 'リスク告知', 'foot.col3.2': '開示',
     'foot.copy': '© 2026 ONEWALLET · v0.9 プロトタイプ',
+    'foot.social.h': 'コミュニティ', 'foot.social.aria': 'ONEWALLET コミュニティチャンネル',
+    'foot.social.tg': 'Telegram の ONEWALLET', 'foot.social.x': 'X の ONEWALLET', 'foot.social.yt': 'YouTube の ONEWALLET', 'foot.social.fb': 'Facebook の ONEWALLET',
 
     /* Whitepaper JA */
     'wp.bar.wpv': 'ホワイトペーパー · v0.9 ドラフト',
@@ -1155,9 +1161,11 @@ window.I18N = (function () {
 
     'foot.about': '面向用户、商户与 $1 生态的 Telegram 原生 Web3 钱包与支付通道。',
     'foot.col1.h': '产品', 'foot.col1.1': '用户', 'foot.col1.2': '商户', 'foot.col1.3': '安全', 'foot.col1.4': '白皮书',
-    'foot.col2.h': '公司', 'foot.col2.1': '团队', 'foot.col2.2': '路线图', 'foot.col2.3': 'Telegram',
+    'foot.col2.h': '公司', 'foot.col2.1': '团队', 'foot.col2.2': '路线图', 'foot.col2.3': '社区',
     'foot.col3.h': '法律', 'foot.col3.1': '风险提示', 'foot.col3.2': '披露',
     'foot.copy': '© 2026 ONEWALLET · v0.9 原型',
+    'foot.social.h': '社区', 'foot.social.aria': 'ONEWALLET 社区频道',
+    'foot.social.tg': 'Telegram 上的 ONEWALLET', 'foot.social.x': 'X 上的 ONEWALLET', 'foot.social.yt': 'YouTube 上的 ONEWALLET', 'foot.social.fb': 'Facebook 上的 ONEWALLET',
 
     /* Whitepaper ZH */
     'wp.bar.wpv': '白皮书 · v0.9 草稿',

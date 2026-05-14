@@ -113,9 +113,17 @@ SECTION 13 — Glossary
 - Recovery share — a non-online MPC share used in recovery flows.
 
 
-SECTION 14 — Support
----------------------
-The current public entry point is the Telegram Mini App: https://t.me/onedollar_wallet_bot/app . For account-specific or launch-related questions, Telegram support is the source of action.
+SECTION 14 — Support and community channels
+--------------------------------------------
+The product entry point is the Telegram Mini App: https://t.me/onedollar_wallet_bot/app .
+
+Community and announcement channels are separate from the product link:
+- Telegram community: https://t.me/onedollar_project (news, questions, support discussion)
+- X (Twitter): https://x.com/one_wallet_
+- YouTube: https://www.youtube.com/@One_Wallet_Official
+- Facebook: https://www.facebook.com/profile.php?id=61589009140069
+
+The Telegram Mini App link is the product entry, not a social channel. Launch updates and community questions are handled on the Telegram community channel. Users must not share private wallet, account, or recovery data in any public channel; for account-specific issues, use private support paths only.
 
 
 SECTION 15 — Disclosure

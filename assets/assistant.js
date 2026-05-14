@@ -343,7 +343,7 @@
             t.disclosureLinks.map((l) => {
               const href = resolveHref(l.href);
               const ext = /^https?:/.test(href);
-              return '<li><a href="' + href + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + l.label + iconArrow() + '</a></li>';
+              return '<li><a href="' + href + '"' + (ext ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + l.label + iconArrow() + '</a></li>';
             }).join('') +
           '</ul>' +
         '</div>';
@@ -384,7 +384,7 @@
           const href = resolveHref(m.href || '');
           const ext = /^https?:/.test(href);
           const link = (href && m.link)
-            ? '<a class="ow-msg-link" href="' + href + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + m.link + iconArrow() + '</a>'
+            ? '<a class="ow-msg-link" href="' + href + '"' + (ext ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + m.link + iconArrow() + '</a>'
             : '';
           return '<li class="ow-msg ow-msg-bot">' + escapeHtml(m.text) + link + '</li>';
         }).join('') +

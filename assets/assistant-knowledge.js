@@ -23,14 +23,15 @@ window.ONEWALLET_ASSISTANT = (function () {
       disclosure: [
         'This assistant draws on the public ONEWALLET website and whitepaper through a grounded AI layer. Answers can still be wrong. It does not access your account, private wallet data, or execute wallet actions on your behalf.',
         'Nothing here is financial, legal, tax, or investment advice. No price, return, exchange-listing, audit, regulatory, or vendor-architecture guarantees are made. Forward-looking statements ("target", "planned", "draft") remain subject to final product, security, and legal review.',
-        'For account-specific issues, launch dates, or anything not in the public copy, please contact us on Telegram.'
+        'For launch dates, community questions, or anything not in the public copy, please reach us through the Telegram community channel. Do not share private wallet, account, or recovery data in any public channel.'
       ],
       disclosureLinks: [
         { href: 'whitepaper.html#ch11', label: 'Whitepaper · Risks & mitigations' },
         { href: 'whitepaper.html#ch12', label: 'Whitepaper · Glossary' },
-        { href: 'https://t.me/onedollar_wallet_bot/app', label: 'Open ONEWALLET on Telegram' }
+        { href: 'https://t.me/onedollar_wallet_bot/app', label: 'Open ONEWALLET Mini App' },
+        { href: 'https://t.me/onedollar_project', label: 'Telegram community channel' }
       ],
-      fallback: 'I can only answer from the current public homepage and whitepaper draft. Try asking about wallet setup, MPC security, recovery, payments, fees, $1 utility, roadmap, risks, or Telegram support.',
+      fallback: 'I can only answer from the current public homepage and whitepaper draft. Try asking about wallet setup, MPC security, recovery, payments, fees, $1 utility, roadmap, risks, or community channels.',
       items: [
         { id: 'what', featured: true, q: 'What does ONEWALLET do?', a: 'ONEWALLET is a Telegram-native Web3 wallet and payment rail. It bundles keyless MPC custody, QR payments, merchant tools, and $1 utility into a single Mini App flow.', href: 'whitepaper.html#ch1', link: 'Executive summary', k: 'what product wallet payment rail telegram mini app' },
         { id: 'open', q: 'How do I open a wallet?', a: 'You open ONEWALLET inside Telegram, verify the device, create the wallet, and then send, pay, or earn from the Mini App. The default flow avoids app-store downloads and a seed-phrase setup.', href: '#product-flow', link: 'Product flow', k: 'open wallet telegram mini app onboarding setup start device' },
@@ -45,7 +46,8 @@ window.ONEWALLET_ASSISTANT = (function () {
         { id: 'risks', q: 'What risks are disclosed?', a: 'The whitepaper calls out custody compromise, Telegram platform dependency, regulatory shifts, merchant adoption, token utility drift, and localization quality. Mitigations are described as planned or conditional where appropriate.', href: 'whitepaper.html#ch11', link: 'Risks & mitigations', k: 'risk risks mitigation telegram dependency regulatory custody adoption localization' },
         { id: 'whitepaper', q: 'Where should I read the details?', a: 'The whitepaper is the detailed product and technical reference. It covers executive summary, product thesis, UX, architecture, security, token model, growth, business model, roadmap, team, risks, and glossary.', href: 'whitepaper.html', link: 'Read whitepaper', k: 'whitepaper details documentation chapters glossary architecture pdf' },
         { id: 'team', q: 'Who is behind ONEWALLET?', a: 'The team section names the founders, engineering, and operating partners listed in the current public copy. For governance or partnership questions outside that list, please reach the team on Telegram.', href: '#team', link: 'Team section', k: 'team founders governance who behind people' },
-        { id: 'support', q: 'How do I contact or try ONEWALLET?', a: 'The current public entry point is the Telegram Mini App link. For account-specific or launch-related questions, Telegram support should be treated as the source of action.', href: 'https://t.me/onedollar_wallet_bot/app', link: 'Open Telegram', k: 'contact support telegram try app bot help reach' }
+        { id: 'support', q: 'How do I contact or try ONEWALLET?', a: 'To try the product, open the Telegram Mini App at t.me/onedollar_wallet_bot/app. For launch updates and community questions, join the Telegram community channel at t.me/onedollar_project. ONEWALLET also runs public X, YouTube, and Facebook channels for announcements. Never share private wallet, account, or recovery data in any public channel.', href: 'https://t.me/onedollar_wallet_bot/app', link: 'Open Telegram', k: 'contact support telegram try app bot help reach community channel x youtube facebook social sns announce privacy' },
+        { id: 'community', q: 'Where can I follow ONEWALLET on social media?', a: 'Official ONEWALLET channels are: Telegram community t.me/onedollar_project, X (Twitter) x.com/one_wallet_, YouTube youtube.com/@One_Wallet_Official, and Facebook profile 61589009140069. The Telegram Mini App (t.me/onedollar_wallet_bot/app) is the product entry, not a social channel.', href: 'https://t.me/onedollar_project', link: 'Join the community', k: 'social sns community channel telegram x twitter youtube facebook follow news announce' }
       ]
     },
     ko: {
@@ -66,14 +68,15 @@ window.ONEWALLET_ASSISTANT = (function () {
       disclosure: [
         '이 도우미는 공개된 ONEWALLET 웹사이트와 백서 자료를 근거로 동작하는 AI 레이어입니다. 답변이 틀릴 수 있습니다. 사용자의 계정이나 개인 지갑 데이터에 접근하지 않으며, 지갑 작업을 대신 실행하지 않습니다.',
         '본 응답은 금융·법률·세무·투자 자문이 아닙니다. 가격, 수익, 거래소 상장, 감사, 규제, 벤더 아키텍처에 대해 보증하지 않습니다. "목표", "계획", "초안" 등 미래 표현은 최종 제품·보안·법무 검토를 거쳐 변경될 수 있습니다.',
-        '계정별 문의나 출시 일정 등 공개 문구에 없는 사안은 Telegram을 통해 문의해 주세요.'
+        '출시 일정이나 커뮤니티 관련 질문 등 공개 문구에 없는 사안은 Telegram 커뮤니티 채널을 통해 문의해 주세요. 개인 지갑, 계정, 복구 정보는 어떤 공개 채널에도 공유하지 마세요.'
       ],
       disclosureLinks: [
         { href: 'whitepaper.html#ch11', label: '백서 · 리스크와 완화' },
         { href: 'whitepaper.html#ch12', label: '백서 · 용어집' },
-        { href: 'https://t.me/onedollar_wallet_bot/app', label: 'Telegram에서 ONEWALLET 열기' }
+        { href: 'https://t.me/onedollar_wallet_bot/app', label: 'ONEWALLET 미니앱 열기' },
+        { href: 'https://t.me/onedollar_project', label: 'Telegram 커뮤니티 채널' }
       ],
-      fallback: '현재 공개 홈페이지와 백서 초안에 있는 내용만 답변할 수 있습니다. 지갑 개설, MPC 보안, 복구, 결제, 수수료, $1 유틸리티, 로드맵, 리스크 또는 Telegram 지원을 물어보세요.',
+      fallback: '현재 공개 홈페이지와 백서 초안에 있는 내용만 답변할 수 있습니다. 지갑 개설, MPC 보안, 복구, 결제, 수수료, $1 유틸리티, 로드맵, 리스크 또는 커뮤니티 채널에 대해 물어보세요.',
       items: [
         { id: 'what', featured: true, q: 'ONEWALLET은 무엇을 하나요?', a: 'ONEWALLET은 Telegram 안에서 작동하는 Web3 지갑이자 결제 레일입니다. 무시드 MPC 커스터디, QR 결제, 머천트 도구, $1 유틸리티를 하나의 Mini App 흐름으로 연결합니다.', href: 'whitepaper.html#ch1', link: '요약 읽기', k: '무엇 제품 지갑 결제 telegram mini app' },
         { id: 'open', q: '지갑은 어떻게 열 수 있나요?', a: 'Telegram에서 ONEWALLET을 열고, 기기를 확인한 뒤 지갑을 생성합니다. 이후 Mini App 안에서 전송, 결제, 보상 흐름을 사용할 수 있습니다. 공개 문구는 앱스토어 다운로드와 기본 시드 문구 설정을 피하는 방향입니다.', href: '#product-flow', link: '제품 흐름', k: '열기 지갑 telegram 온보딩 시작 기기' },
@@ -88,7 +91,8 @@ window.ONEWALLET_ASSISTANT = (function () {
         { id: 'risks', q: '어떤 리스크가 공개되어 있나요?', a: '백서는 커스터디 침해, Telegram 플랫폼 의존성, 규제 변화, 머천트 채택, 토큰 유틸리티 이탈, 현지화 품질을 리스크로 공개합니다. 완화책은 필요한 경우 계획 또는 조건부로 표현합니다.', href: 'whitepaper.html#ch11', link: '리스크와 완화', k: '리스크 완화 telegram 의존성 규제 커스터디 채택 현지화' },
         { id: 'whitepaper', q: '자세한 내용은 어디서 보나요?', a: '백서가 제품 및 기술 상세 기준 문서입니다. 요약, 제품 논리, UX, 아키텍처, 보안, 토큰 모델, 성장, 비즈니스 모델, 로드맵, 팀, 리스크, 용어집을 다룹니다.', href: 'whitepaper.html', link: '백서 읽기', k: '백서 자세한 문서 장 용어집 아키텍처' },
         { id: 'team', q: 'ONEWALLET 팀은 어떻게 구성되어 있나요?', a: '팀 섹션에는 공개된 창립자, 엔지니어링, 운영 파트너가 명시되어 있습니다. 거버넌스나 파트너십 등 공개 정보 외 문의는 Telegram으로 연락해 주세요.', href: '#team', link: '팀 섹션', k: '팀 창립자 거버넌스 누구 사람' },
-        { id: 'support', q: '어떻게 문의하거나 사용해볼 수 있나요?', a: '현재 공개 진입점은 Telegram 링크입니다. 계정별 또는 출시 관련 질문은 Telegram 지원 채널을 실제 행동 기준으로 보아야 합니다.', href: 'https://t.me/onedollar_wallet_bot/app', link: 'Telegram 열기', k: '문의 지원 telegram 사용 앱 봇 도움' }
+        { id: 'support', q: '어떻게 문의하거나 사용해볼 수 있나요?', a: '제품을 사용해 보려면 Telegram 미니앱(t.me/onedollar_wallet_bot/app)을 여세요. 출시 소식과 커뮤니티 질문은 Telegram 커뮤니티 채널(t.me/onedollar_project)을 이용하세요. X, YouTube, Facebook 공식 채널도 운영합니다. 개인 지갑, 계정, 복구 정보는 어떤 공개 채널에도 공유하지 마세요.', href: 'https://t.me/onedollar_wallet_bot/app', link: 'Telegram 열기', k: '문의 지원 telegram 사용 앱 봇 도움 커뮤니티 채널 소셜 sns 개인정보' },
+        { id: 'community', q: '소셜 미디어에서 ONEWALLET을 어디에서 팔로우할 수 있나요?', a: '공식 채널은 Telegram 커뮤니티(t.me/onedollar_project), X(x.com/one_wallet_), YouTube(@One_Wallet_Official), Facebook(프로필 61589009140069)입니다. Telegram 미니앱(t.me/onedollar_wallet_bot/app)은 제품 진입점이며 소셜 채널이 아닙니다.', href: 'https://t.me/onedollar_project', link: '커뮤니티 참여', k: '소셜 sns 커뮤니티 채널 telegram x twitter youtube facebook 팔로우 소식' }
       ]
     },
     ja: {
@@ -109,14 +113,15 @@ window.ONEWALLET_ASSISTANT = (function () {
       disclosure: [
         'このアシスタントは、公開されている ONEWALLET ウェブサイトとホワイトペーパーを根拠に動作する AI レイヤーを使用します。回答が誤る場合があります。ユーザーのアカウントや個人のウォレットデータにはアクセスせず、ウォレット操作を代理で実行しません。',
         'これは金融、法律、税務、投資の助言ではありません。価格、収益、取引所上場、監査、規制、ベンダーアーキテクチャの保証は行いません。「目標」「計画」「草案」などの将来表現は、最終的な製品・セキュリティ・法務レビューによって変更される可能性があります。',
-        'アカウント固有の問題、ローンチ日、その他公開コピーにない事項は Telegram でお問い合わせください。'
+        'ローンチ日やコミュニティの質問など、公開コピーにない事項は Telegram コミュニティチャンネルでお問い合わせください。個人のウォレット情報、アカウント情報、リカバリー情報を公開チャンネルで共有しないでください。'
       ],
       disclosureLinks: [
         { href: 'whitepaper.html#ch11', label: 'ホワイトペーパー · リスクと緩和' },
         { href: 'whitepaper.html#ch12', label: 'ホワイトペーパー · 用語集' },
-        { href: 'https://t.me/onedollar_wallet_bot/app', label: 'Telegram で ONEWALLET を開く' }
+        { href: 'https://t.me/onedollar_wallet_bot/app', label: 'ONEWALLET ミニアプリを開く' },
+        { href: 'https://t.me/onedollar_project', label: 'Telegram コミュニティチャンネル' }
       ],
-      fallback: '現在の公開ホームページとホワイトペーパー草案にある内容だけ回答できます。ウォレット作成、MPC セキュリティ、復旧、決済、手数料、$1 ユーティリティ、ロードマップ、リスク、Telegram サポートについて質問してください。',
+      fallback: '現在の公開ホームページとホワイトペーパー草案にある内容だけ回答できます。ウォレット作成、MPC セキュリティ、復旧、決済、手数料、$1 ユーティリティ、ロードマップ、リスク、コミュニティチャンネルについて質問してください。',
       items: [
         { id: 'what', featured: true, q: 'ONEWALLET は何をするものですか？', a: 'ONEWALLET は Telegram ネイティブの Web3 ウォレット兼決済レールです。キーレス MPC カストディ、QR 決済、加盟店ツール、$1 ユーティリティを Telegram の Mini App 内でつなぎます。', href: 'whitepaper.html#ch1', link: '概要を見る', k: 'what product wallet payment telegram mini app' },
         { id: 'open', q: 'ウォレットはどう開きますか？', a: 'Telegram から ONEWALLET を開き、デバイスを確認し、ウォレットを作成します。その後 Mini App 内で送金、支払い、報酬機能を使えます。公開コピーでは、アプリストアのダウンロードや標準のシードフレーズ設定を避ける流れです。', href: '#product-flow', link: 'プロダクトフロー', k: 'open wallet telegram onboarding setup device' },
@@ -131,7 +136,8 @@ window.ONEWALLET_ASSISTANT = (function () {
         { id: 'risks', q: 'どんなリスクが開示されていますか？', a: 'ホワイトペーパーは、カストディ侵害、Telegram プラットフォーム依存、規制変化、加盟店採用、トークンユーティリティのずれ、ローカライズ品質をリスクとして開示しています。緩和策は必要に応じて計画または条件付きで記載しています。', href: 'whitepaper.html#ch11', link: 'リスクと緩和策', k: 'risk mitigation telegram dependency regulatory custody adoption localization' },
         { id: 'whitepaper', q: '詳細はどこで読めますか？', a: 'ホワイトペーパーが製品・技術の詳細リファレンスです。概要、製品論点、UX、アーキテクチャ、セキュリティ、トークンモデル、成長、ビジネスモデル、ロードマップ、チーム、リスク、用語集を扱います。', href: 'whitepaper.html', link: 'ホワイトペーパーを読む', k: 'whitepaper details documentation chapters glossary architecture' },
         { id: 'team', q: 'ONEWALLET のチームは？', a: 'チームセクションでは、公開コピーに記載された創業者、エンジニアリング、運営パートナーを紹介しています。ガバナンスやパートナーシップなど公開外の質問は Telegram でご連絡ください。', href: '#team', link: 'チームセクション', k: 'team founders governance who behind people' },
-        { id: 'support', q: '問い合わせや試用はどうしますか？', a: '現在の公開エントリーポイントは Telegram リンクです。アカウント別またはローンチ関連の質問は、Telegram サポートを実際の案内先として扱ってください。', href: 'https://t.me/onedollar_wallet_bot/app', link: 'Telegram を開く', k: 'contact support telegram try app bot help' }
+        { id: 'support', q: '問い合わせや試用はどうしますか？', a: '製品を試すには Telegram ミニアプリ（t.me/onedollar_wallet_bot/app）を開いてください。ローンチ情報やコミュニティの質問は Telegram コミュニティチャンネル（t.me/onedollar_project）をご利用ください。X、YouTube、Facebook の公式チャンネルもあります。個人のウォレット情報、アカウント情報、リカバリー情報を公開チャンネルで共有しないでください。', href: 'https://t.me/onedollar_wallet_bot/app', link: 'Telegram を開く', k: 'contact support telegram try app bot help community channel social sns privacy' },
+        { id: 'community', q: 'ONEWALLET をどこでフォローできますか？', a: '公式チャンネルは Telegram コミュニティ（t.me/onedollar_project）、X（x.com/one_wallet_）、YouTube（@One_Wallet_Official）、Facebook（プロフィール 61589009140069）です。Telegram ミニアプリ（t.me/onedollar_wallet_bot/app）はプロダクトの入口であり、ソーシャルチャンネルではありません。', href: 'https://t.me/onedollar_project', link: 'コミュニティに参加', k: 'social sns community channel telegram x twitter youtube facebook follow announce' }
       ]
     },
     zh: {
@@ -152,14 +158,15 @@ window.ONEWALLET_ASSISTANT = (function () {
       disclosure: [
         '此助手基于公开的 ONEWALLET 网站与白皮书内容，通过有依据的 AI 层作答。答复仍可能出错。它不会访问您的账户或私人钱包数据，也不会代您执行任何钱包操作。',
         '此处内容不构成任何金融、法律、税务或投资建议。我们不对价格、收益、交易所上线、审计、监管或供应商架构作出保证。"目标"、"计划"、"草稿"等前瞻性表述仍需最终产品、安全及法律审查。',
-        '关于账户问题、上线日期或公开文案未涵盖的事项，请通过 Telegram 联系我们。'
+        '关于上线日期或社区问题等公开文案未涵盖的事项，请通过 Telegram 社区频道联系我们。请勿在任何公开渠道分享个人钱包、账户或恢复信息。'
       ],
       disclosureLinks: [
         { href: 'whitepaper.html#ch11', label: '白皮书 · 风险与缓解' },
         { href: 'whitepaper.html#ch12', label: '白皮书 · 术语表' },
-        { href: 'https://t.me/onedollar_wallet_bot/app', label: '在 Telegram 中打开 ONEWALLET' }
+        { href: 'https://t.me/onedollar_wallet_bot/app', label: '打开 ONEWALLET 小程序' },
+        { href: 'https://t.me/onedollar_project', label: 'Telegram 社区频道' }
       ],
-      fallback: '我只能根据当前公开主页和白皮书草稿回答。可以询问钱包开通、MPC 安全、恢复、支付、费用、$1 效用、路线图、风险或 Telegram 支持。',
+      fallback: '我只能根据当前公开主页和白皮书草稿回答。可以询问钱包开通、MPC 安全、恢复、支付、费用、$1 效用、路线图、风险或社区频道。',
       items: [
         { id: 'what', featured: true, q: 'ONEWALLET 是做什么的？', a: 'ONEWALLET 是原生于 Telegram 的 Web3 钱包和支付通道。它把无种子短语 MPC 托管、QR 支付、商户工具和 $1 效用整合到 Telegram Mini App 中。', href: 'whitepaper.html#ch1', link: '执行摘要', k: 'what product wallet payment telegram mini app' },
         { id: 'open', q: '如何打开钱包？', a: '从 Telegram 打开 ONEWALLET，验证设备，创建钱包，然后在 Mini App 中转账、支付或获得奖励。公开文案避免把应用商店下载和默认助记词设置作为主流程。', href: '#product-flow', link: '产品流程', k: 'open wallet telegram onboarding setup device' },
@@ -174,7 +181,8 @@ window.ONEWALLET_ASSISTANT = (function () {
         { id: 'risks', q: '披露了哪些风险？', a: '白皮书披露了托管被入侵、Telegram 平台依赖、监管变化、商户采用、代币效用偏移和本地化质量等风险。缓解措施在适当位置标为计划或条件性内容。', href: 'whitepaper.html#ch11', link: '风险与缓解', k: 'risk mitigation telegram dependency regulatory custody adoption localization' },
         { id: 'whitepaper', q: '在哪里阅读详细信息？', a: '白皮书是详细的产品和技术参考，涵盖执行摘要、产品论点、UX、架构、安全、代币模型、增长、商业模型、路线图、团队、风险和术语表。', href: 'whitepaper.html', link: '阅读白皮书', k: 'whitepaper details documentation chapters glossary architecture' },
         { id: 'team', q: 'ONEWALLET 团队是谁？', a: '团队部分介绍了公开文案中列出的创始人、工程和运营合作伙伴。关于治理或合作的其他问题，请通过 Telegram 联系团队。', href: '#team', link: '团队部分', k: 'team founders governance who behind people' },
-        { id: 'support', q: '如何联系或试用 ONEWALLET？', a: '当前公开入口是 Telegram 链接。账户相关或上线相关问题，应以 Telegram 支持作为实际操作入口。', href: 'https://t.me/onedollar_wallet_bot/app', link: '打开 Telegram', k: 'contact support telegram try app bot help' }
+        { id: 'support', q: '如何联系或试用 ONEWALLET？', a: '试用产品请打开 Telegram 小程序 t.me/onedollar_wallet_bot/app。上线资讯与社区咨询请加入 Telegram 社区频道 t.me/onedollar_project。我们同时运营 X、YouTube、Facebook 官方频道。请勿在任何公开渠道分享个人钱包、账户或恢复信息。', href: 'https://t.me/onedollar_wallet_bot/app', link: '打开 Telegram', k: 'contact support telegram try app bot help community channel social sns privacy' },
+        { id: 'community', q: '在哪里关注 ONEWALLET 的社交媒体？', a: '官方渠道：Telegram 社区 t.me/onedollar_project、X（x.com/one_wallet_）、YouTube（@One_Wallet_Official）、Facebook（个人主页 61589009140069）。Telegram 小程序（t.me/onedollar_wallet_bot/app）是产品入口，不是社交渠道。', href: 'https://t.me/onedollar_project', link: '加入社区', k: 'social sns community channel telegram x twitter youtube facebook follow announce' }
       ]
     }
   };

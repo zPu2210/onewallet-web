@@ -14,7 +14,11 @@
 
 ## Contact
 
-- [Telegram Mini App](https://t.me/onedollar_wallet_bot/app): Public entry point. Account-specific or launch-related questions are handled here, not on the marketing site.
+- [Telegram Mini App](https://t.me/onedollar_wallet_bot/app): Product entry point. Distinct from the community channel.
+- [Telegram community](https://t.me/onedollar_project): Launch updates and community questions. Do not post private wallet, account, or recovery data publicly.
+- [X (Twitter)](https://x.com/one_wallet_): Short updates and announcements.
+- [YouTube](https://www.youtube.com/@One_Wallet_Official): Product clips and walkthroughs.
+- [Facebook](https://www.facebook.com/profile.php?id=61589009140069): Broader reach announcements.
 
 ## Out of scope
 
